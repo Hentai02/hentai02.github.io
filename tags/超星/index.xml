@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>超星 on Hentai</title>
+    <link>https://hentaiworld.cn/tags/%E8%B6%85%E6%98%9F/</link>
+    <description>Recent content in 超星 on Hentai</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 10 Aug 2021 10:35:10 +0000</lastBuildDate><atom:link href="https://hentaiworld.cn/tags/%E8%B6%85%E6%98%9F/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用 Termux 刷网课</title>
+      <link>https://hentaiworld.cn/p/%E4%BD%BF%E7%94%A8-termux-%E5%88%B7%E7%BD%91%E8%AF%BE/</link>
+      <pubDate>Tue, 10 Aug 2021 10:35:10 +0000</pubDate>
+      
+      <guid>https://hentaiworld.cn/p/%E4%BD%BF%E7%94%A8-termux-%E5%88%B7%E7%BD%91%E8%AF%BE/</guid>
+      <description> 安装Termux。更换清华源并更新系统，安装完成重启termux。  sed -i &amp;#39;s@^\(deb.*stable main\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/termux-packages-24 stable main@&amp;#39; $PREFIX/etc/apt/sources.list sed -i &amp;#39;s@^\(deb.*games stable\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/game-packages-24 games stable@&amp;#39; $PREFIX/etc/apt/sources.list.d/game.list sed -i &amp;#39;s@^\(deb.*science stable\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/science-packages-24 science stable@&amp;#39; $PREFIX/etc/apt/sources.list.d/science.list apt update &amp;amp;&amp;amp; apt upgrade 安装运行环境node.js，安装Git从Github服务器上克隆刷课程序。  pkg install nodejs pkg install git 使用Git从Github上克隆 超星学习通全自动刷课程序，超星学习通全自动无人值守刷课程序，使用协议发包来实现，无需浏览器，支持自动过测验、过视频。  git clone https://github.com/ZhyMc/chaoxing-xuexitong-autoflush cd chaoxing-xuexitong-autoflush npm install 安装完成后执行 npm start 启动刷课程序。 </description>
+    </item>
+    
+  </channel>
+</rss>

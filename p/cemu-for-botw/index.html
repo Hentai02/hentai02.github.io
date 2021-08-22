@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Cemu安装优化指南 1.安装运行库Microsoft Visual C&#43;&#43; 2017 X64 Redistributable：vc_redist.x64.exe，避免运行时出现xxx.dll缺失等错误。下载Cemu，解压到任意位置，为了避免出现不必要的错误，路径内尽量不要包含中文字符。右键Cemu.exe，单击 属性，切换至 兼容性 选项卡，启用启用 禁用全屏优化 和 以管理员身份运行此程序；单击 更改高dpi设置，启用 使用此设置修复此程序的缩放问题，而不是“设置”中的问题”和替代高DPI缩放行为。 并把缩放执行更改为 应用程序。
+2.下载CemuHook，解压到cemu根目录下，安装成功选项中应该会有出现 GamePad motion source。打开Cemu.exe，首次打开要求设置两个路径，mlc01 path：游戏数据（dlc,存档&amp;hellip;），Game path：存放游戏本体，要求路径中不能有中文字符，有条件连接外网的单击 Download community graphics packs 下载图像插件，没条件的到分享的百度网盘下载。单击 Optical 选择 General settings 设置语言，重启Cemu生效。
+3.优化Cemu效率。单击 选项 打开 通用设置 切换至 图形 选项卡下将图形API切换为 Vulkan,如果的的设备具有独立显卡，请确保你的图形设备设置为使用独立显卡。启用 异步着色器编译器 。Cemu 现在应该能够以最快的速度运行，并为某些用户带来性能的大幅提升。
+4.映射输入设置。单击 选项 打开 输入设置 根据个人习惯设置。怎么顺手怎么来。键鼠，手柄，手机体感
+5.安装塞尔达传说：旷野之息。下载BreathOfTheWild.zip及其拆分卷z01，z02，解压到Game path下，打开Cemu即可看到添加的游戏，此时添加的游戏尚未安装DLC与更新档，单击 文件 选择 安装档案、升级档或DLC 选择meta文件夹下的meta.xml安装DLC或更新档。
+6.优化塞尔达传说：旷野之息运行速度。右键选择游戏，打开 编辑图形插件，启用 Mods/FPS&#43;&#43;，Graphics 并修改至合适fps以及分辨率。当进入游戏时发现菜单切换过快时，将 Mods/FPS&#43;&#43; Mode切换为 Advanced Setting，启用 Menu Cursor Fix。出现人物加速时，将Fence Type切换为 Accurate Fence。右键选择游戏，打开 编辑游戏设定 将线程量子长度设置为最大。将编译的缓存文件放到Cemu安装路径下 shaderCache\transferable 内即可（可选），v1.'><title>Cemu for BotW</title>
+
+<link rel='canonical' href='https://hentaiworld.cn/p/cemu-for-botw/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Cemu for BotW'>
+<meta property='og:description' content='Cemu安装优化指南 1.安装运行库Microsoft Visual C&#43;&#43; 2017 X64 Redistributable：vc_redist.x64.exe，避免运行时出现xxx.dll缺失等错误。下载Cemu，解压到任意位置，为了避免出现不必要的错误，路径内尽量不要包含中文字符。右键Cemu.exe，单击 属性，切换至 兼容性 选项卡，启用启用 禁用全屏优化 和 以管理员身份运行此程序；单击 更改高dpi设置，启用 使用此设置修复此程序的缩放问题，而不是“设置”中的问题”和替代高DPI缩放行为。 并把缩放执行更改为 应用程序。
+2.下载CemuHook，解压到cemu根目录下，安装成功选项中应该会有出现 GamePad motion source。打开Cemu.exe，首次打开要求设置两个路径，mlc01 path：游戏数据（dlc,存档&amp;hellip;），Game path：存放游戏本体，要求路径中不能有中文字符，有条件连接外网的单击 Download community graphics packs 下载图像插件，没条件的到分享的百度网盘下载。单击 Optical 选择 General settings 设置语言，重启Cemu生效。
+3.优化Cemu效率。单击 选项 打开 通用设置 切换至 图形 选项卡下将图形API切换为 Vulkan,如果的的设备具有独立显卡，请确保你的图形设备设置为使用独立显卡。启用 异步着色器编译器 。Cemu 现在应该能够以最快的速度运行，并为某些用户带来性能的大幅提升。
+4.映射输入设置。单击 选项 打开 输入设置 根据个人习惯设置。怎么顺手怎么来。键鼠，手柄，手机体感
+5.安装塞尔达传说：旷野之息。下载BreathOfTheWild.zip及其拆分卷z01，z02，解压到Game path下，打开Cemu即可看到添加的游戏，此时添加的游戏尚未安装DLC与更新档，单击 文件 选择 安装档案、升级档或DLC 选择meta文件夹下的meta.xml安装DLC或更新档。
+6.优化塞尔达传说：旷野之息运行速度。右键选择游戏，打开 编辑图形插件，启用 Mods/FPS&#43;&#43;，Graphics 并修改至合适fps以及分辨率。当进入游戏时发现菜单切换过快时，将 Mods/FPS&#43;&#43; Mode切换为 Advanced Setting，启用 Menu Cursor Fix。出现人物加速时，将Fence Type切换为 Accurate Fence。右键选择游戏，打开 编辑游戏设定 将线程量子长度设置为最大。将编译的缓存文件放到Cemu安装路径下 shaderCache\transferable 内即可（可选），v1.'>
+<meta property='og:url' content='https://hentaiworld.cn/p/cemu-for-botw/'>
+<meta property='og:site_name' content='Hentai'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='模拟器' /><meta property='article:tag' content='Cemu' /><meta property='article:published_time' content='2021-08-06T15:14:23&#43;00:00'/><meta property='article:modified_time' content='2021-08-06T15:14:23&#43;00:00'/><meta property='og:image' content='https://cemu.cfw.guide/assets/images/reshade.png' />
+<meta name="twitter:title" content="Cemu for BotW">
+<meta name="twitter:description" content="Cemu安装优化指南 1.安装运行库Microsoft Visual C&#43;&#43; 2017 X64 Redistributable：vc_redist.x64.exe，避免运行时出现xxx.dll缺失等错误。下载Cemu，解压到任意位置，为了避免出现不必要的错误，路径内尽量不要包含中文字符。右键Cemu.exe，单击 属性，切换至 兼容性 选项卡，启用启用 禁用全屏优化 和 以管理员身份运行此程序；单击 更改高dpi设置，启用 使用此设置修复此程序的缩放问题，而不是“设置”中的问题”和替代高DPI缩放行为。 并把缩放执行更改为 应用程序。
+2.下载CemuHook，解压到cemu根目录下，安装成功选项中应该会有出现 GamePad motion source。打开Cemu.exe，首次打开要求设置两个路径，mlc01 path：游戏数据（dlc,存档&amp;hellip;），Game path：存放游戏本体，要求路径中不能有中文字符，有条件连接外网的单击 Download community graphics packs 下载图像插件，没条件的到分享的百度网盘下载。单击 Optical 选择 General settings 设置语言，重启Cemu生效。
+3.优化Cemu效率。单击 选项 打开 通用设置 切换至 图形 选项卡下将图形API切换为 Vulkan,如果的的设备具有独立显卡，请确保你的图形设备设置为使用独立显卡。启用 异步着色器编译器 。Cemu 现在应该能够以最快的速度运行，并为某些用户带来性能的大幅提升。
+4.映射输入设置。单击 选项 打开 输入设置 根据个人习惯设置。怎么顺手怎么来。键鼠，手柄，手机体感
+5.安装塞尔达传说：旷野之息。下载BreathOfTheWild.zip及其拆分卷z01，z02，解压到Game path下，打开Cemu即可看到添加的游戏，此时添加的游戏尚未安装DLC与更新档，单击 文件 选择 安装档案、升级档或DLC 选择meta文件夹下的meta.xml安装DLC或更新档。
+6.优化塞尔达传说：旷野之息运行速度。右键选择游戏，打开 编辑图形插件，启用 Mods/FPS&#43;&#43;，Graphics 并修改至合适fps以及分辨率。当进入游戏时发现菜单切换过快时，将 Mods/FPS&#43;&#43; Mode切换为 Advanced Setting，启用 Menu Cursor Fix。出现人物加速时，将Fence Type切换为 Accurate Fence。右键选择游戏，打开 编辑游戏设定 将线程量子长度设置为最大。将编译的缓存文件放到Cemu安装路径下 shaderCache\transferable 内即可（可选），v1."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://cemu.cfw.guide/assets/images/reshade.png' />
+    </head>
+    <body class="
+    article-page 
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        on-phone--column extended
+    
+">
+    
+        <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            
+            <figure class="site-avatar">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huf2e040f2a884f096395abb6a83451c18_35877_300x0_resize_q75_box.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+
+                
+            </figure>
+            
+        
+        <h1 class="site-name"><a href="https://hentaiworld.cn">Hentai</a></h1>
+        <h2 class="site-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' target="_blank">
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>暗色模式</span>
+            </li>
+        
+    </ol>
+</aside>
+
+    
+<main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/cemu-for-botw/">
+                
+                    <img src="https://cemu.cfw.guide/assets/images/reshade.png" loading="lazy" alt="Featured image of post Cemu for BotW" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%95%99%E7%A8%8B/" >
+                教程
+            </a>
+        
+            <a href="/categories/%E6%A8%A1%E6%8B%9F%E5%99%A8/" >
+                模拟器
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/p/cemu-for-botw/">Cemu for BotW</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2021年8月06日</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 1 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <h3 id="cemu安装优化指南">Cemu安装优化指南</h3>
+<p>1.安装运行库Microsoft Visual C++ 2017 X64 Redistributable：<a class="link" href="https://download.visualstudio.microsoft.com/download/pr/36e45907-8554-4390-ba70-9f6306924167/97CC5066EB3C7246CF89B735AE0F5A5304A7EE33DC087D65D9DFF3A1A73FE803/VC_redist.x64.exe"  title="vc_redist.x64.exe"
+     target="_blank" rel="noopener"
+    >vc_redist.x64.exe</a>，避免运行时出现xxx.dll缺失等错误。下载<a class="link" href="http://cemu.info/"  title="Cemu v.1.250b"
+     target="_blank" rel="noopener"
+    >Cemu</a>，解压到任意位置，为了避免出现不必要的错误，路径内尽量不要包含中文字符。右键Cemu.exe，单击 <code>属性</code>，切换至 <code>兼容性</code> 选项卡，启用启用 <code>禁用全屏优化</code> 和 <code>以管理员身份运行此程序</code>；单击 <code>更改高dpi设置</code>，启用 <code>使用此设置修复此程序的缩放问题，而不是“设置”中的问题”和替代高DPI缩放行为。</code> 并把缩放执行更改为 <code>应用程序</code>。</p>
+<p>2.下载<a class="link" href="https://cemuhook.sshnuke.net/#Downloads"  title="CemuHook"
+     target="_blank" rel="noopener"
+    >CemuHook</a>，解压到cemu根目录下，安装成功选项中应该会有出现 <code>GamePad motion source</code>。打开Cemu.exe，首次打开要求设置两个路径，mlc01 path：游戏数据（dlc,存档&hellip;），Game path：存放游戏本体，要求路径中不能有中文字符，有条件连接外网的单击 <code>Download community graphics packs</code> 下载图像插件，没条件的到分享的百度网盘下载。单击 <code>Optical</code> 选择 <code>General settings</code> 设置语言，重启Cemu生效。</p>
+<p><img src="https://i.loli.net/2021/08/08/ETyNR9iXqpw5Obe.png" alt=""  /></p>
+<p>3.优化Cemu效率。单击 <code>选项</code> 打开 <code>通用设置</code> 切换至 <code>图形</code> 选项卡下将图形API切换为 <code>Vulkan</code>,如果的的设备具有独立显卡，请确保你的图形设备设置为使用独立显卡。启用 <code>异步着色器编译器</code> 。Cemu 现在应该能够以最快的速度运行，并为某些用户带来性能的大幅提升。</p>
+<p>4.映射输入设置。单击 <code>选项</code> 打开 <code>输入设置</code> 根据个人习惯设置。怎么顺手怎么来。<a class="link" href="https://github.com/CemuUser8/mouse2joystick_custom_CEMU"  title="键鼠"
+     target="_blank" rel="noopener"
+    >键鼠</a>，<a class="link" href="https://cemuhook.sshnuke.net/padudpserver.html"  title="手柄"
+     target="_blank" rel="noopener"
+    >手柄</a>，<a class="link" href="https://cemuhook.sshnuke.net/padudpserver.html"  title="手机体感"
+     target="_blank" rel="noopener"
+    >手机体感</a></p>
+<p><img src="https://i.loli.net/2021/08/06/69ovxDkLVaeSfP5.png" alt=""  /></p>
+<p>5.安装塞尔达传说：旷野之息。下载BreathOfTheWild.zip及其拆分卷z01，z02，解压到Game path下，打开Cemu即可看到添加的游戏，此时添加的游戏尚未安装DLC与更新档，单击 <code>文件</code> 选择 <code>安装档案、升级档或DLC</code> 选择meta文件夹下的meta.xml安装DLC或更新档。</p>
+<p>6.优化塞尔达传说：旷野之息运行速度。右键选择游戏，打开 <code>编辑图形插件</code>，启用 <code>Mods/FPS++</code>，<code>Graphics</code> 并修改至合适fps以及分辨率。当进入游戏时发现菜单切换过快时，将 <code>Mods/FPS++</code> Mode切换为 <code>Advanced Setting</code>，启用 <code>Menu Cursor Fix</code>。出现人物加速时，将Fence Type切换为 <code>Accurate Fence</code>。右键选择游戏，打开 <code>编辑游戏设定</code> 将线程量子长度设置为最大。将编译的缓存文件放到Cemu安装路径下 <code>shaderCache\transferable</code> 内即可（可选），v1.25.0重新设计的着色器缓存，不用编译好的缓存也不会太卡。</p>
+<p><img src="https://i.loli.net/2021/08/08/NRoLsWQ6BZGcd4F.png" alt=""  />
+<img src="https://i.loli.net/2021/08/08/Pl8ixfWYw2CqzTA.png" alt=""  />
+<img src="https://i.loli.net/2021/08/08/tluf2rIKGwge6Rm.png" alt=""  />
+<img src="https://i.loli.net/2021/08/08/1P3XWgB7TckS4M5.png" alt=""  />
+<img src="https://i.loli.net/2021/08/08/xHyOahnuMS3kRl5.png" alt=""  /></p>
+<blockquote>
+<p><strong>异步着色器编译</strong>：
+在 Cemu 中运行游戏时，需要重新编译图形着色器才能在桌面 GPU 上运行。这可能需要一些时间，这会导致每次将新游戏发送到模拟器时游戏中都会出现轻微的卡顿。
+异步执行此操作允许模拟器在后台运行进程。这意味着当着色器第一次被调用时，它会跳过渲染到屏幕的过程，而是在下次使用时存储它，从而提供更流畅的体验。（越玩越流畅）</p>
+</blockquote>
+<p>BreathOfTheWild_Hentai整合了几个比较常用的mod（林可儿，塞尔达，简体中文）。</p>
+<p>游戏可能出现的问题：<a class="link" href="https://wiki.cemu.info/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild"  title="Wiki页面"
+     target="_blank" rel="noopener"
+    >Wiki页面</a><br>
+官方教程：https://cemu.cfw.guide/<br>
+游戏下载（需要转格式）：<a class="link" href="https://www.oldmanemu.net/"  title="老男人游戏网"
+     target="_blank" rel="noopener"
+    >老男人游戏网</a>，<a class="link" href="https://bbs.naxgen.cn/"  title="91Wii"
+     target="_blank" rel="noopener"
+    >91Wii</a><br>
+链接：https://pan.baidu.com/s/1drUzcLE3ZCyWafU9rBqrig 提取码：unwy</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E6%A8%A1%E6%8B%9F%E5%99%A8/">模拟器</a>
+        
+            <a href="/tags/cemu/">Cemu</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">相关文章</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="has-image">
+    <a href="/p/%E5%A6%82%E4%BD%95%E7%A7%91%E5%AD%A6%E4%BD%BF%E7%94%A8%E7%99%BE%E5%BA%A6%E4%BA%91%E7%9B%98/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://pan.baidu.com/static/images/16new/bg3.jpg" loading="lazy" data-key="" data-hash="https://pan.baidu.com/static/images/16new/bg3.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">如何科学使用百度云盘</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/%E5%B0%86-hexo-%E9%83%A8%E7%BD%B2%E5%88%B0-github-pages/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d33wubrfki0l68.cloudfront.net/5997a40576f3beca7bbbd86fe79a795e9d520d8e/87f88/themes/screenshots/landscape.png" loading="lazy" data-key="" data-hash="https://d33wubrfki0l68.cloudfront.net/5997a40576f3beca7bbbd86fe79a795e9d520d8e/87f88/themes/screenshots/landscape.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">将 Hexo 部署到 GitHub Pages</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+     
+        
+    <script src="//cdn.jsdelivr.net/npm/twikoo@1.4.3/dist/twikoo.all.min.js"></script>
+<div id="tcomment"></div>
+<style>
+    .twikoo {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+    :root[data-scheme="dark"] {
+        --twikoo-body-text-color-main: rgba(255, 255, 255, 0.9);
+        --twikoo-body-text-color: rgba(255, 255, 255, 0.7);
+    }
+    .twikoo .el-input-group__prepend,
+    .twikoo .tk-action-icon,
+    .twikoo .tk-time,
+    .twikoo .tk-comments-count {
+        color: var(--twikoo-body-text-color);
+    }
+    .twikoo .el-input__inner,
+    .twikoo .el-textarea__inner,
+    .twikoo .tk-preview-container,
+    .twikoo .tk-content,
+    .twikoo .tk-nick,
+    .twikoo .tk-send {
+        color: var(--twikoo-body-text-color-main);
+    }
+    .twikoo .el-button{
+        color: var(--twikoo-body-text-color)!important;
+    }
+</style><script>
+    twikoo.init({
+        envId: 'https:\/\/twikoo-hentai02.vercel.app\/',
+        el: '#tcomment',})
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2021 Hentai
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.1.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

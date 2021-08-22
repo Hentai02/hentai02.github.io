@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Termux on Hentai</title>
+    <link>https://hentaiworld.cn/categories/termux/</link>
+    <description>Recent content in Termux on Hentai</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 10 Aug 2021 11:11:36 +0000</lastBuildDate><atom:link href="https://hentaiworld.cn/categories/termux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在 Termux 中安装 Ubuntu</title>
+      <link>https://hentaiworld.cn/p/%E5%9C%A8-termux-%E4%B8%AD%E5%AE%89%E8%A3%85-ubuntu/</link>
+      <pubDate>Tue, 10 Aug 2021 11:11:36 +0000</pubDate>
+      
+      <guid>https://hentaiworld.cn/p/%E5%9C%A8-termux-%E4%B8%AD%E5%AE%89%E8%A3%85-ubuntu/</guid>
+      <description> 安装Termux和Anlinix基本上就完事了。。。打开Anlinux选择Ubuntu，复制指令到termux中执行。安装过程中需连接外网，安装成功之后可以使用 ./start-ubuntu.sh 指令来启动系统。  pkg install wget openssl-tool proot -y &amp;amp;&amp;amp; hash -r &amp;amp;&amp;amp; wget https://raw.githubusercontent.com/EXALAB/AnLinux-Resources/master/Scripts/Installer/Ubuntu/ubuntu.sh &amp;amp;&amp;amp; bash ubuntu.sh 为Ubuntu安装图形界面。先启动Ubuntu，之后在Ubuntun内安装图形界面，安装过程比较长且全程需连接外网。安装完成后执行 vncserver-start 指令开启vnc，执行 vncserver-stop 关闭vnc。  wget https://raw.githubusercontent.com/EXALAB/AnLinux-Resources/master/Scripts/DesktopEnvironment/Apt/Xfce4/de-apt-xfce4.sh &amp;amp;&amp;amp; bash de-apt-xfce4.sh </description>
+    </item>
+    
+    <item>
+      <title>使用 Termux 刷网课</title>
+      <link>https://hentaiworld.cn/p/%E4%BD%BF%E7%94%A8-termux-%E5%88%B7%E7%BD%91%E8%AF%BE/</link>
+      <pubDate>Tue, 10 Aug 2021 10:35:10 +0000</pubDate>
+      
+      <guid>https://hentaiworld.cn/p/%E4%BD%BF%E7%94%A8-termux-%E5%88%B7%E7%BD%91%E8%AF%BE/</guid>
+      <description> 安装Termux。更换清华源并更新系统，安装完成重启termux。  sed -i &amp;#39;s@^\(deb.*stable main\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/termux-packages-24 stable main@&amp;#39; $PREFIX/etc/apt/sources.list sed -i &amp;#39;s@^\(deb.*games stable\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/game-packages-24 games stable@&amp;#39; $PREFIX/etc/apt/sources.list.d/game.list sed -i &amp;#39;s@^\(deb.*science stable\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/science-packages-24 science stable@&amp;#39; $PREFIX/etc/apt/sources.list.d/science.list apt update &amp;amp;&amp;amp; apt upgrade 安装运行环境node.js，安装Git从Github服务器上克隆刷课程序。  pkg install nodejs pkg install git 使用Git从Github上克隆 超星学习通全自动刷课程序，超星学习通全自动无人值守刷课程序，使用协议发包来实现，无需浏览器，支持自动过测验、过视频。  git clone https://github.com/ZhyMc/chaoxing-xuexitong-autoflush cd chaoxing-xuexitong-autoflush npm install 安装完成后执行 npm start 启动刷课程序。 </description>
+    </item>
+    
+  </channel>
+</rss>

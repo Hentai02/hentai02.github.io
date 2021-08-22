@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spring Boot on Hentai</title>
+    <link>https://hentaiworld.cn/tags/spring-boot/</link>
+    <description>Recent content in Spring Boot on Hentai</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 08 Aug 2021 18:35:17 +0000</lastBuildDate><atom:link href="https://hentaiworld.cn/tags/spring-boot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spring Boot v2.5.3整合MyBatis</title>
+      <link>https://hentaiworld.cn/p/spring-boot-v2.5.3%E6%95%B4%E5%90%88mybatis/</link>
+      <pubDate>Sun, 08 Aug 2021 18:35:17 +0000</pubDate>
+      
+      <guid>https://hentaiworld.cn/p/spring-boot-v2.5.3%E6%95%B4%E5%90%88mybatis/</guid>
+      <description>打开IDEA单击 “File”，选择 “New Project”，切换到 “Spring Initializr” 选项卡下，根据安装的JDK选择对应的版本。单击 “Next” 开始下一步，选择项目所需的依赖，点击 “Finish” 完成。 转到pom.xml添加json的支持。  &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.alibaba&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;fastjson&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.2.47&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 创建数据库，修改 resources\application.properties，配置数据源和MyBatis。  #创建数据库名为person，添加student表，包含id,name和sex属性CREATEDATABASE;USE`person`;DROPTABLEIFEXISTS`student`;CREATETABLE`student`(`id`int(16)NOTNULLAUTO_INCREMENTCOMMENT&amp;#39;id&amp;#39;,`name`varchar(32)COLLATEutf8_croatian_ciDEFAULTNULLCOMMENT&amp;#39;姓名&amp;#39;,`sex`tinyint(1)DEFAULT&amp;#39;1&amp;#39;COMMENT&amp;#39;性别&amp;#39;,PRIMARYKEY(`id`))ENGINE=InnoDBDEFAULTCHARSET=utf8COLLATE=utf8_croatian_ci;#数据源spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driverspring.datasource.url=jdbc:mysql://localhost:3306/数据库名?useUnicode=true&amp;amp;characterEncoding=utf-8spring.datasource.username=数据库用户名spring.datasource.password=数据库密码#mybatismybatis.mapperLocations=classpath:mapper/*.xml要将 MyBatis 与 Spring 一起使用，至少需要SqlSessionFactory一个映射器接口。默认情况下，MyBatis-Spring-Boot-Starter 将搜索标有@Mapper注解的映射器。   MyBatis-Spring-Boot-Starter 将：
+ 自动检测现有 DataSource 将创建并注册一个SqlSessionFactory传递实例DataSource作为输入使用SqlSessionFactoryBean 将创建并注册的一个实例SqlSessionTemplate得到的出SqlSessionFactory 自动扫描您的映射器，将它们链接到SqlSessionTemplate并将它们注册到 Spring 上下文，以便将它们注入到您的 bean 中。   在 resources 下新建mapper命名为 mapper/StudentMapper.xml。在 DemoApplication.java 同级目录下新建映射器 StudentMapper.java，业务处理 StudentService.java，控制层 StudentController.java 以及JavaBean。
+StudentMapper.xml &amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34; ?&amp;gt; &amp;lt;!DOCTYPE mapper PUBLIC &amp;#34;-//mybatis.org//DTD Mapper 3.0//EN&amp;#34; &amp;#34;http://mybatis.org/dtd/mybatis-3-mapper.dtd&amp;#34;&amp;gt; &amp;lt;!--namespace必须为全类名 --&amp;gt; &amp;lt;mapper namespace=&amp;#34;com.example.demo.StudentMapper&amp;#34;&amp;gt; &amp;lt;select id=&amp;#34;query&amp;#34; resultType=&amp;#34;com.</description>
+    </item>
+    
+  </channel>
+</rss>

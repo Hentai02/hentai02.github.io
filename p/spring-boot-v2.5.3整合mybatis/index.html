@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='打开IDEA单击 “File”，选择 “New Project”，切换到 “Spring Initializr” 选项卡下，根据安装的JDK选择对应的版本。单击 “Next” 开始下一步，选择项目所需的依赖，点击 “Finish” 完成。 转到pom.xml添加json的支持。  &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.alibaba&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;fastjson&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.2.47&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 创建数据库，修改 resources\application.properties，配置数据源和MyBatis。  #创建数据库名为person，添加student表，包含id,name和sex属性CREATEDATABASE;USE`person`;DROPTABLEIFEXISTS`student`;CREATETABLE`student`(`id`int(16)NOTNULLAUTO_INCREMENTCOMMENT&amp;#39;id&amp;#39;,`name`varchar(32)COLLATEutf8_croatian_ciDEFAULTNULLCOMMENT&amp;#39;姓名&amp;#39;,`sex`tinyint(1)DEFAULT&amp;#39;1&amp;#39;COMMENT&amp;#39;性别&amp;#39;,PRIMARYKEY(`id`))ENGINE=InnoDBDEFAULTCHARSET=utf8COLLATE=utf8_croatian_ci;#数据源spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driverspring.datasource.url=jdbc:mysql://localhost:3306/数据库名?useUnicode=true&amp;amp;characterEncoding=utf-8spring.datasource.username=数据库用户名spring.datasource.password=数据库密码#mybatismybatis.mapperLocations=classpath:mapper/*.xml要将 MyBatis 与 Spring 一起使用，至少需要SqlSessionFactory一个映射器接口。默认情况下，MyBatis-Spring-Boot-Starter 将搜索标有@Mapper注解的映射器。   MyBatis-Spring-Boot-Starter 将：
+ 自动检测现有 DataSource 将创建并注册一个SqlSessionFactory传递实例DataSource作为输入使用SqlSessionFactoryBean 将创建并注册的一个实例SqlSessionTemplate得到的出SqlSessionFactory 自动扫描您的映射器，将它们链接到SqlSessionTemplate并将它们注册到 Spring 上下文，以便将它们注入到您的 bean 中。   在 resources 下新建mapper命名为 mapper/StudentMapper.xml。在 DemoApplication.java 同级目录下新建映射器 StudentMapper.java，业务处理 StudentService.java，控制层 StudentController.java 以及JavaBean。
+StudentMapper.xml &amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34; ?&amp;gt; &amp;lt;!DOCTYPE mapper PUBLIC &amp;#34;-//mybatis.org//DTD Mapper 3.0//EN&amp;#34; &amp;#34;http://mybatis.org/dtd/mybatis-3-mapper.dtd&amp;#34;&amp;gt; &amp;lt;!--namespace必须为全类名 --&amp;gt; &amp;lt;mapper namespace=&amp;#34;com.example.demo.StudentMapper&amp;#34;&amp;gt; &amp;lt;select id=&amp;#34;query&amp;#34; resultType=&amp;#34;com.'><title>Spring Boot v2.5.3整合MyBatis</title>
+
+<link rel='canonical' href='https://hentaiworld.cn/p/spring-boot-v2.5.3%E6%95%B4%E5%90%88mybatis/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Spring Boot v2.5.3整合MyBatis'>
+<meta property='og:description' content='打开IDEA单击 “File”，选择 “New Project”，切换到 “Spring Initializr” 选项卡下，根据安装的JDK选择对应的版本。单击 “Next” 开始下一步，选择项目所需的依赖，点击 “Finish” 完成。 转到pom.xml添加json的支持。  &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.alibaba&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;fastjson&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.2.47&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 创建数据库，修改 resources\application.properties，配置数据源和MyBatis。  #创建数据库名为person，添加student表，包含id,name和sex属性CREATEDATABASE;USE`person`;DROPTABLEIFEXISTS`student`;CREATETABLE`student`(`id`int(16)NOTNULLAUTO_INCREMENTCOMMENT&amp;#39;id&amp;#39;,`name`varchar(32)COLLATEutf8_croatian_ciDEFAULTNULLCOMMENT&amp;#39;姓名&amp;#39;,`sex`tinyint(1)DEFAULT&amp;#39;1&amp;#39;COMMENT&amp;#39;性别&amp;#39;,PRIMARYKEY(`id`))ENGINE=InnoDBDEFAULTCHARSET=utf8COLLATE=utf8_croatian_ci;#数据源spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driverspring.datasource.url=jdbc:mysql://localhost:3306/数据库名?useUnicode=true&amp;amp;characterEncoding=utf-8spring.datasource.username=数据库用户名spring.datasource.password=数据库密码#mybatismybatis.mapperLocations=classpath:mapper/*.xml要将 MyBatis 与 Spring 一起使用，至少需要SqlSessionFactory一个映射器接口。默认情况下，MyBatis-Spring-Boot-Starter 将搜索标有@Mapper注解的映射器。   MyBatis-Spring-Boot-Starter 将：
+ 自动检测现有 DataSource 将创建并注册一个SqlSessionFactory传递实例DataSource作为输入使用SqlSessionFactoryBean 将创建并注册的一个实例SqlSessionTemplate得到的出SqlSessionFactory 自动扫描您的映射器，将它们链接到SqlSessionTemplate并将它们注册到 Spring 上下文，以便将它们注入到您的 bean 中。   在 resources 下新建mapper命名为 mapper/StudentMapper.xml。在 DemoApplication.java 同级目录下新建映射器 StudentMapper.java，业务处理 StudentService.java，控制层 StudentController.java 以及JavaBean。
+StudentMapper.xml &amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34; ?&amp;gt; &amp;lt;!DOCTYPE mapper PUBLIC &amp;#34;-//mybatis.org//DTD Mapper 3.0//EN&amp;#34; &amp;#34;http://mybatis.org/dtd/mybatis-3-mapper.dtd&amp;#34;&amp;gt; &amp;lt;!--namespace必须为全类名 --&amp;gt; &amp;lt;mapper namespace=&amp;#34;com.example.demo.StudentMapper&amp;#34;&amp;gt; &amp;lt;select id=&amp;#34;query&amp;#34; resultType=&amp;#34;com.'>
+<meta property='og:url' content='https://hentaiworld.cn/p/spring-boot-v2.5.3%E6%95%B4%E5%90%88mybatis/'>
+<meta property='og:site_name' content='Hentai'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Spring Boot' /><meta property='article:tag' content='MyBatis' /><meta property='article:published_time' content='2021-08-08T18:35:17&#43;00:00'/><meta property='article:modified_time' content='2021-08-08T18:35:17&#43;00:00'/><meta property='og:image' content='https://spring.io/images/why-spring-6e498dea75b581bd5b41581d2fb6c225.svg' />
+<meta name="twitter:title" content="Spring Boot v2.5.3整合MyBatis">
+<meta name="twitter:description" content="打开IDEA单击 “File”，选择 “New Project”，切换到 “Spring Initializr” 选项卡下，根据安装的JDK选择对应的版本。单击 “Next” 开始下一步，选择项目所需的依赖，点击 “Finish” 完成。 转到pom.xml添加json的支持。  &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.alibaba&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;fastjson&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.2.47&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 创建数据库，修改 resources\application.properties，配置数据源和MyBatis。  #创建数据库名为person，添加student表，包含id,name和sex属性CREATEDATABASE;USE`person`;DROPTABLEIFEXISTS`student`;CREATETABLE`student`(`id`int(16)NOTNULLAUTO_INCREMENTCOMMENT&amp;#39;id&amp;#39;,`name`varchar(32)COLLATEutf8_croatian_ciDEFAULTNULLCOMMENT&amp;#39;姓名&amp;#39;,`sex`tinyint(1)DEFAULT&amp;#39;1&amp;#39;COMMENT&amp;#39;性别&amp;#39;,PRIMARYKEY(`id`))ENGINE=InnoDBDEFAULTCHARSET=utf8COLLATE=utf8_croatian_ci;#数据源spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driverspring.datasource.url=jdbc:mysql://localhost:3306/数据库名?useUnicode=true&amp;amp;characterEncoding=utf-8spring.datasource.username=数据库用户名spring.datasource.password=数据库密码#mybatismybatis.mapperLocations=classpath:mapper/*.xml要将 MyBatis 与 Spring 一起使用，至少需要SqlSessionFactory一个映射器接口。默认情况下，MyBatis-Spring-Boot-Starter 将搜索标有@Mapper注解的映射器。   MyBatis-Spring-Boot-Starter 将：
+ 自动检测现有 DataSource 将创建并注册一个SqlSessionFactory传递实例DataSource作为输入使用SqlSessionFactoryBean 将创建并注册的一个实例SqlSessionTemplate得到的出SqlSessionFactory 自动扫描您的映射器，将它们链接到SqlSessionTemplate并将它们注册到 Spring 上下文，以便将它们注入到您的 bean 中。   在 resources 下新建mapper命名为 mapper/StudentMapper.xml。在 DemoApplication.java 同级目录下新建映射器 StudentMapper.java，业务处理 StudentService.java，控制层 StudentController.java 以及JavaBean。
+StudentMapper.xml &amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34; ?&amp;gt; &amp;lt;!DOCTYPE mapper PUBLIC &amp;#34;-//mybatis.org//DTD Mapper 3.0//EN&amp;#34; &amp;#34;http://mybatis.org/dtd/mybatis-3-mapper.dtd&amp;#34;&amp;gt; &amp;lt;!--namespace必须为全类名 --&amp;gt; &amp;lt;mapper namespace=&amp;#34;com.example.demo.StudentMapper&amp;#34;&amp;gt; &amp;lt;select id=&amp;#34;query&amp;#34; resultType=&amp;#34;com."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://spring.io/images/why-spring-6e498dea75b581bd5b41581d2fb6c225.svg' />
+    </head>
+    <body class="
+    article-page 
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        on-phone--column extended
+    
+">
+    
+        <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            
+            <figure class="site-avatar">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huf2e040f2a884f096395abb6a83451c18_35877_300x0_resize_q75_box.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+
+                
+            </figure>
+            
+        
+        <h1 class="site-name"><a href="https://hentaiworld.cn">Hentai</a></h1>
+        <h2 class="site-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' target="_blank">
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>暗色模式</span>
+            </li>
+        
+    </ol>
+</aside>
+
+    
+<main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/spring-boot-v2.5.3%E6%95%B4%E5%90%88mybatis/">
+                
+                    <img src="https://spring.io/images/why-spring-6e498dea75b581bd5b41581d2fb6c225.svg" loading="lazy" alt="Featured image of post Spring Boot v2.5.3整合MyBatis" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/java/" >
+                Java
+            </a>
+        
+            <a href="/categories/spring-boot/" >
+                Spring Boot
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/p/spring-boot-v2.5.3%E6%95%B4%E5%90%88mybatis/">Spring Boot v2.5.3整合MyBatis</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2021年8月08日</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 2 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <ol>
+<li>打开IDEA单击 “File”，选择 “New Project”，切换到 “Spring Initializr” 选项卡下，根据安装的JDK选择对应的版本。单击 “Next” 开始下一步，选择项目所需的依赖，点击 “Finish” 完成。 转到pom.xml添加json的支持。</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;dependency&gt;</span>
+	<span class="nt">&lt;groupId&gt;</span>com.alibaba<span class="nt">&lt;/groupId&gt;</span>
+	<span class="nt">&lt;artifactId&gt;</span>fastjson<span class="nt">&lt;/artifactId&gt;</span>
+	<span class="nt">&lt;version&gt;</span>1.2.47<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div><p><img src="https://i.loli.net/2021/08/08/JuGkNMtXoFQPq3I.png" alt=""  /></p>
+<ol start="2">
+<li>创建数据库，修改 <code>resources\application.properties</code>，配置数据源和MyBatis。</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="o">#</span><span class="w"> </span><span class="err">创建数据库名为</span><span class="n">person</span><span class="err">，添加</span><span class="n">student表</span><span class="err">，包含</span><span class="n">id</span><span class="p">,</span><span class="n">name和sex属性</span><span class="w">
+</span><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="n">USE</span><span class="w"> </span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="o">`</span><span class="n">student</span><span class="o">`</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="o">`</span><span class="n">student</span><span class="o">`</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span><span class="w">  </span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="w"> </span><span class="k">COMMENT</span><span class="w"> </span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="o">`</span><span class="n">name</span><span class="o">`</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8_croatian_ci</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">COMMENT</span><span class="w"> </span><span class="s1">&#39;姓名&#39;</span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="o">`</span><span class="n">sex</span><span class="o">`</span><span class="w"> </span><span class="n">tinyint</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="w"> </span><span class="k">COMMENT</span><span class="w"> </span><span class="s1">&#39;性别&#39;</span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8</span><span class="w"> </span><span class="k">COLLATE</span><span class="o">=</span><span class="n">utf8_croatian_ci</span><span class="p">;</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c">#数据源</span><span class="w">
+</span><span class="w"></span><span class="l">spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver</span><span class="w">
+</span><span class="w"></span><span class="l">spring.datasource.url=jdbc:mysql://localhost:3306/数据库名?useUnicode=true&amp;characterEncoding=utf-8</span><span class="w">
+</span><span class="w"></span><span class="l">spring.datasource.username=数据库用户名</span><span class="w">
+</span><span class="w"></span><span class="l">spring.datasource.password=数据库密码</span><span class="w">
+</span><span class="w"></span><span class="c">#mybatis</span><span class="w">
+</span><span class="w"></span><span class="l">mybatis.mapperLocations=classpath:mapper/*.xml</span><span class="w">
+</span></code></pre></div><ol start="3">
+<li>要将 MyBatis 与 Spring 一起使用，至少需要SqlSessionFactory一个映射器接口。默认情况下，MyBatis-Spring-Boot-Starter 将搜索标有@Mapper注解的映射器。</li>
+</ol>
+<blockquote>
+<p>MyBatis-Spring-Boot-Starter 将：</p>
+<ul>
+<li>自动检测现有 DataSource</li>
+<li>将创建并注册一个SqlSessionFactory传递实例DataSource作为输入使用SqlSessionFactoryBean</li>
+<li>将创建并注册的一个实例SqlSessionTemplate得到的出SqlSessionFactory</li>
+<li>自动扫描您的映射器，将它们链接到SqlSessionTemplate并将它们注册到 Spring 上下文，以便将它们注入到您的 bean 中。</li>
+</ul>
+</blockquote>
+<p>在 <code>resources</code> 下新建mapper命名为 <code>mapper/StudentMapper.xml</code>。在 <code>DemoApplication.java</code> 同级目录下新建映射器 <code>StudentMapper.java</code>，业务处理 <code>StudentService.java</code>，控制层 <code>StudentController.java</code> 以及JavaBean。</p>
+<h4 id="studentmapperxml">StudentMapper.xml</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; ?&gt;</span>
+<span class="cp">&lt;!DOCTYPE mapper
+</span><span class="cp">  PUBLIC &#34;-//mybatis.org//DTD Mapper 3.0//EN&#34;
+</span><span class="cp">  &#34;http://mybatis.org/dtd/mybatis-3-mapper.dtd&#34;&gt;</span>
+
+<span class="c">&lt;!--namespace必须为全类名 --&gt;</span>
+<span class="nt">&lt;mapper</span> <span class="na">namespace=</span><span class="s">&#34;com.example.demo.StudentMapper&#34;</span><span class="nt">&gt;</span>
+
+	<span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">&#34;query&#34;</span> <span class="na">resultType=</span><span class="s">&#34;com.example.demo.Student&#34;</span><span class="nt">&gt;</span>
+		select * from
+		`student`
+	<span class="nt">&lt;/select&gt;</span>
+
+	<span class="nt">&lt;insert</span> <span class="na">id=</span><span class="s">&#34;insert&#34;</span> <span class="na">parameterType=</span><span class="s">&#34;com.example.demo.Student&#34;</span>
+		<span class="na">useGeneratedKeys=</span><span class="s">&#34;true&#34;</span> <span class="na">keyProperty=</span><span class="s">&#34;id&#34;</span><span class="nt">&gt;</span>
+		INSERT INTO `student`
+		(`id`,
+		`name`, `sex`)
+		VALUES(#{id}, #{name}, #{sex})
+	<span class="nt">&lt;/insert&gt;</span>
+
+	<span class="nt">&lt;delete</span> <span class="na">id=</span><span class="s">&#34;delete&#34;</span> <span class="na">parameterType=</span><span class="s">&#34;int&#34;</span><span class="nt">&gt;</span>
+		delete from `student` where
+		id=#{id}
+	<span class="nt">&lt;/delete&gt;</span>
+
+	<span class="nt">&lt;update</span> <span class="na">id=</span><span class="s">&#34;update&#34;</span> <span class="na">parameterType=</span><span class="s">&#34;hashmap&#34;</span><span class="nt">&gt;</span>
+		update `student` set `name`=#{name},`sex`=#{sex}
+		where id=#{id}
+	<span class="nt">&lt;/update&gt;</span>
+	
+	<span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">&#34;selectID&#34;</span> <span class="na">parameterType=</span><span class="s">&#34;int&#34;</span> <span class="na">resultType=</span><span class="s">&#34;com.example.demo.Student&#34;</span><span class="nt">&gt;</span>
+		select * from `student` where id=#{id}
+	<span class="nt">&lt;/select&gt;</span>
+	
+	<span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">&#34;selectName&#34;</span> <span class="na">parameterType=</span><span class="s">&#34;String&#34;</span> <span class="na">resultType=</span><span class="s">&#34;com.example.demo.Student&#34;</span><span class="nt">&gt;</span>
+		SELECT * FROM `student`
+		WHERE `name` LIKE #{name}
+	<span class="nt">&lt;/select&gt;</span>
+
+<span class="nt">&lt;/mapper&gt;</span>
+</code></pre></div><h4 id="studentmapperjava">StudentMapper.java</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.example.demo</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.apache.ibatis.annotations.Mapper</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="nd">@Mapper</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">StudentMapper</span>
+<span class="o">{</span>
+	<span class="n">List</span><span class="o">&lt;</span><span class="n">Student</span><span class="o">&gt;</span> <span class="nf">query</span><span class="o">();</span>
+	
+	<span class="kt">int</span> <span class="nf">insert</span><span class="o">(</span><span class="n">Student</span> <span class="n">s</span><span class="o">);</span>
+	
+	<span class="kt">int</span> <span class="nf">delete</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">);</span>
+	
+	<span class="kt">int</span> <span class="nf">update</span><span class="o">(</span><span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">m</span><span class="o">);</span>
+	
+	<span class="n">List</span><span class="o">&lt;</span><span class="n">Student</span><span class="o">&gt;</span> <span class="nf">selectID</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">);</span>
+	
+	<span class="n">List</span><span class="o">&lt;</span><span class="n">Student</span><span class="o">&gt;</span> <span class="nf">selectName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">);</span>
+
+<span class="o">}</span>
+</code></pre></div><h4 id="studentservicejava">StudentService.java</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.example.demo</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Qualifier</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StudentService</span> <span class="kd">implements</span> <span class="n">StudentMapper</span>
+<span class="o">{</span>
+	<span class="nd">@Qualifier</span><span class="o">(</span><span class="s">&#34;studentMapper&#34;</span><span class="o">)</span>
+	<span class="nd">@Autowired</span>
+	<span class="kd">private</span> <span class="n">StudentMapper</span> <span class="n">stuMapper</span><span class="o">;</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Student</span><span class="o">&gt;</span> <span class="nf">query</span><span class="o">()</span>
+	<span class="o">{</span>
+		<span class="k">return</span> <span class="n">stuMapper</span><span class="o">.</span><span class="na">query</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">insert</span><span class="o">(</span><span class="n">Student</span> <span class="n">s</span><span class="o">)</span>
+	<span class="o">{</span>
+		<span class="k">return</span> <span class="n">stuMapper</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">delete</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">)</span>
+	<span class="o">{</span>
+		<span class="k">return</span> <span class="n">stuMapper</span><span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">update</span><span class="o">(</span><span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">m</span><span class="o">)</span>
+	<span class="o">{</span>
+		<span class="k">return</span> <span class="n">stuMapper</span><span class="o">.</span><span class="na">update</span><span class="o">(</span><span class="n">m</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span>  <span class="n">List</span><span class="o">&lt;</span><span class="n">Student</span><span class="o">&gt;</span> <span class="nf">selectID</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">)</span>
+	<span class="o">{</span>
+		<span class="k">return</span> <span class="n">stuMapper</span><span class="o">.</span><span class="na">selectID</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Student</span><span class="o">&gt;</span> <span class="nf">selectName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span>
+	<span class="o">{</span>
+		<span class="k">return</span> <span class="n">stuMapper</span><span class="o">.</span><span class="na">selectName</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div><h4 id="studentcontrollerjava">StudentController.java</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.example.demo</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.alibaba.fastjson.JSONArray</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.alibaba.fastjson.JSONObject</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Qualifier</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Controller</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.PostMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestBody</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.servlet.View</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="nd">@Controller</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StudentController</span>
+<span class="o">{</span>
+
+	<span class="nd">@Autowired</span>
+	<span class="nd">@Qualifier</span><span class="o">(</span><span class="s">&#34;studentService&#34;</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="n">StudentService</span> <span class="n">stuservice</span><span class="o">;</span>
+
+	<span class="c1">// 全部学生信息
+</span><span class="c1"></span>	<span class="nd">@GetMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&#34;/query.do&#34;</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="n">View</span> <span class="nf">query</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span>
+	<span class="o">{</span>
+		<span class="n">List</span><span class="o">&lt;</span><span class="n">Student</span><span class="o">&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="n">stuservice</span><span class="o">.</span><span class="na">query</span><span class="o">();</span>
+		<span class="k">if</span><span class="o">(</span><span class="n">data</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">return</span> <span class="k">new</span> <span class="n">RestData</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="n">RestData</span><span class="o">(</span><span class="s">&#34;暂无数据！&#34;</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="c1">// 增加
+</span><span class="c1"></span>	<span class="nd">@GetMapping</span><span class="o">(</span><span class="s">&#34;/insert.do&#34;</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="n">View</span> <span class="nf">insert</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span><span class="n">Integer</span> <span class="n">sex</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span>
+	<span class="o">{</span>
+		<span class="n">Student</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Student</span><span class="o">();</span>
+		<span class="n">s</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+		<span class="k">if</span><span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&lt;</span><span class="n">0</span> <span class="o">||</span> <span class="n">name</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span><span class="k">return</span> <span class="k">new</span> <span class="n">RestData</span><span class="o">(</span><span class="s">&#34;&#34;</span><span class="o">);</span>
+		<span class="n">s</span><span class="o">.</span><span class="na">sex</span> <span class="o">=</span> <span class="n">sex</span><span class="o">;</span>
+		
+		<span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="n">stuservice</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;done&#34;</span><span class="o">);</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="n">RestData</span><span class="o">(</span><span class="s">&#34;&#34;</span><span class="o">);</span>
+		
+	<span class="o">}</span>
+
+	<span class="c1">// 根据id删除学生记录
+</span><span class="c1"></span>	<span class="nd">@GetMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&#34;/delete.do&#34;</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="n">View</span> <span class="nf">delete</span><span class="o">(</span><span class="n">Integer</span> <span class="n">id</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span>
+	<span class="o">{</span>
+		<span class="n">stuservice</span><span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="n">RestData</span><span class="o">(</span><span class="s">&#34;&#34;</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="c1">// 修改一条学生信息
+</span><span class="c1"></span>	<span class="nd">@GetMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&#34;/update.do&#34;</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="n">View</span> <span class="nf">update</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="n">HashMap</span> <span class="n">m</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span>
+	<span class="o">{</span>
+		<span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="n">stuservice</span><span class="o">.</span><span class="na">update</span><span class="o">(</span><span class="n">m</span><span class="o">);</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="n">RestData</span><span class="o">(</span><span class="s">&#34;&#34;</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="c1">// 根据学号查找一个学生信息
+</span><span class="c1"></span>	<span class="nd">@GetMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&#34;/selectID.do&#34;</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="n">View</span> <span class="nf">selectID</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span>
+	<span class="o">{</span>
+		<span class="n">Student</span> <span class="n">student</span> <span class="o">=</span> <span class="n">stuservice</span><span class="o">.</span><span class="na">selectID</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="n">RestData</span><span class="o">(</span><span class="n">student</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="c1">// 根据姓名查找一个学生信息
+</span><span class="c1"></span>	<span class="nd">@GetMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&#34;/selectName.do&#34;</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="n">View</span> <span class="nf">selectName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span>
+	<span class="o">{</span>
+		<span class="n">name</span> <span class="o">=</span> <span class="s">&#34;%&#34;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&#34;%&#34;</span><span class="o">;</span>
+		<span class="n">List</span><span class="o">&lt;</span><span class="n">Student</span><span class="o">&gt;</span> <span class="n">row</span> <span class="o">=</span> <span class="n">stuservice</span><span class="o">.</span><span class="na">selectName</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="n">RestData</span><span class="o">(</span><span class="n">row</span><span class="o">);</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div><p><img src="https://i.loli.net/2021/08/10/4cqoymj83AgpTti.png" alt=""  /></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/spring-boot/">Spring Boot</a>
+        
+            <a href="/tags/mybatis/">MyBatis</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">相关文章</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/p/%E5%9C%A8-java-%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E7%9A%84-4-%E7%A7%8D%E6%96%B9%E6%B3%95/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">在 Java 中创建线程的 4 种方法</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+     
+        
+    <script src="//cdn.jsdelivr.net/npm/twikoo@1.4.3/dist/twikoo.all.min.js"></script>
+<div id="tcomment"></div>
+<style>
+    .twikoo {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+    :root[data-scheme="dark"] {
+        --twikoo-body-text-color-main: rgba(255, 255, 255, 0.9);
+        --twikoo-body-text-color: rgba(255, 255, 255, 0.7);
+    }
+    .twikoo .el-input-group__prepend,
+    .twikoo .tk-action-icon,
+    .twikoo .tk-time,
+    .twikoo .tk-comments-count {
+        color: var(--twikoo-body-text-color);
+    }
+    .twikoo .el-input__inner,
+    .twikoo .el-textarea__inner,
+    .twikoo .tk-preview-container,
+    .twikoo .tk-content,
+    .twikoo .tk-nick,
+    .twikoo .tk-send {
+        color: var(--twikoo-body-text-color-main);
+    }
+    .twikoo .el-button{
+        color: var(--twikoo-body-text-color)!important;
+    }
+</style><script>
+    twikoo.init({
+        envId: 'https:\/\/twikoo-hentai02.vercel.app\/',
+        el: '#tcomment',})
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2021 Hentai
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.1.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

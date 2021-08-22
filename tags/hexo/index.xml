@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hexo on Hentai</title>
+    <link>https://hentaiworld.cn/tags/hexo/</link>
+    <description>Recent content in Hexo on Hentai</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 06 Aug 2021 08:52:43 +0000</lastBuildDate><atom:link href="https://hentaiworld.cn/tags/hexo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>将 Hexo 部署到 GitHub Pages</title>
+      <link>https://hentaiworld.cn/p/%E5%B0%86-hexo-%E9%83%A8%E7%BD%B2%E5%88%B0-github-pages/</link>
+      <pubDate>Fri, 06 Aug 2021 08:52:43 +0000</pubDate>
+      
+      <guid>https://hentaiworld.cn/p/%E5%B0%86-hexo-%E9%83%A8%E7%BD%B2%E5%88%B0-github-pages/</guid>
+      <description>1.登录Github创建一个名为 “用户名 .github.io” 的新公共存储库repository，其中用户名是你在 GitHub 上的用户名（或组织名称）。如果存储库的第一部分与你的用户名不完全匹配，它将无法工作，因此请确保正确。
+2.安装node.js,Git。执行 node -v,git --version 指令检查是否安装成功，安装成功会输出版本号。生成SSH密钥ssh-keygen -t rsa -C &amp;quot;your_emial@examle.com&amp;quot;添加到 “Settings” 下的 “Deploy keys”。
+# 设置user.name和user.email git config --global user.name &amp;#34;你的GitHub用户名&amp;#34; git config --global user.email &amp;#34;你的GitHub注册邮箱&amp;#34; 3.部署Hexo 。执行 npm install hexo-deployer-git --save 安装hexo-deployer-git插件，修改_config.yml文件内deploy的配置，执行 hexo deploy 部署到Github Pages。
+# 安装hexo npm install hexo-cli -g hexo init blog cd blog npm install # _config.yml type: git repo: git@github.com:&amp;lt;username&amp;gt;/&amp;lt;username&amp;gt;.github.io.git branch: master 4.自定义域（可选）。打开dos面板执行 ping 用户名.github.io 获取公网ip，登录域名提供平台，修改DNS添加A记录，将记录值更改为公网ip。打开Github 用户名.github.io的存储库单击 “Settings” 面板下的 “Pages”，添加自定义域并保存。为避免每次部署都要重新添加自定义域，可在hexo文件夹中的 “source” 内添加一个名为 “CNAME” 的文件并在其内写入域名。</description>
+    </item>
+    
+  </channel>
+</rss>

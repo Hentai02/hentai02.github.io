@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>百度网盘 on Hentai</title>
+    <link>https://hentaiworld.cn/tags/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98/</link>
+    <description>Recent content in 百度网盘 on Hentai</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 07 Aug 2021 10:17:39 +0000</lastBuildDate><atom:link href="https://hentaiworld.cn/tags/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>如何科学使用百度云盘</title>
+      <link>https://hentaiworld.cn/p/%E5%A6%82%E4%BD%95%E7%A7%91%E5%AD%A6%E4%BD%BF%E7%94%A8%E7%99%BE%E5%BA%A6%E4%BA%91%E7%9B%98/</link>
+      <pubDate>Sat, 07 Aug 2021 10:17:39 +0000</pubDate>
+      
+      <guid>https://hentaiworld.cn/p/%E5%A6%82%E4%BD%95%E7%A7%91%E5%AD%A6%E4%BD%BF%E7%94%A8%E7%99%BE%E5%BA%A6%E4%BA%91%E7%9B%98/</guid>
+      <description>1.安装Tampermonkey油猴浏览器扩展程序。 Chrome：点击安装（需要科学上网），Firefox：点击安装。打开Greasy Fork，安装 百度网盘简易下载助手（直链下载复活版）或 网盘直链下载助手，浏览器右上角单击Tampermonkey图标打开管理面板查看脚本是否安装成功并开启。
+2.部署aria2下载工具。下载与你的设备相匹配的版本，解压到任意路径，将该路径设置添加到Path环境变量中（可选），不添加则需在当前路径下启动dos面板执行启动命令。
+#启动服务 aria2c --enable-rpc --rpc-listen-all 3.现在可以登录百度网盘，脚本应该已经生效。选择你要下载的文件单击 “简易下载助手”，选择 “发送到Aria2”，此时回到启动的dos界面可以看到下载任务。 4.配置web界面（可选）。下载webui-aria2将docs提取出来，打开index.html，单击 “设置” 选择 “连接设置” 默认应该是不用修改，主机：localhost，端口：6800，RPC 路径： /jsonrpc。   免费轻量级命令行下载工具：Aria2 Aria2是一款开源下载工具，可帮助简化不同设备和服务器之间的下载过程。它支持磁力链接、BT种子、http等类型的文件下载，与迅雷及QQ旋风相比，Aria2有着优秀的性能及较低的资源占用，架构本身非常轻巧，通常只需要4兆字节（HTTP下载）到9兆字节（用于BitTorrent交互）之间。最重要的一点是Aria2完全免费！
+ </description>
+    </item>
+    
+  </channel>
+</rss>

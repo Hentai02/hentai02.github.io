@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Hentai</title>
+    <link>https://hentaiworld.cn/post/</link>
+    <description>Recent content in Posts on Hentai</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 10 Aug 2021 11:11:36 +0000</lastBuildDate><atom:link href="https://hentaiworld.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在 Termux 中安装 Ubuntu</title>
+      <link>https://hentaiworld.cn/p/%E5%9C%A8-termux-%E4%B8%AD%E5%AE%89%E8%A3%85-ubuntu/</link>
+      <pubDate>Tue, 10 Aug 2021 11:11:36 +0000</pubDate>
+      
+      <guid>https://hentaiworld.cn/p/%E5%9C%A8-termux-%E4%B8%AD%E5%AE%89%E8%A3%85-ubuntu/</guid>
+      <description> 安装Termux和Anlinix基本上就完事了。。。打开Anlinux选择Ubuntu，复制指令到termux中执行。安装过程中需连接外网，安装成功之后可以使用 ./start-ubuntu.sh 指令来启动系统。  pkg install wget openssl-tool proot -y &amp;amp;&amp;amp; hash -r &amp;amp;&amp;amp; wget https://raw.githubusercontent.com/EXALAB/AnLinux-Resources/master/Scripts/Installer/Ubuntu/ubuntu.sh &amp;amp;&amp;amp; bash ubuntu.sh 为Ubuntu安装图形界面。先启动Ubuntu，之后在Ubuntun内安装图形界面，安装过程比较长且全程需连接外网。安装完成后执行 vncserver-start 指令开启vnc，执行 vncserver-stop 关闭vnc。  wget https://raw.githubusercontent.com/EXALAB/AnLinux-Resources/master/Scripts/DesktopEnvironment/Apt/Xfce4/de-apt-xfce4.sh &amp;amp;&amp;amp; bash de-apt-xfce4.sh </description>
+    </item>
+    
+    <item>
+      <title>使用 Termux 刷网课</title>
+      <link>https://hentaiworld.cn/p/%E4%BD%BF%E7%94%A8-termux-%E5%88%B7%E7%BD%91%E8%AF%BE/</link>
+      <pubDate>Tue, 10 Aug 2021 10:35:10 +0000</pubDate>
+      
+      <guid>https://hentaiworld.cn/p/%E4%BD%BF%E7%94%A8-termux-%E5%88%B7%E7%BD%91%E8%AF%BE/</guid>
+      <description> 安装Termux。更换清华源并更新系统，安装完成重启termux。  sed -i &amp;#39;s@^\(deb.*stable main\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/termux-packages-24 stable main@&amp;#39; $PREFIX/etc/apt/sources.list sed -i &amp;#39;s@^\(deb.*games stable\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/game-packages-24 games stable@&amp;#39; $PREFIX/etc/apt/sources.list.d/game.list sed -i &amp;#39;s@^\(deb.*science stable\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/science-packages-24 science stable@&amp;#39; $PREFIX/etc/apt/sources.list.d/science.list apt update &amp;amp;&amp;amp; apt upgrade 安装运行环境node.js，安装Git从Github服务器上克隆刷课程序。  pkg install nodejs pkg install git 使用Git从Github上克隆 超星学习通全自动刷课程序，超星学习通全自动无人值守刷课程序，使用协议发包来实现，无需浏览器，支持自动过测验、过视频。  git clone https://github.com/ZhyMc/chaoxing-xuexitong-autoflush cd chaoxing-xuexitong-autoflush npm install 安装完成后执行 npm start 启动刷课程序。 </description>
+    </item>
+    
+    <item>
+      <title>Spring Boot v2.5.3整合MyBatis</title>
+      <link>https://hentaiworld.cn/p/spring-boot-v2.5.3%E6%95%B4%E5%90%88mybatis/</link>
+      <pubDate>Sun, 08 Aug 2021 18:35:17 +0000</pubDate>
+      
+      <guid>https://hentaiworld.cn/p/spring-boot-v2.5.3%E6%95%B4%E5%90%88mybatis/</guid>
+      <description>打开IDEA单击 “File”，选择 “New Project”，切换到 “Spring Initializr” 选项卡下，根据安装的JDK选择对应的版本。单击 “Next” 开始下一步，选择项目所需的依赖，点击 “Finish” 完成。 转到pom.xml添加json的支持。  &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.alibaba&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;fastjson&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.2.47&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 创建数据库，修改 resources\application.properties，配置数据源和MyBatis。  #创建数据库名为person，添加student表，包含id,name和sex属性CREATEDATABASE;USE`person`;DROPTABLEIFEXISTS`student`;CREATETABLE`student`(`id`int(16)NOTNULLAUTO_INCREMENTCOMMENT&amp;#39;id&amp;#39;,`name`varchar(32)COLLATEutf8_croatian_ciDEFAULTNULLCOMMENT&amp;#39;姓名&amp;#39;,`sex`tinyint(1)DEFAULT&amp;#39;1&amp;#39;COMMENT&amp;#39;性别&amp;#39;,PRIMARYKEY(`id`))ENGINE=InnoDBDEFAULTCHARSET=utf8COLLATE=utf8_croatian_ci;#数据源spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driverspring.datasource.url=jdbc:mysql://localhost:3306/数据库名?useUnicode=true&amp;amp;characterEncoding=utf-8spring.datasource.username=数据库用户名spring.datasource.password=数据库密码#mybatismybatis.mapperLocations=classpath:mapper/*.xml要将 MyBatis 与 Spring 一起使用，至少需要SqlSessionFactory一个映射器接口。默认情况下，MyBatis-Spring-Boot-Starter 将搜索标有@Mapper注解的映射器。   MyBatis-Spring-Boot-Starter 将：
+ 自动检测现有 DataSource 将创建并注册一个SqlSessionFactory传递实例DataSource作为输入使用SqlSessionFactoryBean 将创建并注册的一个实例SqlSessionTemplate得到的出SqlSessionFactory 自动扫描您的映射器，将它们链接到SqlSessionTemplate并将它们注册到 Spring 上下文，以便将它们注入到您的 bean 中。   在 resources 下新建mapper命名为 mapper/StudentMapper.xml。在 DemoApplication.java 同级目录下新建映射器 StudentMapper.java，业务处理 StudentService.java，控制层 StudentController.java 以及JavaBean。
+StudentMapper.xml &amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34; ?&amp;gt; &amp;lt;!DOCTYPE mapper PUBLIC &amp;#34;-//mybatis.org//DTD Mapper 3.0//EN&amp;#34; &amp;#34;http://mybatis.org/dtd/mybatis-3-mapper.dtd&amp;#34;&amp;gt; &amp;lt;!--namespace必须为全类名 --&amp;gt; &amp;lt;mapper namespace=&amp;#34;com.example.demo.StudentMapper&amp;#34;&amp;gt; &amp;lt;select id=&amp;#34;query&amp;#34; resultType=&amp;#34;com.</description>
+    </item>
+    
+    <item>
+      <title>在 Java 中创建线程的 4 种方法</title>
+      <link>https://hentaiworld.cn/p/%E5%9C%A8-java-%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E7%9A%84-4-%E7%A7%8D%E6%96%B9%E6%B3%95/</link>
+      <pubDate>Sun, 08 Aug 2021 17:32:34 +0000</pubDate>
+      
+      <guid>https://hentaiworld.cn/p/%E5%9C%A8-java-%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E7%9A%84-4-%E7%A7%8D%E6%96%B9%E6%B3%95/</guid>
+      <description>1. 继承 Thread 类
+class MyThread extends Thread{ // 重写run()  @Override public void run() { } } 2. 实现 Runnable 接口
+class MyThread implements Runnable{ // 重写run()  @Override public void run() { } }  JDK5.0新增线程创建方式
+  实现 Callable 接口 创建线程池  3. 实现 Callable 接口
+class MyThread implements Callable{ // 重写call()  @Override public Object call() throws Exception { } }  优点
+ call()可以有返回值 call()可以抛出异常，被外面捕获，获取异常信息 Callable是支持泛型   4.</description>
+    </item>
+    
+    <item>
+      <title>如何科学使用百度云盘</title>
+      <link>https://hentaiworld.cn/p/%E5%A6%82%E4%BD%95%E7%A7%91%E5%AD%A6%E4%BD%BF%E7%94%A8%E7%99%BE%E5%BA%A6%E4%BA%91%E7%9B%98/</link>
+      <pubDate>Sat, 07 Aug 2021 10:17:39 +0000</pubDate>
+      
+      <guid>https://hentaiworld.cn/p/%E5%A6%82%E4%BD%95%E7%A7%91%E5%AD%A6%E4%BD%BF%E7%94%A8%E7%99%BE%E5%BA%A6%E4%BA%91%E7%9B%98/</guid>
+      <description>1.安装Tampermonkey油猴浏览器扩展程序。 Chrome：点击安装（需要科学上网），Firefox：点击安装。打开Greasy Fork，安装 百度网盘简易下载助手（直链下载复活版）或 网盘直链下载助手，浏览器右上角单击Tampermonkey图标打开管理面板查看脚本是否安装成功并开启。
+2.部署aria2下载工具。下载与你的设备相匹配的版本，解压到任意路径，将该路径设置添加到Path环境变量中（可选），不添加则需在当前路径下启动dos面板执行启动命令。
+#启动服务 aria2c --enable-rpc --rpc-listen-all 3.现在可以登录百度网盘，脚本应该已经生效。选择你要下载的文件单击 “简易下载助手”，选择 “发送到Aria2”，此时回到启动的dos界面可以看到下载任务。 4.配置web界面（可选）。下载webui-aria2将docs提取出来，打开index.html，单击 “设置” 选择 “连接设置” 默认应该是不用修改，主机：localhost，端口：6800，RPC 路径： /jsonrpc。   免费轻量级命令行下载工具：Aria2 Aria2是一款开源下载工具，可帮助简化不同设备和服务器之间的下载过程。它支持磁力链接、BT种子、http等类型的文件下载，与迅雷及QQ旋风相比，Aria2有着优秀的性能及较低的资源占用，架构本身非常轻巧，通常只需要4兆字节（HTTP下载）到9兆字节（用于BitTorrent交互）之间。最重要的一点是Aria2完全免费！
+ </description>
+    </item>
+    
+    <item>
+      <title>Cemu for BotW</title>
+      <link>https://hentaiworld.cn/p/cemu-for-botw/</link>
+      <pubDate>Fri, 06 Aug 2021 15:14:23 +0000</pubDate>
+      
+      <guid>https://hentaiworld.cn/p/cemu-for-botw/</guid>
+      <description>Cemu安装优化指南 1.安装运行库Microsoft Visual C++ 2017 X64 Redistributable：vc_redist.x64.exe，避免运行时出现xxx.dll缺失等错误。下载Cemu，解压到任意位置，为了避免出现不必要的错误，路径内尽量不要包含中文字符。右键Cemu.exe，单击 属性，切换至 兼容性 选项卡，启用启用 禁用全屏优化 和 以管理员身份运行此程序；单击 更改高dpi设置，启用 使用此设置修复此程序的缩放问题，而不是“设置”中的问题”和替代高DPI缩放行为。 并把缩放执行更改为 应用程序。
+2.下载CemuHook，解压到cemu根目录下，安装成功选项中应该会有出现 GamePad motion source。打开Cemu.exe，首次打开要求设置两个路径，mlc01 path：游戏数据（dlc,存档&amp;hellip;），Game path：存放游戏本体，要求路径中不能有中文字符，有条件连接外网的单击 Download community graphics packs 下载图像插件，没条件的到分享的百度网盘下载。单击 Optical 选择 General settings 设置语言，重启Cemu生效。
+3.优化Cemu效率。单击 选项 打开 通用设置 切换至 图形 选项卡下将图形API切换为 Vulkan,如果的的设备具有独立显卡，请确保你的图形设备设置为使用独立显卡。启用 异步着色器编译器 。Cemu 现在应该能够以最快的速度运行，并为某些用户带来性能的大幅提升。
+4.映射输入设置。单击 选项 打开 输入设置 根据个人习惯设置。怎么顺手怎么来。键鼠，手柄，手机体感
+5.安装塞尔达传说：旷野之息。下载BreathOfTheWild.zip及其拆分卷z01，z02，解压到Game path下，打开Cemu即可看到添加的游戏，此时添加的游戏尚未安装DLC与更新档，单击 文件 选择 安装档案、升级档或DLC 选择meta文件夹下的meta.xml安装DLC或更新档。
+6.优化塞尔达传说：旷野之息运行速度。右键选择游戏，打开 编辑图形插件，启用 Mods/FPS++，Graphics 并修改至合适fps以及分辨率。当进入游戏时发现菜单切换过快时，将 Mods/FPS++ Mode切换为 Advanced Setting，启用 Menu Cursor Fix。出现人物加速时，将Fence Type切换为 Accurate Fence。右键选择游戏，打开 编辑游戏设定 将线程量子长度设置为最大。将编译的缓存文件放到Cemu安装路径下 shaderCache\transferable 内即可（可选），v1.</description>
+    </item>
+    
+    <item>
+      <title>将 Hexo 部署到 GitHub Pages</title>
+      <link>https://hentaiworld.cn/p/%E5%B0%86-hexo-%E9%83%A8%E7%BD%B2%E5%88%B0-github-pages/</link>
+      <pubDate>Fri, 06 Aug 2021 08:52:43 +0000</pubDate>
+      
+      <guid>https://hentaiworld.cn/p/%E5%B0%86-hexo-%E9%83%A8%E7%BD%B2%E5%88%B0-github-pages/</guid>
+      <description>1.登录Github创建一个名为 “用户名 .github.io” 的新公共存储库repository，其中用户名是你在 GitHub 上的用户名（或组织名称）。如果存储库的第一部分与你的用户名不完全匹配，它将无法工作，因此请确保正确。
+2.安装node.js,Git。执行 node -v,git --version 指令检查是否安装成功，安装成功会输出版本号。生成SSH密钥ssh-keygen -t rsa -C &amp;quot;your_emial@examle.com&amp;quot;添加到 “Settings” 下的 “Deploy keys”。
+# 设置user.name和user.email git config --global user.name &amp;#34;你的GitHub用户名&amp;#34; git config --global user.email &amp;#34;你的GitHub注册邮箱&amp;#34; 3.部署Hexo 。执行 npm install hexo-deployer-git --save 安装hexo-deployer-git插件，修改_config.yml文件内deploy的配置，执行 hexo deploy 部署到Github Pages。
+# 安装hexo npm install hexo-cli -g hexo init blog cd blog npm install # _config.yml type: git repo: git@github.com:&amp;lt;username&amp;gt;/&amp;lt;username&amp;gt;.github.io.git branch: master 4.自定义域（可选）。打开dos面板执行 ping 用户名.github.io 获取公网ip，登录域名提供平台，修改DNS添加A记录，将记录值更改为公网ip。打开Github 用户名.github.io的存储库单击 “Settings” 面板下的 “Pages”，添加自定义域并保存。为避免每次部署都要重新添加自定义域，可在hexo文件夹中的 “source” 内添加一个名为 “CNAME” 的文件并在其内写入域名。</description>
+    </item>
+    
+    <item>
+      <title>Chinese Test</title>
+      <link>https://hentaiworld.cn/p/test-chinese/</link>
+      <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://hentaiworld.cn/p/test-chinese/</guid>
+      <description>正文测试 而这些并不是完全重要，更加重要的问题是， 带着这些问题，我们来审视一下学生会退会。 既然如何， 对我个人而言，学生会退会不仅仅是一个重大的事件，还可能会改变我的人生。 我们不得不面对一个非常尴尬的事实，那就是， 可是，即使是这样，学生会退会的出现仍然代表了一定的意义。 学生会退会，发生了会如何，不发生又会如何。 经过上述讨论， 生活中，若学生会退会出现了，我们就不得不考虑它出现了的事实。 学生会退会，到底应该如何实现。 这样看来， 在这种困难的抉择下，本人思来想去，寝食难安。 对我个人而言，学生会退会不仅仅是一个重大的事件，还可能会改变我的人生。 就我个人来说，学生会退会对我的意义，不能不说非常重大。 莎士比亚曾经提到过，人的一生是短的，但如果卑劣地过这一生，就太长了。这似乎解答了我的疑惑。 莫扎特说过一句富有哲理的话，谁和我一样用功，谁就会和我一样成功。这启发了我， 对我个人而言，学生会退会不仅仅是一个重大的事件，还可能会改变我的人生。 学生会退会，到底应该如何实现。 一般来说， 从这个角度来看， 这种事实对本人来说意义重大，相信对这个世界也是有一定意义的。 在这种困难的抉择下，本人思来想去，寝食难安。 了解清楚学生会退会到底是一种怎么样的存在，是解决一切问题的关键。 一般来说， 生活中，若学生会退会出现了，我们就不得不考虑它出现了的事实。 问题的关键究竟为何？ 而这些并不是完全重要，更加重要的问题是。
+奥斯特洛夫斯基曾经说过，共同的事业，共同的斗争，可以使人们产生忍受一切的力量。　带着这句话，我们还要更加慎重的审视这个问题： 一般来讲，我们都必须务必慎重的考虑考虑。 既然如此， 这种事实对本人来说意义重大，相信对这个世界也是有一定意义的。 带着这些问题，我们来审视一下学生会退会。 我认为， 我认为， 在这种困难的抉择下，本人思来想去，寝食难安。 问题的关键究竟为何？ 每个人都不得不面对这些问题。 在面对这种问题时， 要想清楚，学生会退会，到底是一种怎么样的存在。 我认为， 既然如此， 每个人都不得不面对这些问题。 在面对这种问题时， 那么， 我认为， 学生会退会因何而发生。
+引用  思念是最暖的忧伤像一双翅膀
+让我停不了飞不远在过往游荡
+不告而别的你 就算为了我着想
+这么沉痛的呵护 我怎么能翱翔
+最暖的憂傷 - 田馥甄
+ 图片 ![Photo by Florian Klauer on Unsplash](https://i.loli.net/2021/08/22/bF9YSAr68n4BG2a.jpg) ![Photo by Luca Bravo on Unsplash](https://i.</description>
+    </item>
+    
+    <item>
+      <title>Markdown Syntax Guide</title>
+      <link>https://hentaiworld.cn/p/markdown-syntax-guide/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://hentaiworld.cn/p/markdown-syntax-guide/</guid>
+      <description>&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
