@@ -6,7 +6,58 @@
         <description>Recent content on Hentai</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Tue, 10 Aug 2021 11:11:36 +0000</lastBuildDate><atom:link href="https://hentaiworld.cn/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 26 Aug 2021 16:50:18 +0800</lastBuildDate><atom:link href="https://hentaiworld.cn/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Metasploit 实战模拟：SSH暴力破解</title>
+        <link>https://hentaiworld.cn/p/metasploit-%E5%AE%9E%E6%88%98%E6%A8%A1%E6%8B%9Fssh%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/</link>
+        <pubDate>Thu, 26 Aug 2021 16:50:18 +0800</pubDate>
+        
+        <guid>https://hentaiworld.cn/p/metasploit-%E5%AE%9E%E6%88%98%E6%A8%A1%E6%8B%9Fssh%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/</guid>
+        <description>&lt;h2 id=&#34;安装-metasploit&#34;&gt;安装 Metasploit&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;安装依赖&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Metasploit 是基于 Ruby 语言开发的，需要安装 ruby 运行环境，执行 &lt;code&gt;sudo apt-get install ruby&lt;/code&gt; 安装 ruby。
+安装完成后执行 &lt;code&gt;ruby -v&lt;/code&gt; 检查是否安装成功，正常情况下会输出 ruby 版本及其他信息。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;执行 &lt;code&gt;sudo apt-get install postgresql postgresql-client&lt;/code&gt; 安装 postgresql 数据库。
+执行 &lt;code&gt;systemctl status postgresql&lt;/code&gt; 检查数据库是否正常启动。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2021/08/26/x63ZKyEDlGst7Lc.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;执行以下指令安装 &lt;a class=&#34;link&#34; href=&#34;https://github.com/rapid7/metasploit-framework&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;metasploit&lt;/a&gt;  。安装后，可在 &lt;code&gt;/opt/metasploit-framework/bin/msfconsole&lt;/code&gt; 从终端启动 msfconsole。
+首次运行时，一系列提示将帮助你设置数据库并将 Metasploit 添加到本地 PATH（如果尚未添加）。执行 &lt;code&gt;msfconsole -v&lt;/code&gt; 检查是否安装成功，安装成功将会输出版本号。
+之后只需执行 &lt;code&gt;msfconsole&lt;/code&gt; 运行即可。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2021/08/26/lrFQWCfgIkwA2bG.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;sudo curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb &amp;gt; msfinstall &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  chmod &lt;span class=&#34;m&#34;&gt;755&lt;/span&gt; msfinstall &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  ./msfinstall
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;暴力破解-ssh&#34;&gt;暴力破解 SSH&lt;/h2&gt;
+&lt;p&gt;执行  &lt;code&gt;ping 域名&lt;/code&gt; 获取目标 ip，使用 nmap 扫描检查22端口是否为开启状态，没有安装 nmap，可到 &lt;a class=&#34;link&#34; href=&#34;https://zh-hans.ipshu.com/scan_port&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;IPSHU&lt;/a&gt; 扫描端口。
+没有合适的服务器用 termux 作为靶机，它的ssh端口默认为8022。
+&lt;img src=&#34;https://i.loli.net/2021/08/26/kEjZQmdnMBItas3.png&#34; alt=&#34;Snipaste_2021-08-26_20-28-30.png&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;运行 Metasploit 执行 &lt;code&gt;use auxiliary/scanner/ssh/ssh_login&lt;/code&gt; 运行模块，使用 &lt;code&gt;show options&lt;/code&gt; 查看该模块下的参数
+&lt;img src=&#34;https://i.loli.net/2021/08/26/MsqbPjYogyetBi2.png&#34; alt=&#34;Snipaste_2021-08-26_20-39-51.png&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;设置参数。为了方便演示正确的密码会放在字典中。字典可到Github上找还蛮多的，或者到&lt;a class=&#34;link&#34; href=&#34;https://wiki.skullsecurity.org/index.php/Main_Page&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;skullsecurity&lt;/a&gt; 不过这是国外的，设置密码的习惯应该跟我们有些区别吧。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 攻击地址&lt;/span&gt;
+&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; rhosts 192.168.1.178
+&lt;span class=&#34;c1&#34;&gt;# 端口(根据实际情况)&lt;/span&gt;
+&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; rport &lt;span class=&#34;m&#34;&gt;8022&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# 用户名&lt;/span&gt;
+&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; username root
+&lt;span class=&#34;c1&#34;&gt;# 字典&lt;/span&gt;
+&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; pass_file passwd.txt
+&lt;span class=&#34;c1&#34;&gt;# 运行&lt;/span&gt;
+run
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里已经爆破出来密码，用这个账号密码连接。实际跑字典还是有点费时间，10分钟左右跑了才1w5左右。
+&lt;img src=&#34;https://i.loli.net/2021/08/26/USE14ThVg9fbqPp.png&#34; alt=&#34;Snipaste_2021-08-26_20-48-50.png&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2021/08/26/XE5TUoHWOxvb1a7.png&#34; alt=&#34;Snipaste_2021-08-26_21-02-41.png&#34;  /&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>在 Termux 中安装 Ubuntu</title>
         <link>https://hentaiworld.cn/p/%E5%9C%A8-termux-%E4%B8%AD%E5%AE%89%E8%A3%85-ubuntu/</link>
         <pubDate>Tue, 10 Aug 2021 11:11:36 +0000</pubDate>

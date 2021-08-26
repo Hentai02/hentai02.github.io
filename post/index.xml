@@ -6,7 +6,20 @@
     <description>Recent content in Posts on Hentai</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 10 Aug 2021 11:11:36 +0000</lastBuildDate><atom:link href="https://hentaiworld.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 26 Aug 2021 16:50:18 +0800</lastBuildDate><atom:link href="https://hentaiworld.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Metasploit 实战模拟：SSH暴力破解</title>
+      <link>https://hentaiworld.cn/p/metasploit-%E5%AE%9E%E6%88%98%E6%A8%A1%E6%8B%9Fssh%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/</link>
+      <pubDate>Thu, 26 Aug 2021 16:50:18 +0800</pubDate>
+      
+      <guid>https://hentaiworld.cn/p/metasploit-%E5%AE%9E%E6%88%98%E6%A8%A1%E6%8B%9Fssh%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/</guid>
+      <description>安装 Metasploit 安装依赖
+  Metasploit 是基于 Ruby 语言开发的，需要安装 ruby 运行环境，执行 sudo apt-get install ruby 安装 ruby。 安装完成后执行 ruby -v 检查是否安装成功，正常情况下会输出 ruby 版本及其他信息。
+  执行 sudo apt-get install postgresql postgresql-client 安装 postgresql 数据库。 执行 systemctl status postgresql 检查数据库是否正常启动。
+  执行以下指令安装 metasploit 。安装后，可在 /opt/metasploit-framework/bin/msfconsole 从终端启动 msfconsole。 首次运行时，一系列提示将帮助你设置数据库并将 Metasploit 添加到本地 PATH（如果尚未添加）。执行 msfconsole -v 检查是否安装成功，安装成功将会输出版本号。 之后只需执行 msfconsole 运行即可。
+sudo curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb &amp;gt; msfinstall &amp;amp;&amp;amp; \  chmod 755 msfinstall &amp;amp;&amp;amp; \  .</description>
+    </item>
+    
     <item>
       <title>在 Termux 中安装 Ubuntu</title>
       <link>https://hentaiworld.cn/p/%E5%9C%A8-termux-%E4%B8%AD%E5%AE%89%E8%A3%85-ubuntu/</link>

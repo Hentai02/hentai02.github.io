@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='安装 Metasploit 安装依赖
+  Metasploit 是基于 Ruby 语言开发的，需要安装 ruby 运行环境，执行 sudo apt-get install ruby 安装 ruby。 安装完成后执行 ruby -v 检查是否安装成功，正常情况下会输出 ruby 版本及其他信息。
+  执行 sudo apt-get install postgresql postgresql-client 安装 postgresql 数据库。 执行 systemctl status postgresql 检查数据库是否正常启动。
+  执行以下指令安装 metasploit 。安装后，可在 /opt/metasploit-framework/bin/msfconsole 从终端启动 msfconsole。 首次运行时，一系列提示将帮助你设置数据库并将 Metasploit 添加到本地 PATH（如果尚未添加）。执行 msfconsole -v 检查是否安装成功，安装成功将会输出版本号。 之后只需执行 msfconsole 运行即可。
+sudo curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb &amp;gt; msfinstall &amp;amp;&amp;amp; \  chmod 755 msfinstall &amp;amp;&amp;amp; \  .'><title>Metasploit 实战模拟：SSH暴力破解</title>
+
+<link rel='canonical' href='https://hentaiworld.cn/p/metasploit-%E5%AE%9E%E6%88%98%E6%A8%A1%E6%8B%9Fssh%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Metasploit 实战模拟：SSH暴力破解'>
+<meta property='og:description' content='安装 Metasploit 安装依赖
+  Metasploit 是基于 Ruby 语言开发的，需要安装 ruby 运行环境，执行 sudo apt-get install ruby 安装 ruby。 安装完成后执行 ruby -v 检查是否安装成功，正常情况下会输出 ruby 版本及其他信息。
+  执行 sudo apt-get install postgresql postgresql-client 安装 postgresql 数据库。 执行 systemctl status postgresql 检查数据库是否正常启动。
+  执行以下指令安装 metasploit 。安装后，可在 /opt/metasploit-framework/bin/msfconsole 从终端启动 msfconsole。 首次运行时，一系列提示将帮助你设置数据库并将 Metasploit 添加到本地 PATH（如果尚未添加）。执行 msfconsole -v 检查是否安装成功，安装成功将会输出版本号。 之后只需执行 msfconsole 运行即可。
+sudo curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb &amp;gt; msfinstall &amp;amp;&amp;amp; \  chmod 755 msfinstall &amp;amp;&amp;amp; \  .'>
+<meta property='og:url' content='https://hentaiworld.cn/p/metasploit-%E5%AE%9E%E6%88%98%E6%A8%A1%E6%8B%9Fssh%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/'>
+<meta property='og:site_name' content='Hentai'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2021-08-26T16:50:18&#43;08:00'/><meta property='article:modified_time' content='2021-08-26T16:50:18&#43;08:00'/>
+<meta name="twitter:title" content="Metasploit 实战模拟：SSH暴力破解">
+<meta name="twitter:description" content="安装 Metasploit 安装依赖
+  Metasploit 是基于 Ruby 语言开发的，需要安装 ruby 运行环境，执行 sudo apt-get install ruby 安装 ruby。 安装完成后执行 ruby -v 检查是否安装成功，正常情况下会输出 ruby 版本及其他信息。
+  执行 sudo apt-get install postgresql postgresql-client 安装 postgresql 数据库。 执行 systemctl status postgresql 检查数据库是否正常启动。
+  执行以下指令安装 metasploit 。安装后，可在 /opt/metasploit-framework/bin/msfconsole 从终端启动 msfconsole。 首次运行时，一系列提示将帮助你设置数据库并将 Metasploit 添加到本地 PATH（如果尚未添加）。执行 msfconsole -v 检查是否安装成功，安装成功将会输出版本号。 之后只需执行 msfconsole 运行即可。
+sudo curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb &amp;gt; msfinstall &amp;amp;&amp;amp; \  chmod 755 msfinstall &amp;amp;&amp;amp; \  .">
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="https://hentaiworld.cn" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>返回</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/test/" style="background-color: #2a9d8f; color: #fff;">
+                Test
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/p/metasploit-%E5%AE%9E%E6%88%98%E6%A8%A1%E6%8B%9Fssh%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/">Metasploit 实战模拟：SSH暴力破解</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2021年8月26日</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 1 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <h2 id="安装-metasploit">安装 Metasploit</h2>
+<p><strong>安装依赖</strong></p>
+<ol>
+<li>
+<p>Metasploit 是基于 Ruby 语言开发的，需要安装 ruby 运行环境，执行 <code>sudo apt-get install ruby</code> 安装 ruby。
+安装完成后执行 <code>ruby -v</code> 检查是否安装成功，正常情况下会输出 ruby 版本及其他信息。</p>
+</li>
+<li>
+<p>执行 <code>sudo apt-get install postgresql postgresql-client</code> 安装 postgresql 数据库。
+执行 <code>systemctl status postgresql</code> 检查数据库是否正常启动。</p>
+</li>
+</ol>
+<p><img src="https://i.loli.net/2021/08/26/x63ZKyEDlGst7Lc.png" alt=""  /></p>
+<p>执行以下指令安装 <a class="link" href="https://github.com/rapid7/metasploit-framework"  target="_blank" rel="noopener"
+    >metasploit</a>  。安装后，可在 <code>/opt/metasploit-framework/bin/msfconsole</code> 从终端启动 msfconsole。
+首次运行时，一系列提示将帮助你设置数据库并将 Metasploit 添加到本地 PATH（如果尚未添加）。执行 <code>msfconsole -v</code> 检查是否安装成功，安装成功将会输出版本号。
+之后只需执行 <code>msfconsole</code> 运行即可。</p>
+<p><img src="https://i.loli.net/2021/08/26/lrFQWCfgIkwA2bG.png" alt=""  /></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb &gt; msfinstall <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>  chmod <span class="m">755</span> msfinstall <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>  ./msfinstall
+</code></pre></div><h2 id="暴力破解-ssh">暴力破解 SSH</h2>
+<p>执行  <code>ping 域名</code> 获取目标 ip，使用 nmap 扫描检查22端口是否为开启状态，没有安装 nmap，可到 <a class="link" href="https://zh-hans.ipshu.com/scan_port"  target="_blank" rel="noopener"
+    >IPSHU</a> 扫描端口。
+没有合适的服务器用 termux 作为靶机，它的ssh端口默认为8022。
+<img src="https://i.loli.net/2021/08/26/kEjZQmdnMBItas3.png" alt="Snipaste_2021-08-26_20-28-30.png"  /></p>
+<p>运行 Metasploit 执行 <code>use auxiliary/scanner/ssh/ssh_login</code> 运行模块，使用 <code>show options</code> 查看该模块下的参数
+<img src="https://i.loli.net/2021/08/26/MsqbPjYogyetBi2.png" alt="Snipaste_2021-08-26_20-39-51.png"  /></p>
+<p>设置参数。为了方便演示正确的密码会放在字典中。字典可到Github上找还蛮多的，或者到<a class="link" href="https://wiki.skullsecurity.org/index.php/Main_Page"  target="_blank" rel="noopener"
+    >skullsecurity</a> 不过这是国外的，设置密码的习惯应该跟我们有些区别吧。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 攻击地址</span>
+<span class="nb">set</span> rhosts 192.168.1.178
+<span class="c1"># 端口(根据实际情况)</span>
+<span class="nb">set</span> rport <span class="m">8022</span>
+<span class="c1"># 用户名</span>
+<span class="nb">set</span> username root
+<span class="c1"># 字典</span>
+<span class="nb">set</span> pass_file passwd.txt
+<span class="c1"># 运行</span>
+run
+</code></pre></div><p>这里已经爆破出来密码，用这个账号密码连接。实际跑字典还是有点费时间，10分钟左右跑了才1w5左右。
+<img src="https://i.loli.net/2021/08/26/USE14ThVg9fbqPp.png" alt="Snipaste_2021-08-26_20-48-50.png"  /></p>
+<p><img src="https://i.loli.net/2021/08/26/XE5TUoHWOxvb1a7.png" alt="Snipaste_2021-08-26_21-02-41.png"  /></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">相关文章</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="has-image">
+    <a href="/p/markdown-syntax-guide/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://i.loli.net/2021/08/22/olLCPcsi5qBWjJb.jpg" loading="lazy" data-key="" data-hash="https://i.loli.net/2021/08/22/olLCPcsi5qBWjJb.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Markdown Syntax Guide</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+     
+        
+    <script src="//cdn.jsdelivr.net/npm/twikoo@1.4.3/dist/twikoo.all.min.js"></script>
+<div id="tcomment"></div>
+<style>
+    .twikoo {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+    :root[data-scheme="dark"] {
+        --twikoo-body-text-color-main: rgba(255, 255, 255, 0.9);
+        --twikoo-body-text-color: rgba(255, 255, 255, 0.7);
+    }
+    .twikoo .el-input-group__prepend,
+    .twikoo .tk-action-icon,
+    .twikoo .tk-time,
+    .twikoo .tk-comments-count {
+        color: var(--twikoo-body-text-color);
+    }
+    .twikoo .el-input__inner,
+    .twikoo .el-textarea__inner,
+    .twikoo .tk-preview-container,
+    .twikoo .tk-content,
+    .twikoo .tk-nick,
+    .twikoo .tk-send {
+        color: var(--twikoo-body-text-color-main);
+    }
+    .twikoo .el-button{
+        color: var(--twikoo-body-text-color)!important;
+    }
+</style><script>
+    twikoo.init({
+        envId: 'https:\/\/twikoo-hentai02.vercel.app\/',
+        el: '#tcomment',})
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2021 Hentai
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.1.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">目录</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#安装-metasploit">安装 Metasploit</a></li>
+    <li><a href="#暴力破解-ssh">暴力破解 SSH</a></li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
