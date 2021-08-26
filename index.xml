@@ -12,7 +12,7 @@
         <pubDate>Tue, 10 Aug 2021 11:11:36 +0000</pubDate>
         
         <guid>https://hentaiworld.cn/p/%E5%9C%A8-termux-%E4%B8%AD%E5%AE%89%E8%A3%85-ubuntu/</guid>
-        <description>&lt;img src="https://i.loli.net/2021/08/10/LiDYdQyUpcsWXRI.jpg" alt="Featured image of post 在 Termux 中安装 Ubuntu" /&gt;&lt;ol&gt;
+        <description>&lt;ol&gt;
 &lt;li&gt;安装&lt;a class=&#34;link&#34; href=&#34;https://f-droid.org/packages/com.termux/,%22%22&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Termux&lt;/a&gt;和&lt;a class=&#34;link&#34; href=&#34;https://github.com/EXALAB/AnLinux-App&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Anlinix&lt;/a&gt;基本上就完事了。。。打开Anlinux选择Ubuntu，复制指令到termux中执行。安装过程中需连接外网，安装成功之后可以使用 &lt;code&gt;./start-ubuntu.sh&lt;/code&gt; 指令来启动系统。&lt;/li&gt;
@@ -62,7 +62,7 @@ npm install
         <pubDate>Sun, 08 Aug 2021 18:35:17 +0000</pubDate>
         
         <guid>https://hentaiworld.cn/p/spring-boot-v2.5.3%E6%95%B4%E5%90%88mybatis/</guid>
-        <description>&lt;img src="https://spring.io/images/why-spring-6e498dea75b581bd5b41581d2fb6c225.svg" alt="Featured image of post Spring Boot v2.5.3整合MyBatis" /&gt;&lt;ol&gt;
+        <description>&lt;ol&gt;
 &lt;li&gt;打开IDEA单击 “File”，选择 “New Project”，切换到 “Spring Initializr” 选项卡下，根据安装的JDK选择对应的版本。单击 “Next” 开始下一步，选择项目所需的依赖，点击 “Finish” 完成。 转到pom.xml添加json的支持。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
@@ -403,7 +403,7 @@ npm install
         <pubDate>Sat, 07 Aug 2021 10:17:39 +0000</pubDate>
         
         <guid>https://hentaiworld.cn/p/%E5%A6%82%E4%BD%95%E7%A7%91%E5%AD%A6%E4%BD%BF%E7%94%A8%E7%99%BE%E5%BA%A6%E4%BA%91%E7%9B%98/</guid>
-        <description>&lt;img src="https://pan.baidu.com/static/images/16new/bg3.jpg" alt="Featured image of post 如何科学使用百度云盘" /&gt;&lt;p&gt;1.安装Tampermonkey油猴浏览器扩展程序。 Chrome：&lt;a class=&#34;link&#34; href=&#34;https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo&#34;  title=&#34;点击安装&#34;
+        <description>&lt;p&gt;1.安装Tampermonkey油猴浏览器扩展程序。 Chrome：&lt;a class=&#34;link&#34; href=&#34;https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo&#34;  title=&#34;点击安装&#34;
      target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;点击安装&lt;/a&gt;（需要科学上网），Firefox：&lt;a class=&#34;link&#34; href=&#34;https://addons.mozilla.org/zh-CN/firefox/addon/tampermonkey/&#34;  title=&#34;点击安装&#34;
      target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -440,7 +440,7 @@ Aria2是一款开源下载工具，可帮助简化不同设备和服务器之间
         <pubDate>Fri, 06 Aug 2021 15:14:23 +0000</pubDate>
         
         <guid>https://hentaiworld.cn/p/cemu-for-botw/</guid>
-        <description>&lt;img src="https://cemu.cfw.guide/assets/images/reshade.png" alt="Featured image of post Cemu for BotW" /&gt;&lt;h3 id=&#34;cemu安装优化指南&#34;&gt;Cemu安装优化指南&lt;/h3&gt;
+        <description>&lt;h3 id=&#34;cemu安装优化指南&#34;&gt;Cemu安装优化指南&lt;/h3&gt;
 &lt;p&gt;1.安装运行库Microsoft Visual C++ 2017 X64 Redistributable：&lt;a class=&#34;link&#34; href=&#34;https://download.visualstudio.microsoft.com/download/pr/36e45907-8554-4390-ba70-9f6306924167/97CC5066EB3C7246CF89B735AE0F5A5304A7EE33DC087D65D9DFF3A1A73FE803/VC_redist.x64.exe&#34;  title=&#34;vc_redist.x64.exe&#34;
      target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;vc_redist.x64.exe&lt;/a&gt;，避免运行时出现xxx.dll缺失等错误。下载&lt;a class=&#34;link&#34; href=&#34;http://cemu.info/&#34;  title=&#34;Cemu v.1.250b&#34;
@@ -490,7 +490,7 @@ Aria2是一款开源下载工具，可帮助简化不同设备和服务器之间
         <pubDate>Fri, 06 Aug 2021 08:52:43 +0000</pubDate>
         
         <guid>https://hentaiworld.cn/p/%E5%B0%86-hexo-%E9%83%A8%E7%BD%B2%E5%88%B0-github-pages/</guid>
-        <description>&lt;img src="https://d33wubrfki0l68.cloudfront.net/5997a40576f3beca7bbbd86fe79a795e9d520d8e/87f88/themes/screenshots/landscape.png" alt="Featured image of post 将 Hexo 部署到 GitHub Pages" /&gt;&lt;p&gt;1.登录Github创建一个名为 “用户名 .github.io” 的新公共存储库repository，其中用户名是你在 GitHub 上的用户名（或组织名称）。如果存储库的第一部分与你的用户名不完全匹配，它将无法工作，因此请确保正确。&lt;/p&gt;
+        <description>&lt;p&gt;1.登录Github创建一个名为 “用户名 .github.io” 的新公共存储库repository，其中用户名是你在 GitHub 上的用户名（或组织名称）。如果存储库的第一部分与你的用户名不完全匹配，它将无法工作，因此请确保正确。&lt;/p&gt;
 &lt;p&gt;2.安装node.js,Git。执行 &lt;code&gt;node -v&lt;/code&gt;,&lt;code&gt;git --version&lt;/code&gt; 指令检查是否安装成功，安装成功会输出版本号。生成SSH密钥&lt;code&gt;ssh-keygen -t rsa -C &amp;quot;your_emial@examle.com&amp;quot;&lt;/code&gt;添加到 “Settings” 下的 “Deploy keys”。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://i.loli.net/2021/08/08/23gevDmCI9jstXE.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 设置user.name和user.email&lt;/span&gt;
