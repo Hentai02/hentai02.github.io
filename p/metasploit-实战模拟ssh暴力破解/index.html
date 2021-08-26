@@ -150,9 +150,9 @@ sudo curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/con
 </span><span class="se"></span>  chmod <span class="m">755</span> msfinstall <span class="o">&amp;&amp;</span> <span class="se">\
 </span><span class="se"></span>  ./msfinstall
 </code></pre></div><h2 id="暴力破解-ssh">暴力破解 SSH</h2>
-<p>执行  <code>ping 域名</code> 获取目标 ip，使用 nmap 扫描检查22端口是否为开启状态，没有安装 nmap，可到 <a class="link" href="https://zh-hans.ipshu.com/scan_port"  target="_blank" rel="noopener"
+<p>执行  <code>ping 域名</code> 获取目标 ip，使用 nmap 扫描检查ssh端口是否为开启状态，没有安装 nmap，可到 <a class="link" href="https://zh-hans.ipshu.com/scan_port"  target="_blank" rel="noopener"
     >IPSHU</a> 扫描端口。
-没有合适的服务器用 termux 作为靶机，它的ssh端口默认为8022。
+这里用 termux 作为靶机，termux 的 ssh 端口默认为8022。
 <img src="https://i.loli.net/2021/08/26/kEjZQmdnMBItas3.png" alt="Snipaste_2021-08-26_20-28-30.png"  /></p>
 <p>运行 Metasploit 执行 <code>use auxiliary/scanner/ssh/ssh_login</code> 运行模块，使用 <code>show options</code> 查看该模块下的参数
 <img src="https://i.loli.net/2021/08/26/MsqbPjYogyetBi2.png" alt="Snipaste_2021-08-26_20-39-51.png"  /></p>
