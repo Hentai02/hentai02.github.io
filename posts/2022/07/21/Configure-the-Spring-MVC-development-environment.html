@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="msvalidate.01" content="46686EA544F69C02245E04C484BEE826">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.hentaiworld.cn","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Spring Web MVC 是基于 Servlet API 构建的原始 Web 框架，从一开始就包含在 Spring Framework 中。 正式名称“Spring Web MVC”来自其源模块的名称（spring-webmvc），但更常见的是“Spring MVC”。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="配置 Spring MVC 开发环境">
+<meta property="og:url" content="https://blog.hentaiworld.cn/posts/2022/07/21/Configure-the-Spring-MVC-development-environment.html">
+<meta property="og:site_name" content="Hentai&#39;s Blog">
+<meta property="og:description" content="Spring Web MVC 是基于 Servlet API 构建的原始 Web 框架，从一开始就包含在 Spring Framework 中。 正式名称“Spring Web MVC”来自其源模块的名称（spring-webmvc），但更常见的是“Spring MVC”。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/07/23/iBe5amr3NQwSIKV.png">
+<meta property="article:published_time" content="2022-07-21T10:37:20.000Z">
+<meta property="article:modified_time" content="2022-07-31T04:50:42.132Z">
+<meta property="article:author" content="Hentai">
+<meta property="article:tag" content="Spring MVC">
+<meta property="article:tag" content="Thymeleaf">
+<meta property="article:tag" content="MyBatis">
+<meta property="article:tag" content="RESTful">
+<meta property="article:tag" content="SLF4J">
+<meta property="article:tag" content="Log4j">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/07/23/iBe5amr3NQwSIKV.png">
+
+
+<link rel="canonical" href="https://blog.hentaiworld.cn/posts/2022/07/21/Configure-the-Spring-MVC-development-environment.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.hentaiworld.cn/posts/2022/07/21/Configure-the-Spring-MVC-development-environment.html","path":"posts/2022/07/21/Configure-the-Spring-MVC-development-environment.html","title":"配置 Spring MVC 开发环境"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>配置 Spring MVC 开发环境 | Hentai's Blog</title>
+  
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-235107950-1","only_pageview":true}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Hentai's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hentai's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Hello World!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DispatcherServlet"><span class="nav-number">1.</span> <span class="nav-text">DispatcherServlet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVC-%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">MVC 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Message-Converters"><span class="nav-number">2.1.</span> <span class="nav-text">Message Converters</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-Thymeleaf"><span class="nav-number">3.</span> <span class="nav-text">配置 Thymeleaf</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-MVC-%E4%B8%AD%E7%9A%84%E8%A7%86%E5%9B%BE%E5%92%8C%E8%A7%86%E5%9B%BE%E8%A7%A3%E6%9E%90%E5%99%A8"><span class="nav-number">3.1.</span> <span class="nav-text">Spring MVC 中的视图和视图解析器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thymeleaf-%E4%B8%AD%E7%9A%84%E8%A7%86%E5%9B%BE%E5%92%8C%E8%A7%86%E5%9B%BE%E8%A7%A3%E6%9E%90%E5%99%A8"><span class="nav-number">3.2.</span> <span class="nav-text">Thymeleaf 中的视图和视图解析器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-MyBatis-Spring"><span class="nav-number">4.</span> <span class="nav-text">配置 MyBatis-Spring</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E7%8E%B0%E6%98%A0%E5%B0%84%E5%99%A8"><span class="nav-number">4.1.</span> <span class="nav-text">发现映射器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MapperScannerConfigurer"><span class="nav-number">4.1.1.</span> <span class="nav-text">MapperScannerConfigurer</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-SLF4J"><span class="nav-number">5.</span> <span class="nav-text">配置 SLF4J</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A6%E6%9C%89%E5%B1%9E%E6%80%A7%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">5.1.</span> <span class="nav-text">带有属性的配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3"><span class="nav-number">6.</span> <span class="nav-text">官方文档</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hentai"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Hentai</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://qm.qq.com/cgi-bin/qm/qr?k=jZrJG3YL8HkjJ94lhIUSXfFvNE9goOQY&noverify=0" title="QQ → https:&#x2F;&#x2F;qm.qq.com&#x2F;cgi-bin&#x2F;qm&#x2F;qr?k&#x3D;jZrJG3YL8HkjJ94lhIUSXfFvNE9goOQY&amp;noverify&#x3D;0" rel="noopener" target="_blank"><i class="fa-brands fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hentaikis@gmail.com" title="E-Mail → mailto:hentaikis@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://fanxx-my.sharepoint.com/:f:/g/personal/dianaj_hentaiworld_cn/Ekeow0iSQp1AjP0hAU_IQ2YB3PHl1jajXaUKwhkcbyvcZg?e=NiMUtT" title="OneDrive → https:&#x2F;&#x2F;fanxx-my.sharepoint.com&#x2F;:f:&#x2F;g&#x2F;personal&#x2F;dianaj_hentaiworld_cn&#x2F;Ekeow0iSQp1AjP0hAU_IQ2YB3PHl1jajXaUKwhkcbyvcZg?e&#x3D;NiMUtT" rel="noopener" target="_blank"><i class="fa-solid fa-cloud fa-fw"></i>OneDrive</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/Hentai02" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.hentaiworld.cn/posts/2022/07/21/Configure-the-Spring-MVC-development-environment.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hentai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hentai's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="配置 Spring MVC 开发环境 | Hentai's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          配置 Spring MVC 开发环境
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-07-21 18:37:20" itemprop="dateCreated datePublished" datetime="2022-07-21T18:37:20+08:00">2022-07-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-31 12:50:42" itemprop="dateModified" datetime="2022-07-31T12:50:42+08:00">2022-07-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Spring Web MVC 是基于 Servlet API 构建的原始 Web 框架，从一开始就包含在 Spring Framework 中。 正式名称“Spring Web MVC”来自其源模块的名称（<a target="_blank" rel="noopener" href="https://github.com/spring-projects/spring-framework/tree/main/spring-webmvc">spring-webmvc</a>），但更常见的是“Spring MVC”。</p>
+<span id="more"></span>
+
+<p><img data-src="https://s2.loli.net/2022/07/23/iBe5amr3NQwSIKV.png" alt="Demo"></p>
+<h2 id="DispatcherServlet"><a href="#DispatcherServlet" class="headerlink" title="DispatcherServlet"></a>DispatcherServlet</h2><p>Spring MVC 与许多其他 Web 框架一样，围绕前端控制器模式设计，其中中央 Servlet DispatcherServlet 为请求处理提供共享算法，而实际工作由可配置的委托组件执行。 该模型非常灵活，支持多种工作流程。</p>
+<p><code>DispatcherServlet</code> 与任何 Servlet 一样，需要根据 Servlet 规范通过使用 Java 配置或在 <code>web.xml</code> 中进行声明和映射。 反过来，DispatcherServlet 使用 Spring 配置来发现请求映射、视图解析、异常处理等所需的委托组件。</p>
+<p>以下 web.xml 配置示例注册并初始化 DispatcherServlet：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">web-app</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">listener</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>org.springframework.web.context.ContextLoaderListener<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">listener</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>/WEB-INF/app-context.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>app<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">param-value</span>&gt;</span><span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>app<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/app/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="MVC-配置"><a href="#MVC-配置" class="headerlink" title="MVC 配置"></a>MVC 配置</h2><p>在 XML 配置中，可以使用 <code>&lt;mvc:annotation-driven&gt;</code> 元素来启用 MVC 配置，如以下示例所示：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:mvc</span>=<span class="string">&quot;http://www.springframework.org/schema/mvc&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;</span></span></span><br><span class="line"><span class="string"><span class="tag">        http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag">        https://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag">        http://www.springframework.org/schema/mvc</span></span></span><br><span class="line"><span class="string"><span class="tag">        https://www.springframework.org/schema/mvc/spring-mvc.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">mvc:annotation-driven</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Message-Converters"><a href="#Message-Converters" class="headerlink" title="Message Converters"></a>Message Converters</h3><p>由于 Spring 的 HTTP 默认消息转换器支持，无需手动进行此转换。 只需将 <a target="_blank" rel="noopener" href="https://github.com/FasterXML/jackson">Jackson 2</a> 添加在类路径上，会自动选择 Spring 的 <code>MappingJackson2HttpMessageConverter</code> 将实例转换为 JSON。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-databind<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.13.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="配置-Thymeleaf"><a href="#配置-Thymeleaf" class="headerlink" title="配置 Thymeleaf"></a>配置 Thymeleaf</h2><p>Thymeleaf 提供了一组 Spring 集成，允许您将其用作 Spring MVC 应用程序中 JSP 的全功能替代品。为了实现更容易和更好的集成，Thymeleaf 提供了一种语法，它专门实现了所有需要的特性，以便它与 Spring 正确工作。这种特定语法基于 Thymeleaf 标准语法，并在名为 <code>org.thymeleaf.spring4.dialect.SpringStandardDialect</code> 的类中实现，该类实际上是从 <code>org.thymeleaf.standard.StandardDialect</code> 扩展而来的。</p>
+<p>创建一个新模板引擎类的实例，该类自动执行所有必需的配置步骤：org.thymeleaf.spring4.SpringTemplateEngine。</p>
+<p>bean 配置：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;templateResolver&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">class</span>=<span class="string">&quot;org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;prefix&quot;</span> <span class="attr">value</span>=<span class="string">&quot;/WEB-INF/templates/&quot;</span> /&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 默认值 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;suffix&quot;</span> <span class="attr">value</span>=<span class="string">&quot;.html&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;templateMode&quot;</span> <span class="attr">value</span>=<span class="string">&quot;HTML&quot;</span> /&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 模板在修改时自动更新. --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;cacheable&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;templateEngine&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">class</span>=<span class="string">&quot;org.thymeleaf.spring5.SpringTemplateEngine&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;templateResolver&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;templateResolver&quot;</span> /&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 使用 Spring 4.2.4 或更高版本启用 SpringEL 编译器可以加快速度 --&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 是的，因此默认情况下此标志为“false”以实现更安全的向后兼容性。 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;enableSpringELCompiler&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Spring-MVC-中的视图和视图解析器"><a href="#Spring-MVC-中的视图和视图解析器" class="headerlink" title="Spring MVC 中的视图和视图解析器"></a>Spring MVC 中的视图和视图解析器</h3><p>Spring MVC 中有两个接口符合其模板系统的核心：</p>
+<ul>
+<li>org.springframework.web.servlet.View</li>
+<li>org.springframework.web.servlet.ViewResolver</li>
+</ul>
+<p>在我们的应用程序中查看模型页面，并允许我们通过将它们定义为 bean 来修改和预定义它们的行为。 视图负责渲染实际的 HTML 界面，通常通过执行某些模板引擎，如 Thymeleaf。</p>
+<p>ViewResolver 是负责为特定操作和语言环境获取 View 对象的对象。 通常，Controller 要求 ViewResolver 转发到具有特定名称的视图（Controller 方法返回的字符串），然后应用程序中的所有视图解析器按有序链执行，直到其中一个能够解析该视图，其中 如果返回 View 对象并将控制权传递给它以呈现 HTML。</p>
+<blockquote>
+<p>如果向 ViewResolver 询问一个没有对应 bean 的视图（这是常见的情况），则会临时创建一个新的 View 对象并返回。</p>
+</blockquote>
+<p>过去 Spring MVC 应用程序中 JSP+JSTL ViewResolver 的典型配置如下所示：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;viewClass&quot;</span> <span class="attr">value</span>=<span class="string">&quot;org.springframework.web.servlet.view.JstlView&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;prefix&quot;</span> <span class="attr">value</span>=<span class="string">&quot;/WEB-INF/jsps/&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;suffix&quot;</span> <span class="attr">value</span>=<span class="string">&quot;.jsp&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;order&quot;</span> <span class="attr">value</span>=<span class="string">&quot;2&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;viewNames&quot;</span> <span class="attr">value</span>=<span class="string">&quot;*jsp&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>快速查看它的属性就足以了解它是如何配置的：</p>
+<ul>
+<li><code>viewClass</code> 建立 View 实例的类。 这是 JSP 解析器所需要的，但当我们使用 Thymeleaf 时根本不需要它。</li>
+<li><code>prefix</code> 和 <code>suffix</code> 与 Thymeleaf 的 TemplateResolver 对象中相同名称的属性类似的方式工作。</li>
+<li><code>order</code> 建立在链中查询 ViewResolver 的顺序。</li>
+<li><code>viewNames</code> 允许定义（使用通配符）将由此 ViewResolver 解析的视图名称。</li>
+</ul>
+<h3 id="Thymeleaf-中的视图和视图解析器"><a href="#Thymeleaf-中的视图和视图解析器" class="headerlink" title="Thymeleaf 中的视图和视图解析器"></a>Thymeleaf 中的视图和视图解析器</h3><p>Thymeleaf 提供了上述两个接口的实现：</p>
+<ul>
+<li>org.thymeleaf.spring4.view.ThymeleafView</li>
+<li>org.thymeleaf.spring4.view.ThymeleafViewResolver</li>
+</ul>
+<p>由于 Controller 的执行，这两个类将负责处理 Thymeleaf 模板。</p>
+<p>Thymeleaf View Resolver 的配置与 JSP 的配置非常相似：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.thymeleaf.spring4.view.ThymeleafViewResolver&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;templateEngine&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;templateEngine&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;order&quot;</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span> /&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- &lt;property name=&quot;viewNames&quot; value=&quot;*.html,*.xhtml&quot; /&gt; --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;characterEncoding&quot;</span> <span class="attr">value</span>=<span class="string">&quot;UTF-8&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>templateEngine</code> 参数就是定义的 <code>SpringTemplateEngine</code> 对象。 其他两个（<code>order</code> 和 <code>viewNames</code>）都是可选的，与之前看到的 JSP ViewResolver 中的含义相同。</p>
+<p>请注意，我们不需要 <code>prefix</code> 或 <code>suffix</code> 参数，因为它们已经在模板解析器中指定（它又被传递给模板引擎）。</p>
+<h2 id="配置-MyBatis-Spring"><a href="#配置-MyBatis-Spring" class="headerlink" title="配置 MyBatis-Spring"></a>配置 MyBatis-Spring</h2><p>MyBatis-Spring 会帮助你将 MyBatis 代码无缝地整合到 Spring 中。它将允许 MyBatis 参与到 Spring 的事务管理之中，创建映射器 mapper 和 SqlSession 并注入到 bean 中，以及将 Mybatis 的异常转换为 Spring 的 DataAccessException。 最终，可以做到应用代码不依赖于 MyBatis，Spring 或 MyBatis-Spring。</p>
+<p>要和 Spring 一起使用 MyBatis，需要在 Spring 应用上下文中定义至少两样东西：一个 SqlSessionFactory 和至少一个数据映射器类。</p>
+<p>在 MyBatis-Spring 中，可使用 SqlSessionFactoryBean来创建 SqlSessionFactory。 要配置这个工厂 bean，只需要把下面代码放在 Spring 的 XML 配置文件中：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;sqlSessionFactory&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;dataSource&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;mapperLocations&quot;</span> <span class="attr">value</span>=<span class="string">&quot;classpath*:mappers/**/*.xml&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>SqlSessionFactory</code> 有一个唯一的必要属性：用于 JDBC 的 <code>DataSource</code>。这可以是任意的 <code>DataSource</code> 对象，它的配置方法和其它 Spring 数据库连接是一样的。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.commons.dbcp2.BasicDataSource&quot;</span> <span class="attr">destroy-method</span>=<span class="string">&quot;close&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driverClassName&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.driverClassName&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.url&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.username&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.password&#125;&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">&quot;classpath:jdbc.properties&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>一个常用的属性是 <code>configLocation</code>，它用来指定 MyBatis 的 XML 配置文件路径。它在需要修改 MyBatis 的基础配置非常有用。通常，基础配置指的是 <code>&lt;settings&gt;</code> 或 <code>&lt;typeAliases&gt;</code> 元素。</p>
+<p>需要注意的是，这个配置文件并不需要是一个完整的 MyBatis 配置。确切地说，任何环境配置（<code>&lt;environments&gt;</code>），数据源（<code>&lt;DataSource&gt;</code>）和 MyBatis 的事务管理器（<code>&lt;transactionManager&gt;</code>）都会被忽略。 <code>SqlSessionFactoryBean</code> 会创建它自有的 <code>MyBatis</code>环境配置（<code>Environment</code>），并按要求设置自定义环境的值。</p>
+<p>如果 MyBatis 在映射器类对应的路径下找不到与之相对应的映射器 XML 文件，那么也需要配置文件。这时有两种解决办法：第一种是手动在 MyBatis 的 XML 配置文件中的 <code>&lt;mappers&gt;</code> 部分中指定 XML 文件的类路径；第二种是设置工厂 bean 的 <code>mapperLocations</code> 属性。</p>
+<p><code>mapperLocations</code> 属性接受多个资源位置。这个属性可以用来指定 MyBatis 的映射器 XML 配置文件的位置。属性的值是一个 Ant 风格的字符串，可以指定加载一个目录中的所有文件，或者从一个目录开始递归搜索所有目录。</p>
+<p>这会从类路径下加载所有在 <code>mappers</code> 包和它的子包中的 MyBatis 映射器 XML 配置文件。</p>
+<h3 id="发现映射器"><a href="#发现映射器" class="headerlink" title="发现映射器"></a>发现映射器</h3><p>不需要一个个地注册你的所有映射器。你可以让 MyBatis-Spring 对类路径进行扫描来发现它们。</p>
+<p>有几种办法来发现映射器：</p>
+<ul>
+<li>使用 <code>&lt;mybatis:scan/&gt;</code> 元素</li>
+<li>使用 <code>@MapperScan</code> 注解</li>
+<li>在 Spring XML 配置文件中注册一个 <code>MapperScannerConfigurer</code></li>
+</ul>
+<p><code>&lt;mybatis:scan/&gt;</code> 和 <code>@MapperScan</code> 都在 MyBatis-Spring 1.2.0 中被引入。<code>@MapperScan</code> 需要你使用 Spring 3.1+。</p>
+<p>从 2.0.2 开始，映射器扫描功能支持一个选项（<code>lazy-initialization</code>），用于控制映射器 bean 的延迟初始化启用&#x2F;禁用。 添加此选项是支持 Spring Boot 2.2 支持的延迟初始化控制功能。 此选项的默认值为 <code>false</code>（&#x3D; 不使用延迟初始化）。 如果想对mapper bean使用延迟初始化，应该明确设置为 <code>true</code>。</p>
+<h4 id="MapperScannerConfigurer"><a href="#MapperScannerConfigurer" class="headerlink" title="MapperScannerConfigurer"></a>MapperScannerConfigurer</h4><p><code>MapperScannerConfigurer</code> 是一个 <code>BeanDefinitionRegistryPostProcessor</code>，这样就可以作为一个 bean，包含在经典的 XML 应用上下文中。为了配置 <code>MapperScannerConfigurer</code>，使用下面的 Spring 配置：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;basePackage&quot;</span> <span class="attr">value</span>=<span class="string">&quot;com.example.mapper&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="配置-SLF4J"><a href="#配置-SLF4J" class="headerlink" title="配置 SLF4J"></a>配置 SLF4J</h2><p>Java 的简单日志外观 (SLF4J) 用作各种日志框架（例如 java.util.logging、logback、log4j）的简单外观或抽象，允许最终用户在部署时插入所需的日志框架。</p>
+<p>启用 SLF4J 的库意味着仅添加一个强制依赖项，即 slf4j-api.jar。 如果在类路径上没有找到绑定&#x2F;提供者，那么 SLF4J 将默认为无操作实现。</p>
+<p>从 1.7.35 版开始，通过 Maven <code>&lt;relocation&gt;</code> 指令声明对重定向的依赖。 org.slf4j:slf4j-log4j12org.slf4j:slf4j-reload4j</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-log4j12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.36<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="带有属性的配置"><a href="#带有属性的配置" class="headerlink" title="带有属性的配置"></a>带有属性的配置</h3><p>从 2.4 版开始，Log4j 现在支持通过属性文件进行配置。 注意，属性语法与 Log4j 1 中使用的语法不同。与 XML 和 JSON 配置一样，属性配置根据插件和插件属性定义配置。<code>log4j.properties</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Root logger option</span></span><br><span class="line">log4j.rootLogger=DEBUG, file, stdout</span><br><span class="line"><span class="comment">#log4j.logger.org.thymeleaf=INFO</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Direct log messages to a log file</span></span><br><span class="line">log4j.appender.file=org.apache.log4j.RollingFileAppender</span><br><span class="line">log4j.appender.file.File=D:/Code/.logs/springmvc-test.log</span><br><span class="line">log4j.appender.file.MaxFileSize=1024MB</span><br><span class="line">log4j.appender.file.MaxBackupIndex=10</span><br><span class="line">log4j.appender.file.layout=org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.file.layout.ConversionPattern=%d&#123;yyyy-MM-<span class="built_in">dd</span> HH:mm:ss&#125; %-5p %c&#123;1&#125;:%L - %m%n</span><br><span class="line"></span><br><span class="line"><span class="comment"># Direct log messages to stdout</span></span><br><span class="line">log4j.appender.stdout=org.apache.log4j.ConsoleAppender</span><br><span class="line">log4j.appender.stdout.Target=System.out</span><br><span class="line">log4j.appender.stdout.Encoding=UTF-8</span><br><span class="line">log4j.appender.stdout.layout=org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.stdout.layout.ConversionPattern=%d&#123;yyyy-MM-<span class="built_in">dd</span> HH:mm:ss&#125; %-5p %c&#123;1&#125;:%L - %m%n</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>演示项目：<a target="_blank" rel="noopener" href="https://github.com/Hentai02/springmvc-helloword">https://github.com/Hentai02/springmvc-helloword</a></p>
+</blockquote>
+<h2 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h2><p><a target="_blank" rel="noopener" href="https://docs.spring.io/spring-framework/docs/current/reference/html/">Spring Framework Documentation</a><br><a target="_blank" rel="noopener" href="https://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html">Thymeleaf + Spring</a><br><a target="_blank" rel="noopener" href="https://mybatis.org/spring/zh/index.html">mybatis-spring</a><br><a target="_blank" rel="noopener" href="https://commons.apache.org/proper/commons-dbcp/index.html">DBCP</a><br><a target="_blank" rel="noopener" href="https://www.slf4j.org/manual.html">SLF4J user manual</a><br><a target="_blank" rel="noopener" href="https://logging.apache.org/log4j/2.x/">Log4j</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Spring-MVC/" rel="tag"># Spring MVC</a>
+              <a href="/tags/Thymeleaf/" rel="tag"># Thymeleaf</a>
+              <a href="/tags/MyBatis/" rel="tag"># MyBatis</a>
+              <a href="/tags/RESTful/" rel="tag"># RESTful</a>
+              <a href="/tags/SLF4J/" rel="tag"># SLF4J</a>
+              <a href="/tags/Log4j/" rel="tag"># Log4j</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/2022/07/21/Building-WebDAV-with-Tomcat.html" rel="prev" title="使用 Tomcat 搭建 WebDAV">
+                  <i class="fa fa-chevron-left"></i> 使用 Tomcat 搭建 WebDAV
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/2022/07/27/Installing-MySQL-on-Microsoft-Windows-Using-a-noinstall-ZIP-Archive.html" rel="next" title="在 Windows 上安装 MySQL Community Server">
+                  在 Windows 上安装 MySQL Community Server <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hentai</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"client_id":"e4b1ef7b2d72d418ae83","client_secret":"f95cd364a7298c24f39fc28cb8f543b3f93deeed","repo":"gitalk-comments","github_id":"Hentai02","admin_user":"Hentai02","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"85836dd1e11d0fe77b01168155e1030d"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>

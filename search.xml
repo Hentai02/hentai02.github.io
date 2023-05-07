@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>使用 Tomcat 搭建 WebDAV</title>
+    <url>/posts/2022/07/21/Building-WebDAV-with-Tomcat.html</url>
+    <content><![CDATA[<p>Servlet 添加了对 <a href="https://datatracker.ietf.org/doc/html/rfc4918">WebDAV</a> <a href="https://datatracker.ietf.org/doc/html/rfc4918#section-18">level 2</a> 的支持。所有基本的 HTTP 请求都由 <a href="https://tomcat.apache.org/tomcat-9.0-doc/api/org/apache/catalina/servlets/DefaultServlet.html">DefaultServlet</a> 处理。 <a href="https://tomcat.apache.org/tomcat-9.0-doc/api/org/apache/catalina/servlets/WebdavServlet.html">WebDAVServlet</a> 不能用作 DefaultServlet（即映射到“&#x2F;”），因为它在此配置中不起作用。</p>
+<span id="more"></span>
+
+<p><img data-src="https://s2.loli.net/2022/07/21/BTy6OHSXdEtGeQx.png" alt="WebDAV"></p>
+<p>将子路径（例如 &#x2F;webdav&#x2F;* 映射到此 servlet 在该子路径下重新挂载整个 Web 应用程序的效果，WebDAV 可以访问所有资源。WEB-INF 和 META-INF 目录在此受保护。</p>
+<p>要为 webapp 启用 WebDAV，将以下内容添加到 web.xml：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">└── WEB-INF</span><br><span class="line">    └── web.xml</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>webdav<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.apache.catalina.servlets.WebdavServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>debug<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>0<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>listings<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>webdav<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>启用读写访问：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>readonly<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>通过不同的 URL 使内容可编辑，使用以下映射：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>webdav<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/webdavedit/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>默认情况下，无法通过 WebDAV 访问 &#x2F;WEB-INF 和 META-INF。 要启用对这些 URL 的访问，添加：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>allowSpecialPaths<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>通过上面的映射配置，普通用户可以像以前一样访问 webapp。 具有必要访问权限的用户将能够使用 <a href="http://localhost:8080/webdav/webdavedit/content">http://localhost:8080/webdav/webdavedit/content</a> 编辑通过 <a href="http://localhost:8080/webdav/content">http://localhost:8080/webdav/content</a> 提供的文件。</p>
+]]></content>
+      <categories>
+        <category>HelloWorld</category>
+        <category>Tomcat</category>
+      </categories>
+      <tags>
+        <tag>Tomcat</tag>
+        <tag>WebDAV</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>配置 Spring MVC 开发环境</title>
+    <url>/posts/2022/07/21/Configure-the-Spring-MVC-development-environment.html</url>
+    <content><![CDATA[<p>Spring Web MVC 是基于 Servlet API 构建的原始 Web 框架，从一开始就包含在 Spring Framework 中。 正式名称“Spring Web MVC”来自其源模块的名称（<a href="https://github.com/spring-projects/spring-framework/tree/main/spring-webmvc">spring-webmvc</a>），但更常见的是“Spring MVC”。</p>
+<span id="more"></span>
+
+<p><img data-src="https://s2.loli.net/2022/07/23/iBe5amr3NQwSIKV.png" alt="Demo"></p>
+<h2 id="DispatcherServlet"><a href="#DispatcherServlet" class="headerlink" title="DispatcherServlet"></a>DispatcherServlet</h2><p>Spring MVC 与许多其他 Web 框架一样，围绕前端控制器模式设计，其中中央 Servlet DispatcherServlet 为请求处理提供共享算法，而实际工作由可配置的委托组件执行。 该模型非常灵活，支持多种工作流程。</p>
+<p><code>DispatcherServlet</code> 与任何 Servlet 一样，需要根据 Servlet 规范通过使用 Java 配置或在 <code>web.xml</code> 中进行声明和映射。 反过来，DispatcherServlet 使用 Spring 配置来发现请求映射、视图解析、异常处理等所需的委托组件。</p>
+<p>以下 web.xml 配置示例注册并初始化 DispatcherServlet：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">web-app</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">listener</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>org.springframework.web.context.ContextLoaderListener<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">listener</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>/WEB-INF/app-context.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>app<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">param-value</span>&gt;</span><span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>app<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/app/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="MVC-配置"><a href="#MVC-配置" class="headerlink" title="MVC 配置"></a>MVC 配置</h2><p>在 XML 配置中，可以使用 <code>&lt;mvc:annotation-driven&gt;</code> 元素来启用 MVC 配置，如以下示例所示：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:mvc</span>=<span class="string">&quot;http://www.springframework.org/schema/mvc&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;</span></span></span><br><span class="line"><span class="string"><span class="tag">        http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag">        https://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag">        http://www.springframework.org/schema/mvc</span></span></span><br><span class="line"><span class="string"><span class="tag">        https://www.springframework.org/schema/mvc/spring-mvc.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">mvc:annotation-driven</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Message-Converters"><a href="#Message-Converters" class="headerlink" title="Message Converters"></a>Message Converters</h3><p>由于 Spring 的 HTTP 默认消息转换器支持，无需手动进行此转换。 只需将 <a href="https://github.com/FasterXML/jackson">Jackson 2</a> 添加在类路径上，会自动选择 Spring 的 <code>MappingJackson2HttpMessageConverter</code> 将实例转换为 JSON。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-databind<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.13.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="配置-Thymeleaf"><a href="#配置-Thymeleaf" class="headerlink" title="配置 Thymeleaf"></a>配置 Thymeleaf</h2><p>Thymeleaf 提供了一组 Spring 集成，允许您将其用作 Spring MVC 应用程序中 JSP 的全功能替代品。为了实现更容易和更好的集成，Thymeleaf 提供了一种语法，它专门实现了所有需要的特性，以便它与 Spring 正确工作。这种特定语法基于 Thymeleaf 标准语法，并在名为 <code>org.thymeleaf.spring4.dialect.SpringStandardDialect</code> 的类中实现，该类实际上是从 <code>org.thymeleaf.standard.StandardDialect</code> 扩展而来的。</p>
+<p>创建一个新模板引擎类的实例，该类自动执行所有必需的配置步骤：org.thymeleaf.spring4.SpringTemplateEngine。</p>
+<p>bean 配置：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;templateResolver&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">class</span>=<span class="string">&quot;org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;prefix&quot;</span> <span class="attr">value</span>=<span class="string">&quot;/WEB-INF/templates/&quot;</span> /&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 默认值 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;suffix&quot;</span> <span class="attr">value</span>=<span class="string">&quot;.html&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;templateMode&quot;</span> <span class="attr">value</span>=<span class="string">&quot;HTML&quot;</span> /&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 模板在修改时自动更新. --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;cacheable&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;templateEngine&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">class</span>=<span class="string">&quot;org.thymeleaf.spring5.SpringTemplateEngine&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;templateResolver&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;templateResolver&quot;</span> /&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 使用 Spring 4.2.4 或更高版本启用 SpringEL 编译器可以加快速度 --&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 是的，因此默认情况下此标志为“false”以实现更安全的向后兼容性。 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;enableSpringELCompiler&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Spring-MVC-中的视图和视图解析器"><a href="#Spring-MVC-中的视图和视图解析器" class="headerlink" title="Spring MVC 中的视图和视图解析器"></a>Spring MVC 中的视图和视图解析器</h3><p>Spring MVC 中有两个接口符合其模板系统的核心：</p>
+<ul>
+<li>org.springframework.web.servlet.View</li>
+<li>org.springframework.web.servlet.ViewResolver</li>
+</ul>
+<p>在我们的应用程序中查看模型页面，并允许我们通过将它们定义为 bean 来修改和预定义它们的行为。 视图负责渲染实际的 HTML 界面，通常通过执行某些模板引擎，如 Thymeleaf。</p>
+<p>ViewResolver 是负责为特定操作和语言环境获取 View 对象的对象。 通常，Controller 要求 ViewResolver 转发到具有特定名称的视图（Controller 方法返回的字符串），然后应用程序中的所有视图解析器按有序链执行，直到其中一个能够解析该视图，其中 如果返回 View 对象并将控制权传递给它以呈现 HTML。</p>
+<blockquote>
+<p>如果向 ViewResolver 询问一个没有对应 bean 的视图（这是常见的情况），则会临时创建一个新的 View 对象并返回。</p>
+</blockquote>
+<p>过去 Spring MVC 应用程序中 JSP+JSTL ViewResolver 的典型配置如下所示：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;viewClass&quot;</span> <span class="attr">value</span>=<span class="string">&quot;org.springframework.web.servlet.view.JstlView&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;prefix&quot;</span> <span class="attr">value</span>=<span class="string">&quot;/WEB-INF/jsps/&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;suffix&quot;</span> <span class="attr">value</span>=<span class="string">&quot;.jsp&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;order&quot;</span> <span class="attr">value</span>=<span class="string">&quot;2&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;viewNames&quot;</span> <span class="attr">value</span>=<span class="string">&quot;*jsp&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>快速查看它的属性就足以了解它是如何配置的：</p>
+<ul>
+<li><code>viewClass</code> 建立 View 实例的类。 这是 JSP 解析器所需要的，但当我们使用 Thymeleaf 时根本不需要它。</li>
+<li><code>prefix</code> 和 <code>suffix</code> 与 Thymeleaf 的 TemplateResolver 对象中相同名称的属性类似的方式工作。</li>
+<li><code>order</code> 建立在链中查询 ViewResolver 的顺序。</li>
+<li><code>viewNames</code> 允许定义（使用通配符）将由此 ViewResolver 解析的视图名称。</li>
+</ul>
+<h3 id="Thymeleaf-中的视图和视图解析器"><a href="#Thymeleaf-中的视图和视图解析器" class="headerlink" title="Thymeleaf 中的视图和视图解析器"></a>Thymeleaf 中的视图和视图解析器</h3><p>Thymeleaf 提供了上述两个接口的实现：</p>
+<ul>
+<li>org.thymeleaf.spring4.view.ThymeleafView</li>
+<li>org.thymeleaf.spring4.view.ThymeleafViewResolver</li>
+</ul>
+<p>由于 Controller 的执行，这两个类将负责处理 Thymeleaf 模板。</p>
+<p>Thymeleaf View Resolver 的配置与 JSP 的配置非常相似：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.thymeleaf.spring4.view.ThymeleafViewResolver&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;templateEngine&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;templateEngine&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;order&quot;</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span> /&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- &lt;property name=&quot;viewNames&quot; value=&quot;*.html,*.xhtml&quot; /&gt; --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;characterEncoding&quot;</span> <span class="attr">value</span>=<span class="string">&quot;UTF-8&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>templateEngine</code> 参数就是定义的 <code>SpringTemplateEngine</code> 对象。 其他两个（<code>order</code> 和 <code>viewNames</code>）都是可选的，与之前看到的 JSP ViewResolver 中的含义相同。</p>
+<p>请注意，我们不需要 <code>prefix</code> 或 <code>suffix</code> 参数，因为它们已经在模板解析器中指定（它又被传递给模板引擎）。</p>
+<h2 id="配置-MyBatis-Spring"><a href="#配置-MyBatis-Spring" class="headerlink" title="配置 MyBatis-Spring"></a>配置 MyBatis-Spring</h2><p>MyBatis-Spring 会帮助你将 MyBatis 代码无缝地整合到 Spring 中。它将允许 MyBatis 参与到 Spring 的事务管理之中，创建映射器 mapper 和 SqlSession 并注入到 bean 中，以及将 Mybatis 的异常转换为 Spring 的 DataAccessException。 最终，可以做到应用代码不依赖于 MyBatis，Spring 或 MyBatis-Spring。</p>
+<p>要和 Spring 一起使用 MyBatis，需要在 Spring 应用上下文中定义至少两样东西：一个 SqlSessionFactory 和至少一个数据映射器类。</p>
+<p>在 MyBatis-Spring 中，可使用 SqlSessionFactoryBean来创建 SqlSessionFactory。 要配置这个工厂 bean，只需要把下面代码放在 Spring 的 XML 配置文件中：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;sqlSessionFactory&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;dataSource&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;mapperLocations&quot;</span> <span class="attr">value</span>=<span class="string">&quot;classpath*:mappers/**/*.xml&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>SqlSessionFactory</code> 有一个唯一的必要属性：用于 JDBC 的 <code>DataSource</code>。这可以是任意的 <code>DataSource</code> 对象，它的配置方法和其它 Spring 数据库连接是一样的。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.commons.dbcp2.BasicDataSource&quot;</span> <span class="attr">destroy-method</span>=<span class="string">&quot;close&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driverClassName&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.driverClassName&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.url&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.username&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.password&#125;&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">&quot;classpath:jdbc.properties&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>一个常用的属性是 <code>configLocation</code>，它用来指定 MyBatis 的 XML 配置文件路径。它在需要修改 MyBatis 的基础配置非常有用。通常，基础配置指的是 <code>&lt;settings&gt;</code> 或 <code>&lt;typeAliases&gt;</code> 元素。</p>
+<p>需要注意的是，这个配置文件并不需要是一个完整的 MyBatis 配置。确切地说，任何环境配置（<code>&lt;environments&gt;</code>），数据源（<code>&lt;DataSource&gt;</code>）和 MyBatis 的事务管理器（<code>&lt;transactionManager&gt;</code>）都会被忽略。 <code>SqlSessionFactoryBean</code> 会创建它自有的 <code>MyBatis</code>环境配置（<code>Environment</code>），并按要求设置自定义环境的值。</p>
+<p>如果 MyBatis 在映射器类对应的路径下找不到与之相对应的映射器 XML 文件，那么也需要配置文件。这时有两种解决办法：第一种是手动在 MyBatis 的 XML 配置文件中的 <code>&lt;mappers&gt;</code> 部分中指定 XML 文件的类路径；第二种是设置工厂 bean 的 <code>mapperLocations</code> 属性。</p>
+<p><code>mapperLocations</code> 属性接受多个资源位置。这个属性可以用来指定 MyBatis 的映射器 XML 配置文件的位置。属性的值是一个 Ant 风格的字符串，可以指定加载一个目录中的所有文件，或者从一个目录开始递归搜索所有目录。</p>
+<p>这会从类路径下加载所有在 <code>mappers</code> 包和它的子包中的 MyBatis 映射器 XML 配置文件。</p>
+<h3 id="发现映射器"><a href="#发现映射器" class="headerlink" title="发现映射器"></a>发现映射器</h3><p>不需要一个个地注册你的所有映射器。你可以让 MyBatis-Spring 对类路径进行扫描来发现它们。</p>
+<p>有几种办法来发现映射器：</p>
+<ul>
+<li>使用 <code>&lt;mybatis:scan/&gt;</code> 元素</li>
+<li>使用 <code>@MapperScan</code> 注解</li>
+<li>在 Spring XML 配置文件中注册一个 <code>MapperScannerConfigurer</code></li>
+</ul>
+<p><code>&lt;mybatis:scan/&gt;</code> 和 <code>@MapperScan</code> 都在 MyBatis-Spring 1.2.0 中被引入。<code>@MapperScan</code> 需要你使用 Spring 3.1+。</p>
+<p>从 2.0.2 开始，映射器扫描功能支持一个选项（<code>lazy-initialization</code>），用于控制映射器 bean 的延迟初始化启用&#x2F;禁用。 添加此选项是支持 Spring Boot 2.2 支持的延迟初始化控制功能。 此选项的默认值为 <code>false</code>（&#x3D; 不使用延迟初始化）。 如果想对mapper bean使用延迟初始化，应该明确设置为 <code>true</code>。</p>
+<h4 id="MapperScannerConfigurer"><a href="#MapperScannerConfigurer" class="headerlink" title="MapperScannerConfigurer"></a>MapperScannerConfigurer</h4><p><code>MapperScannerConfigurer</code> 是一个 <code>BeanDefinitionRegistryPostProcessor</code>，这样就可以作为一个 bean，包含在经典的 XML 应用上下文中。为了配置 <code>MapperScannerConfigurer</code>，使用下面的 Spring 配置：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;basePackage&quot;</span> <span class="attr">value</span>=<span class="string">&quot;com.example.mapper&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="配置-SLF4J"><a href="#配置-SLF4J" class="headerlink" title="配置 SLF4J"></a>配置 SLF4J</h2><p>Java 的简单日志外观 (SLF4J) 用作各种日志框架（例如 java.util.logging、logback、log4j）的简单外观或抽象，允许最终用户在部署时插入所需的日志框架。</p>
+<p>启用 SLF4J 的库意味着仅添加一个强制依赖项，即 slf4j-api.jar。 如果在类路径上没有找到绑定&#x2F;提供者，那么 SLF4J 将默认为无操作实现。</p>
+<p>从 1.7.35 版开始，通过 Maven <code>&lt;relocation&gt;</code> 指令声明对重定向的依赖。 org.slf4j:slf4j-log4j12org.slf4j:slf4j-reload4j</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-log4j12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.36<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="带有属性的配置"><a href="#带有属性的配置" class="headerlink" title="带有属性的配置"></a>带有属性的配置</h3><p>从 2.4 版开始，Log4j 现在支持通过属性文件进行配置。 注意，属性语法与 Log4j 1 中使用的语法不同。与 XML 和 JSON 配置一样，属性配置根据插件和插件属性定义配置。<code>log4j.properties</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Root logger option</span></span><br><span class="line">log4j.rootLogger=DEBUG, file, stdout</span><br><span class="line"><span class="comment">#log4j.logger.org.thymeleaf=INFO</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Direct log messages to a log file</span></span><br><span class="line">log4j.appender.file=org.apache.log4j.RollingFileAppender</span><br><span class="line">log4j.appender.file.File=D:/Code/.logs/springmvc-test.log</span><br><span class="line">log4j.appender.file.MaxFileSize=1024MB</span><br><span class="line">log4j.appender.file.MaxBackupIndex=10</span><br><span class="line">log4j.appender.file.layout=org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.file.layout.ConversionPattern=%d&#123;yyyy-MM-<span class="built_in">dd</span> HH:mm:ss&#125; %-5p %c&#123;1&#125;:%L - %m%n</span><br><span class="line"></span><br><span class="line"><span class="comment"># Direct log messages to stdout</span></span><br><span class="line">log4j.appender.stdout=org.apache.log4j.ConsoleAppender</span><br><span class="line">log4j.appender.stdout.Target=System.out</span><br><span class="line">log4j.appender.stdout.Encoding=UTF-8</span><br><span class="line">log4j.appender.stdout.layout=org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.stdout.layout.ConversionPattern=%d&#123;yyyy-MM-<span class="built_in">dd</span> HH:mm:ss&#125; %-5p %c&#123;1&#125;:%L - %m%n</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>演示项目：<a href="https://github.com/Hentai02/springmvc-helloword">https://github.com/Hentai02/springmvc-helloword</a></p>
+</blockquote>
+<h2 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h2><p><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/">Spring Framework Documentation</a><br><a href="https://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html">Thymeleaf + Spring</a><br><a href="https://mybatis.org/spring/zh/index.html">mybatis-spring</a><br><a href="https://commons.apache.org/proper/commons-dbcp/index.html">DBCP</a><br><a href="https://www.slf4j.org/manual.html">SLF4J user manual</a><br><a href="https://logging.apache.org/log4j/2.x/">Log4j</a></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>Spring</category>
+      </categories>
+      <tags>
+        <tag>Spring MVC</tag>
+        <tag>Thymeleaf</tag>
+        <tag>MyBatis</tag>
+        <tag>RESTful</tag>
+        <tag>SLF4J</tag>
+        <tag>Log4j</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>将 Hexo 部署到 GitHub Pages</title>
+    <url>/posts/2022/07/20/Deploy-Hexo-to-GitHub-Pages.html</url>
+    <content><![CDATA[<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 <a href="http://daringfireball.net/projects/markdown/">Markdown</a>（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<span id="more"></span>
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装 Hexo 相当简单，只需要先安装下列应用程序即可：</p>
+<ul>
+<li><a href="https://nodejs.org/en/download/releases/">Node.js</a> (Node.js 版本需不低于 10.13，建议使用 Node.js 12.0 及以上版本)</li>
+<li><a href="http://git-scm.com/">Git</a></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Hexo 版本</th>
+<th>最低兼容 Node.js 版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>6.0+</td>
+<td>12.13.0</td>
+</tr>
+<tr>
+<td>5.0+</td>
+<td>10.13.0</td>
+</tr>
+<tr>
+<td>4.1 - 4.2</td>
+<td>8.10</td>
+</tr>
+<tr>
+<td>4.0</td>
+<td>8.6</td>
+</tr>
+</tbody></table>
+<h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+
+<p>安装 Hexo 完成后，执行下列命令，Hexo 将会在指定文件夹中新建所需要的文件。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">hexo init blog</span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<p>安装完成后，输入<code>hexo server</code>以下命令以启动服务器，网站会在 <a href="http://localhost:4000/">http://localhost:4000</a> 下启动。在服务器启动期间，Hexo 会监视文件变动并自动更新，无须重启服务器。</p>
+<h3 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h3><p>新建完成后，指定文件夹的目录如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> <strong>_config.yml</strong><br>网站的 <a href="https://hexo.io/zh-cn/docs/configuration">配置</a> 信息，您可以在此配置大部分的参数。<br><strong>package.json</strong><br>应用程序的信息。<a href="https://ejs.co/">EJS</a>, <a href="http://learnboost.github.io/stylus/">Stylus</a> 和 <a href="http://daringfireball.net/projects/markdown/">Markdown</a> renderer 已默认安装，可以自由移除。<br><strong>scaffolds</strong><br><a href="https://hexo.io/zh-cn/docs/writing">模版</a> 文件夹。当您新建文章时，Hexo 会根据 scaffold 来建立文件。<br>Hexo的模板是指在新建的文章文件中默认填充的内容。例如，如果您修改scaffold&#x2F;post.md中的Front-matter内容，那么每次新建一篇文章时都会包含这个修改。<br><strong>source</strong><br>资源文件夹是存放用户资源的地方。除 _posts 文件夹之外，开头命名为 _ (下划线)的文件 &#x2F; 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。<br><strong>themes</strong><br><a href="https://hexo.io/zh-cn/docs/themes">主题</a> 文件夹。Hexo 会根据主题来生成静态页面。</p>
+</blockquote>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><ol>
+<li>新建一个 repository。如果你希望你的站点能通过域名 &lt;你的 GitHub 用户名&gt;.github.io 访问，你的 repository 应该直接命名为 &lt;你的 GitHub 用户名&gt;.github.io。</li>
+<li>前往 GitHub 新建 <a href="https://github.com/settings/tokens">Personal Access Token</a>，只勾选 repo 的权限并生成一个新的 Token。Token 生成后请复制并保存好。</li>
+<li>在 <code>_config.yml</code>（如果有已存在的请删除）添加如下配置：<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">&#x27;git&#x27;</span></span><br><span class="line"><span class="attr">repo:</span> <span class="string">https://github.com/Hentai02/hentai02.github.io.git</span></span><br><span class="line"><span class="attr">branch:</span> <span class="string">gh-pages</span></span><br><span class="line"><span class="attr">token:</span> <span class="string">Personal</span> <span class="string">Access</span> <span class="string">Token</span></span><br></pre></td></tr></table></figure></li>
+<li>安装 <a href="https://github.com/hexojs/hexo-deployer-git">hexo-deployer-git</a>。<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></li>
+<li>运行 <code>hexo clean &amp;&amp; hexo deploy </code>。</li>
+<li>查看 username.github.io 上的网页是否部署成功。</li>
+</ol>
+<h2 id="Gitalk"><a href="#Gitalk" class="headerlink" title="Gitalk"></a>Gitalk</h2><p>NexT主题Gitalk配置</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Gitalk</span></span><br><span class="line"><span class="comment"># For more information: https://gitalk.github.io</span></span><br><span class="line"><span class="attr">gitalk:</span></span><br><span class="line">  <span class="attr">client_id:</span> <span class="string">GitHub</span> <span class="string">Application</span> <span class="string">Client</span> <span class="string">ID.</span></span><br><span class="line">  <span class="attr">client_secret:</span> <span class="string">GitHub</span> <span class="string">Application</span> <span class="string">Client</span> <span class="string">Secret.</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">gitalk-comments</span></span><br><span class="line">  <span class="attr">github_id:</span> <span class="string">Hentai02</span> <span class="comment"># GitHub repository 所有者</span></span><br><span class="line">  <span class="attr">admin_user:</span> <span class="string">Hentai02</span> <span class="comment"># GitHub repository 的所有者和合作者</span></span><br><span class="line">  <span class="comment">#distraction_free_mode: true # 类似Facebook评论框的全屏遮罩效果.</span></span><br><span class="line">  <span class="attr">language:</span> <span class="string">zh-CN</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a>自定义域名</h2><ol>
+<li>自定义域名。打开 repository 点击 <code>Settings/Pages</code> 在 <code>Custom domain</code> 中填入域名并保存。</li>
+<li>添加一条主机记录（主机记录相当于域名的前缀，比如 www），记录类型 <code>CNAME</code>（将域名指向另一个域名地址，与其保持相同解析，如 hentai02.github.io）。</li>
+</ol>
+<h2 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h2><p><a href="https://theme-next.js.org/docs/">NexT Documentation</a><br><a href="https://hexo.io/docs/">Hexo Documentation</a></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+        <category>NexT</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+        <tag>Github Pages</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何在 VMware Workstation 上安装 macOS Mojave</title>
+    <url>/posts/2022/07/28/How-to-install-macOS-Mojave-on-VMware-Workstation.html</url>
+    <content><![CDATA[<p>macOS 是在 Apple Mac 上运行的专有操作系统。现在，你可以使用多种技术在你的英特尔 PC (Hackintosh) 上安装 macOS。在 Windows 中，你只需单击几下即可使用 Clover 启动盘创建 macOS Mojave 可启动 USB。但并非所有硬件都受支持，你还需要参考大量文档，以便在你的计算机上安装和运行 macOS。</p>
+<p>在运行 Windows 或 Linux 的计算机上体验 macOS 的更简单方法是在 VMware Workstation 上安装 macOS。这样做的好处是在不影响电脑设置的情况下，你会熟悉安装和使用。通过使用虚拟机，你可以同时使用 macOS 和 Windows 或 Linux。使用虚拟磁盘可确保真实磁盘上的所有数据都不会受到影响。但是我注意到在 VM 上运行 macOS 非常慢，尽管我将它设置为 4GB 的 RAM。</p>
+<span id="more"></span>
+
+<p>本文将指导你如何在 VMware Workstation 上安装 macOS Mojave。我创建了一个包含 macOS 安装程序的虚拟磁盘，你只需下载它，将它附加到虚拟机，然后安装它。我不确定 VMware Workstation 12 是否支持 macOS 10.14 虚拟机，但版本 15 和 16 支持。我在 VirtualBox 上进行了测试，但它不起作用。</p>
+<p><img data-src="https://s2.loli.net/2022/07/28/N2nlz7WGiLqSekH.png" alt="macOS Mojave"></p>
+<h2 id="VMware-macOS-Unlocker"><a href="#VMware-macOS-Unlocker" class="headerlink" title="VMware macOS Unlocker"></a>VMware macOS Unlocker</h2><p>默认情况下，VMware 不提供创建 macOS 和 Mac OS X 计算机的选项。 幸运的是有一个工具可以帮助我解锁这个选项，这个工具就是 <a href="https://github.com/DrDonk/unlocker">VMware macOS Unlocker</a>。 它支持 Windows、Linux 和 MacOS。 如果你能够创建 macOS 虚拟机，请跳过此步骤。</p>
+<p>在 Windows 上，首先打开任务管理器关闭与 VMware 相关的进程，然后右键单击 <code>unlock.exe</code> 文件并选择以管理员身份运行以解锁。 对于 Linux 和 macOS，在 root 下运行 <code>unlock</code>。解锁过程完成后，运行 VMware 以创建 macOS 虚拟机。</p>
+<h2 id="创建-macOS-虚拟机"><a href="#创建-macOS-虚拟机" class="headerlink" title="创建 macOS 虚拟机"></a>创建 macOS 虚拟机</h2><p>创建 macOS 虚拟机非常简单，以下是在 VMware Workstation 上创建虚拟机的步骤：</p>
+<ol>
+<li>单击 <strong>文件</strong> ，选择 <strong>新建虚拟机…</strong></li>
+<li>选择 <strong>典型(推荐)</strong> 并单击下一步。</li>
+<li>选择 <strong>稍后安装操作系统</strong> 。 并单击下一步。</li>
+<li>在选择客户机操作系统部分选择 <strong>Apple Mac OS X</strong>，并在版本部分选择 <strong>macOS 10.14</strong>。 点击下一步。</li>
+<li>在“命名虚拟机”窗口中，命名虚拟机和虚拟机目录。 </li>
+<li>在“指定磁盘容量”窗口中选择新虚拟磁盘的大小。 这是要安装 macOS 的虚拟磁盘。 单击下一步，然后单击完成。</li>
+</ol>
+<h2 id="添加-macOS-映像"><a href="#添加-macOS-映像" class="headerlink" title="添加 macOS 映像"></a>添加 macOS 映像</h2><p>创建虚拟机后，我们有一个虚拟磁盘来安装 macOS Mojave。 现在我们只需要添加一个包含 macOS 安装程序的新虚拟磁盘。 </p>
+<ol>
+<li>下载 <a href="https://fanxx-my.sharepoint.com/:f:/g/personal/dianaj_hentaiworld_cn/Ekeow0iSQp1AjP0hAU_IQ2YB3PHl1jajXaUKwhkcbyvcZg?e=NiMUtT">OSX_10.14.0_Installer.vmdk</a> 文件。 这是 macOS Mojave 的安装映像。</li>
+<li>选择刚刚创建的虚拟机，点击 <strong>编辑虚拟机设置</strong> 。</li>
+<li>在内存部分，你可以增加该值以使虚拟机运行得更快。 我将它增加到 4096MB (4GB)。</li>
+<li>单击 <strong>添加…</strong> ，然后选择 <strong>硬盘</strong> 并单击下一步。</li>
+<li>在“选择磁盘类型”窗口中，单击下一步。</li>
+<li>在“选择磁盘”窗口中选择 <strong>使用现有虚拟磁盘</strong> ，然后单击下一步继续。</li>
+<li>在“选择现有磁盘”窗口中，单击 <strong>浏览…</strong> 选择你在步骤 1 中下载的 <code>OSX_10.14.0_Installer.vmdk</code> 文件。</li>
+<li>单击完成，然后在虚拟机设置窗口中单击确定。</li>
+</ol>
+<h2 id="安装-macOS"><a href="#安装-macOS" class="headerlink" title="安装 macOS"></a>安装 macOS</h2><p>现在你可以启动虚拟机来安装 macOS Mojave。 安装过程中可能会遇到的问题：</p>
+<ol>
+<li><pre><code>VMware Workstation unrecoverable error: (vcpu-0)
+vcpu-0:VERIFY
+
+vmcore/vmm/main/physMem_monitor.c:1279
+</code></pre>
+<p>将 <code>smc.version = &quot;0&quot;</code> 添加到<code>%ProgramData%/VMware/VMware Workstation/config.ini</code>文件来解决此问题。 </p>
+</li>
+<li><p>这个“安装 macOS Mojave”应用程序副本已损坏，不能用来安装 macOS。<br><img data-src="https://s2.loli.net/2022/07/28/yfNmGuoDWHciQZX.png"><br>在执行抹掉磁盘步骤时，在 <strong>实用工具&#x2F;终端</strong> 中输入 <code>date 010101012018</code> 更改时间，因为证书已过期，更改完成后单击 <strong>终端</strong> 选择 <strong>退出终端</strong> 即可继续安装 macOS</p>
+</li>
+</ol>
+<p>在 macOS 实用工具窗口中，你需要运行磁盘工具来创建 <code>APFS</code> 分区以安装 macOS Mojave。</p>
+<ol>
+<li>在左栏中，你将看到在上面创建的虚拟硬盘（<code>VMware Virtual　SATA Hard Drive Media</code>）。 选择它并单击 <strong>抹掉</strong> 按钮。<br><img data-src="https://s2.loli.net/2022/07/28/UFoJ5ReXh8wBpNC.png"></li>
+<li>在名称下，输入新分区的名称。</li>
+<li>macOS Mojave 需要一个 <code>APFS</code> 格式的分区才能安装。 从格式下拉列表中选择 <code>APFS</code>。<br><img data-src="https://s2.loli.net/2022/07/28/6JH1RvzybTsoFEk.png"></li>
+<li>单击 <strong>抹掉</strong> 按钮继续。</li>
+<li>拥有 <code>APFS</code> 分区后，关闭磁盘工具以开始安装 macOS。</li>
+</ol>
+<p>返回 macOS 实用工具窗口：</p>
+<ol>
+<li>选择 <strong>安装 macOS</strong> ，然后单击继续按钮。</li>
+<li>同意软件许可协议中的条款</li>
+<li>在下一个窗口中，选择你在上面创建的 <code>APFS</code> 分区。 然后单击安装。</li>
+<li>虚拟机将重新启动几次，直到允许你进行设置。 请耐心等待。</li>
+</ol>
+<p>安装后，你可以移除在添加 macOS 映像步骤中添加的虚拟硬盘。 打开编辑虚拟机设置，选择在“添加 macOS 映像”步骤中添加的虚拟硬盘并单击移除按钮。</p>
+<h2 id="安装-VMware-Tools"><a href="#安装-VMware-Tools" class="headerlink" title="安装 VMware Tools"></a>安装 VMware Tools</h2><p>在虚拟机中安装 VMware Tools 非常重要。 安装的 VMware Tools 将提高性能并支持其他功能。 在 VMware 的网站上了解有关<a href="https://kb.vmware.com/s/article/1032440">为 macOS 虚拟机安装 VMware Tools</a> 的更多信息。</p>
+<ol>
+<li>从 VMware 菜单中选择虚拟机，然后选择 <strong>安装 VMware Tools…</strong></li>
+<li>VMware Tools 图标将出现在虚拟机屏幕上。 双击 <strong>安装 VMware Tools</strong> 。</li>
+<li>如果你看到消息“系统扩展已被阻止”，请单击 <strong>打开安全性偏好设置</strong> （默认会自动打开）。</li>
+<li>你将看到消息“来自开发商“VMware, Inc.”的系统软件已被阻止载入。”。 单击允许按钮。<br><img data-src="https://s2.loli.net/2022/07/28/vtnKDUMOY3VSZdj.png"></li>
+<li>点击重新启动按钮已完成 VMware Tools 的安装。</li>
+</ol>
+<p>至此，你已完成在 VMware Workstation 上安装 macOS Mojave。 </p>
+]]></content>
+      <categories>
+        <category>VMware</category>
+        <category>macOS</category>
+      </categories>
+      <tags>
+        <tag>macOS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ubuntu 安装配置 Samba</title>
+    <url>/posts/2022/07/21/Install-and-Configure-Samba.html</url>
+    <content><![CDATA[<p>Samba 文件服务器支持通过网络在不同操作系统之间共享文件。 它允许您从笔记本电脑访问桌面文件并与 Windows 和 macOS 用户共享文件。</p>
+<p>本教程介绍了在 Ubuntu（&gt;&#x3D;Ubuntu 16.04 LTS） 上安装和配置 Samba。</p>
+<span id="more"></span>
+
+<p><img data-src="https://s2.loli.net/2022/07/21/W5fYFhqjCIEvAJb.png" alt="samba"></p>
+<h2 id="安装-Samba"><a href="#安装-Samba" class="headerlink" title="安装 Samba"></a>安装 Samba</h2><p>要安装 Samba，执行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install samba</span><br></pre></td></tr></table></figure>
+
+<p>我们可以通过执行<code>whereis samba</code>来检查安装是否成功。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Ubuntu 22.04</span></span><br><span class="line">samba: /usr/sbin/samba /usr/lib/x86_64-linux-gnu/samba /etc/samba /usr/share/samba /usr/share/man/man7/samba.7.gz /usr/share/man/man8/samba.8.gz</span><br></pre></td></tr></table></figure>
+
+<h2 id="设置-Samba"><a href="#设置-Samba" class="headerlink" title="设置 Samba"></a>设置 Samba</h2><p>现在 Samba 已安装，我们需要为其创建一个共享目录：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /home/&lt;username&gt;/sambashare/</span><br></pre></td></tr></table></figure>
+<p>上面的命令在主目录中创建了一个新文件夹 sambashare，稍后将共享它。</p>
+<p>Samba 的配置文件位于 &#x2F;etc&#x2F;samba&#x2F;smb.conf. 要将新目录添加为共享，运行以下命令编辑配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/samba/smb.conf</span><br></pre></td></tr></table></figure>
+<p> 按 <code>i</code> 键切换到编辑模式。在文件的底部，添加以下行：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line">[<span class="string">sambashare</span>]</span><br><span class="line">    <span class="string">comment</span> <span class="string">=</span> <span class="string">Samba</span> <span class="string">on</span> <span class="string">Ubuntu</span></span><br><span class="line">    <span class="string">path</span> <span class="string">=</span> <span class="string">/home/username/sambashare</span> <span class="comment"># 共享的目录</span></span><br><span class="line">    <span class="string">read</span> <span class="string">only</span> <span class="string">=</span> <span class="literal">no</span> <span class="comment"># 修改共享文件夹内容的权限</span></span><br><span class="line">    <span class="string">browsable</span> <span class="string">=</span> <span class="literal">yes</span> <span class="comment"># 文件管理器将在“网络”下列出此共享（它也可以显示为可浏览）。</span></span><br></pre></td></tr></table></figure>
+<p>然后按 <code>Esc</code> 键退出编辑模式，切换到命令模式。输入指令 <code>:wq</code> 保存并退出 vim 文本编辑器。</p>
+<p>现在已经配置了新的共享，重新启动 Samba 以使其生效：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo service smbd restart</span><br></pre></td></tr></table></figure>
+
+<p>更新防火墙规则以允许 Samba 数据传输：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo ufw allow samba</span><br></pre></td></tr></table></figure>
+
+<h2 id="设置用户帐户并连接到共享"><a href="#设置用户帐户并连接到共享" class="headerlink" title="设置用户帐户并连接到共享"></a>设置用户帐户并连接到共享</h2><p>由于 Samba 不使用系统帐户密码，需要为我们的用户帐户设置一个 Samba 密码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo smbpasswd -a username</span><br></pre></td></tr></table></figure>
+
+<p>使用的用户名必须属于系统帐户，否则不会保存。</p>
+<h3 id="连接共享"><a href="#连接共享" class="headerlink" title="连接共享"></a>连接共享</h3><p>在 Windows 上，打开文件管理器并将文件路径编辑为：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">\\ip-address\sambashare</span><br></pre></td></tr></table></figure>
+<p>在 Ubuntu 上：打开默认文件管理器并单击连接到服务器，然后输入：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">smb://ip-address/sambashare</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://s2.loli.net/2022/07/21/72QAHdpJUwi9Btm.png" alt="ubuntu-smb"></p>
+<p>系统将提示您输入凭据。 输入它们进行连接！</p>
+]]></content>
+      <categories>
+        <category>HelloWorld</category>
+        <category>Linux</category>
+        <category>Ubuntu</category>
+      </categories>
+      <tags>
+        <tag>Samba</tag>
+        <tag>Ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在 Windows 上安装 MySQL Community Server</title>
+    <url>/posts/2022/07/27/Installing-MySQL-on-Microsoft-Windows-Using-a-noinstall-ZIP-Archive.html</url>
+    <content><![CDATA[<p>MySQL 软件提供了一个非常快速、多线程、多用户和健壮的 SQL（结构化查询语言）数据库服务器。 MySQL Server 在用于关键任务、重负载生产系统以及嵌入到大规模部署的软件中。</p>
+<span id="more"></span>
+
+<p><img data-src="https://s2.loli.net/2022/07/27/Q4KBXqfTAb6WcZk.png" alt="MySQL"></p>
+<h2 id="初始化数据目录"><a href="#初始化数据目录" class="headerlink" title="初始化数据目录"></a>初始化数据目录</h2><p>MySQL 5.7.7 之前的 Windows 发行版包括一个数据目录，其中包含一组数据库中的预初始化帐户<code> mysql</code>。从 5.7.7 开始，使用该软件包执行的 Windows 安装操作不包括数据目录。 </p>
+<p>从 MySQL 5.7.6 开始，<a href="https://downloads.mysql.com/archives/community/">ZIP Archive</a> 不再包含目录。 要通过创建数据目录并填充 mysql 系统数据库中的表来初始化 MySQL 安装，使用 <code>--initialize</code> 或 <code>--initialize-insecure</code> 初始化 MySQL。 </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.\bin\mysqld.exe --initialize</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">.\bin\mysqld.exe --initialize-insecure</span><br></pre></td></tr></table></figure>
+
+<h2 id="将-MySQL-作为-Windows-服务启动"><a href="#将-MySQL-作为-Windows-服务启动" class="headerlink" title="将 MySQL 作为 Windows 服务启动"></a>将 MySQL 作为 Windows 服务启动</h2><p>在 Windows 上，运行 MySQL 的推荐方法是将其安装为 Windows 服务，以便 MySQL 在 Windows 启动和停止时自动启动和停止。 作为服务安装的 MySQL 服务器也可以使用 NET 命令或图形服务管理工具从命令行进行控制。 通常，要将 MySQL 安装为 Windows 服务，应该以<strong>管理员权限运行</strong>。</p>
+<p>服务管理工具（Windows 管理工具&#x2F;服务）可以在 Windows 控制面板中找到。 为避免冲突，建议在从命令行执行服务器安装或删除操作时关闭 MySQL 服务。</p>
+<h3 id="安装服务"><a href="#安装服务" class="headerlink" title="安装服务"></a>安装服务</h3><p>使用以下命令将服务器安装为服务：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.\bin\mysqld.exe --install</span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">Service successfully installed.</span><br></pre></td></tr></table></figure>
+<p>–install 命令不会启动服务器。</p>
+<p><img data-src="https://s2.loli.net/2022/07/27/qXIlyQg9etihFZE.png" alt="MySQL 服务"></p>
+<h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h3><p>将 MySQL 服务器实例安装为服务后，Windows 会在 Windows 启动时自动启动该服务。 该服务也可以立即从服务实用程序启动，或者使用 <code>sc start mysqld_service_name</code> 或 <code>NET START mysqld_service_name</code> 命令。 SC 和 NET 命令不区分大小写。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sc start MySQL</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">net start MySQL</span><br></pre></td></tr></table></figure>
+
+<p>当作为服务运行时，<code>mysqld</code> 无法访问控制台窗口，因此在那里看不到任何消息。 如果 <code>mysqld</code> 没有启动，请检查错误日志以查看服务器是否在其中写入任何消息以指示问题的原因。 错误日志位于 MySQL 数据目录中（例如， C:\Program Files\MySQL\MySQL Server 5.7\data.err ）。</p>
+<p>当 MySQL 服务器已作为服务安装并且该服务正在运行时，Windows 会在 Windows 关闭时自动停止该服务。 也可以使用服务管理工具、<code>sc stop mysqld_service_name</code> 命令、<code>NET STOP mysqld_service_name</code> 命令或 <code>mysqladmin shutdown</code> 命令手动停止服务器。</p>
+<h3 id="连接到-MySQL-服务器"><a href="#连接到-MySQL-服务器" class="headerlink" title="连接到 MySQL 服务器"></a>连接到 MySQL 服务器</h3><p>要连接到服务器，通常需要在调用 <code>mysql</code> 时提供 MySQL 用户名，并且很可能需要提供密码。 如果服务器在您登录的机器以外的机器上运行，还必须指定主机名。 使用 <code>source</code> 导入 sql 脚本时若出现字符集不匹配，可以尝试指定默认字符集 <code>--default-character-set=utf8</code> 。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 默认密码为空</span></span><br><span class="line">.\bin\mysql -h localhost -u root -p --default-character-set=utf8</span><br></pre></td></tr></table></figure>
+<p>-h 和 -u 代表你的 MySQL 服务器运行的主机名和你的 MySQL 帐户的用户名。 </p>
+<h3 id="修改数据库密码"><a href="#修改数据库密码" class="headerlink" title="修改数据库密码"></a>修改数据库密码</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;127.0.0.1&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;你的密码&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;你的密码&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;你的密码&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line">FLUSH PRIVILEGES;   <span class="comment">/* 运行此命令则立即生效，不需要重启服务器 */</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="删除服务"><a href="#删除服务" class="headerlink" title="删除服务"></a>删除服务</h2><p>要删除作为服务安装的服务，如果它正在运行，首先通过执行 <code>SC STOP mysqld_service_name</code> 或 <code>NET STOP mysqld_service_name</code> 将其停止。 然后使用 <code>SC DELETE mysqld_service_name</code> 将其删除：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SC DELETE MySQL</span><br></pre></td></tr></table></figure>
+<p>或者，使用 <code>mysqld --remove</code> 选项删除服务。</p>
+<blockquote>
+<p>演示所使用的版本（附安装启动卸载脚本）<a href="https://fanxx-my.sharepoint.com/:f:/g/personal/dianaj_hentaiworld_cn/Ekeow0iSQp1AjP0hAU_IQ2YB3PHl1jajXaUKwhkcbyvcZg?e=NiMUtT">mysql-5.7.35-winx64.7z</a></p>
+</blockquote>
+<h2 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h2><p><a href="https://dev.mysql.com/doc/refman/5.7/en/windows-install-archive.html">Installing MySQL on Microsoft Windows Using a noinstall ZIP Archive</a><br><a href="https://downloads.mysql.com/archives/community/">MySQL Community Server (Archived Versions)</a></p>
+]]></content>
+      <categories>
+        <category>HelloWorld</category>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/posts/2022/07/20/hello-world.html</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+
+<p><img data-src="https://d33wubrfki0l68.cloudfront.net/5997a40576f3beca7bbbd86fe79a795e9d520d8e/87f88/themes/screenshots/landscape.png" alt="avatar"></p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <categories>
+        <category>HelloWorld</category>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+        <tag>Github Pages</tag>
+      </tags>
+  </entry>
+</search>

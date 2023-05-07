@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Hentai&#39;s Blog</title>
+  <icon>https://blog.hentaiworld.cn/icon.png</icon>
+  <subtitle>Hello World!</subtitle>
+  <link href="https://blog.hentaiworld.cn/atom.xml" rel="self"/>
+  
+  <link href="https://blog.hentaiworld.cn/"/>
+  <updated>2022-07-28T12:29:50.855Z</updated>
+  <id>https://blog.hentaiworld.cn/</id>
+  
+  <author>
+    <name>Hentai</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何在 VMware Workstation 上安装 macOS Mojave</title>
+    <link href="https://blog.hentaiworld.cn/posts/2022/07/28/How-to-install-macOS-Mojave-on-VMware-Workstation.html"/>
+    <id>https://blog.hentaiworld.cn/posts/2022/07/28/How-to-install-macOS-Mojave-on-VMware-Workstation.html</id>
+    <published>2022-07-28T04:17:58.000Z</published>
+    <updated>2022-07-28T12:29:50.855Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;macOS 是在 Apple Mac 上运行的专有操作系统。现在，你可以使用多种技术在你的英特尔 PC (Hackintosh) 上安装 macOS。在 Windows 中，你只需单击几下即可使用 Clover 启动盘创建 macOS Mojave 可启动 USB。但并非所有硬件都受支持，你还需要参考大量文档，以便在你的计算机上安装和运行 macOS。&lt;/p&gt;
+&lt;p&gt;在运行 Windows 或 Linux 的计算机上体验 macOS 的更简单方法是在 VMware Workstation 上安装 macOS。这样做的好处是在不影响电脑设置的情况下，你会熟悉安装和使用。通过使用虚拟机，你可以同时使用 macOS 和 Windows 或 Linux。使用虚拟磁盘可确保真实磁盘上的所有数据都不会受到影响。但是我注意到在 VM 上运行 macOS 非常慢，尽管我将它设置为 4GB 的 RAM。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="VMware" scheme="https://blog.hentaiworld.cn/categories/VMware/"/>
+    
+    <category term="macOS" scheme="https://blog.hentaiworld.cn/categories/VMware/macOS/"/>
+    
+    
+    <category term="macOS" scheme="https://blog.hentaiworld.cn/tags/macOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在 Windows 上安装 MySQL Community Server</title>
+    <link href="https://blog.hentaiworld.cn/posts/2022/07/27/Installing-MySQL-on-Microsoft-Windows-Using-a-noinstall-ZIP-Archive.html"/>
+    <id>https://blog.hentaiworld.cn/posts/2022/07/27/Installing-MySQL-on-Microsoft-Windows-Using-a-noinstall-ZIP-Archive.html</id>
+    <published>2022-07-27T03:01:10.000Z</published>
+    <updated>2022-07-27T07:12:13.864Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;MySQL 软件提供了一个非常快速、多线程、多用户和健壮的 SQL（结构化查询语言）数据库服务器。 MySQL Server 在用于关键任务、重负载生产系统以及嵌入到大规模部署的软件中。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="HelloWorld" scheme="https://blog.hentaiworld.cn/categories/HelloWorld/"/>
+    
+    <category term="MySQL" scheme="https://blog.hentaiworld.cn/categories/HelloWorld/MySQL/"/>
+    
+    
+    <category term="mysql" scheme="https://blog.hentaiworld.cn/tags/mysql/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>配置 Spring MVC 开发环境</title>
+    <link href="https://blog.hentaiworld.cn/posts/2022/07/21/Configure-the-Spring-MVC-development-environment.html"/>
+    <id>https://blog.hentaiworld.cn/posts/2022/07/21/Configure-the-Spring-MVC-development-environment.html</id>
+    <published>2022-07-21T10:37:20.000Z</published>
+    <updated>2022-07-31T04:50:42.132Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Spring Web MVC 是基于 Servlet API 构建的原始 Web 框架，从一开始就包含在 Spring Framework 中。 正式名称“Spring Web MVC”来自其源模块的名称（&lt;a href=&quot;https://github.com/spring-projects/spring-framework/tree/main/spring-webmvc&quot;&gt;spring-webmvc&lt;/a&gt;），但更常见的是“Spring MVC”。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Java" scheme="https://blog.hentaiworld.cn/categories/Java/"/>
+    
+    <category term="Spring" scheme="https://blog.hentaiworld.cn/categories/Java/Spring/"/>
+    
+    
+    <category term="Spring MVC" scheme="https://blog.hentaiworld.cn/tags/Spring-MVC/"/>
+    
+    <category term="Thymeleaf" scheme="https://blog.hentaiworld.cn/tags/Thymeleaf/"/>
+    
+    <category term="MyBatis" scheme="https://blog.hentaiworld.cn/tags/MyBatis/"/>
+    
+    <category term="RESTful" scheme="https://blog.hentaiworld.cn/tags/RESTful/"/>
+    
+    <category term="SLF4J" scheme="https://blog.hentaiworld.cn/tags/SLF4J/"/>
+    
+    <category term="Log4j" scheme="https://blog.hentaiworld.cn/tags/Log4j/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用 Tomcat 搭建 WebDAV</title>
+    <link href="https://blog.hentaiworld.cn/posts/2022/07/21/Building-WebDAV-with-Tomcat.html"/>
+    <id>https://blog.hentaiworld.cn/posts/2022/07/21/Building-WebDAV-with-Tomcat.html</id>
+    <published>2022-07-21T09:55:26.000Z</published>
+    <updated>2022-07-21T10:34:49.479Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Servlet 添加了对 &lt;a href=&quot;https://datatracker.ietf.org/doc/html/rfc4918&quot;&gt;WebDAV&lt;/a&gt; &lt;a href=&quot;https://datatracker.ietf.org/doc/html/rfc4918#section-18&quot;&gt;level 2&lt;/a&gt; 的支持。所有基本的 HTTP 请求都由 &lt;a href=&quot;https://tomcat.apache.org/tomcat-9.0-doc/api/org/apache/catalina/servlets/DefaultServlet.html&quot;&gt;DefaultServlet&lt;/a&gt; 处理。 &lt;a href=&quot;https://tomcat.apache.org/tomcat-9.0-doc/api/org/apache/catalina/servlets/WebdavServlet.html&quot;&gt;WebDAVServlet&lt;/a&gt; 不能用作 DefaultServlet（即映射到“&amp;#x2F;”），因为它在此配置中不起作用。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="HelloWorld" scheme="https://blog.hentaiworld.cn/categories/HelloWorld/"/>
+    
+    <category term="Tomcat" scheme="https://blog.hentaiworld.cn/categories/HelloWorld/Tomcat/"/>
+    
+    
+    <category term="Tomcat" scheme="https://blog.hentaiworld.cn/tags/Tomcat/"/>
+    
+    <category term="WebDAV" scheme="https://blog.hentaiworld.cn/tags/WebDAV/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ubuntu 安装配置 Samba</title>
+    <link href="https://blog.hentaiworld.cn/posts/2022/07/21/Install-and-Configure-Samba.html"/>
+    <id>https://blog.hentaiworld.cn/posts/2022/07/21/Install-and-Configure-Samba.html</id>
+    <published>2022-07-21T07:18:35.000Z</published>
+    <updated>2022-07-21T10:34:55.605Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Samba 文件服务器支持通过网络在不同操作系统之间共享文件。 它允许您从笔记本电脑访问桌面文件并与 Windows 和 macOS 用户共享文件。&lt;/p&gt;
+&lt;p&gt;本教程介绍了在 Ubuntu（&amp;gt;&amp;#x3D;Ubuntu 16.04 LTS） 上安装和配置 Samba。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="HelloWorld" scheme="https://blog.hentaiworld.cn/categories/HelloWorld/"/>
+    
+    <category term="Linux" scheme="https://blog.hentaiworld.cn/categories/HelloWorld/Linux/"/>
+    
+    <category term="Ubuntu" scheme="https://blog.hentaiworld.cn/categories/HelloWorld/Linux/Ubuntu/"/>
+    
+    
+    <category term="Samba" scheme="https://blog.hentaiworld.cn/tags/Samba/"/>
+    
+    <category term="Ubuntu" scheme="https://blog.hentaiworld.cn/tags/Ubuntu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>将 Hexo 部署到 GitHub Pages</title>
+    <link href="https://blog.hentaiworld.cn/posts/2022/07/20/Deploy-Hexo-to-GitHub-Pages.html"/>
+    <id>https://blog.hentaiworld.cn/posts/2022/07/20/Deploy-Hexo-to-GitHub-Pages.html</id>
+    <published>2022-07-20T06:47:23.000Z</published>
+    <updated>2022-07-27T05:51:07.439Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 &lt;a href=&quot;http://daringfireball.net/projects/markdown/&quot;&gt;Markdown&lt;/a&gt;（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Hexo" scheme="https://blog.hentaiworld.cn/categories/Hexo/"/>
+    
+    <category term="NexT" scheme="https://blog.hentaiworld.cn/categories/Hexo/NexT/"/>
+    
+    
+    <category term="Hexo" scheme="https://blog.hentaiworld.cn/tags/Hexo/"/>
+    
+    <category term="NexT" scheme="https://blog.hentaiworld.cn/tags/NexT/"/>
+    
+    <category term="Github Pages" scheme="https://blog.hentaiworld.cn/tags/Github-Pages/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://blog.hentaiworld.cn/posts/2022/07/20/hello-world.html"/>
+    <id>https://blog.hentaiworld.cn/posts/2022/07/20/hello-world.html</id>
+    <published>2022-07-20T02:00:00.000Z</published>
+    <updated>2022-07-21T07:23:26.203Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="HelloWorld" scheme="https://blog.hentaiworld.cn/categories/HelloWorld/"/>
+    
+    <category term="Hexo" scheme="https://blog.hentaiworld.cn/categories/HelloWorld/Hexo/"/>
+    
+    
+    <category term="Hexo" scheme="https://blog.hentaiworld.cn/tags/Hexo/"/>
+    
+    <category term="NexT" scheme="https://blog.hentaiworld.cn/tags/NexT/"/>
+    
+    <category term="Github Pages" scheme="https://blog.hentaiworld.cn/tags/Github-Pages/"/>
+    
+  </entry>
+  
+</feed>
