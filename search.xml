@@ -34,6 +34,132 @@
       </tags>
   </entry>
   <entry>
+    <title>如何在 VMware Workstation 上安装 macOS Mojave</title>
+    <url>/posts/2022/07/28/How-to-install-macOS-Mojave-on-VMware-Workstation.html</url>
+    <content><![CDATA[<p>macOS 是在 Apple Mac 上运行的专有操作系统。现在，你可以使用多种技术在你的英特尔 PC (Hackintosh) 上安装 macOS。在 Windows 中，你只需单击几下即可使用 Clover 启动盘创建 macOS Mojave 可启动 USB。但并非所有硬件都受支持，你还需要参考大量文档，以便在你的计算机上安装和运行 macOS。</p>
+<p>在运行 Windows 或 Linux 的计算机上体验 macOS 的更简单方法是在 VMware Workstation 上安装 macOS。这样做的好处是在不影响电脑设置的情况下，你会熟悉安装和使用。通过使用虚拟机，你可以同时使用 macOS 和 Windows 或 Linux。使用虚拟磁盘可确保真实磁盘上的所有数据都不会受到影响。但是我注意到在 VM 上运行 macOS 非常慢，尽管我将它设置为 4GB 的 RAM。</p>
+<span id="more"></span>
+
+<p>本文将指导你如何在 VMware Workstation 上安装 macOS Mojave。我创建了一个包含 macOS 安装程序的虚拟磁盘，你只需下载它，将它附加到虚拟机，然后安装它。我不确定 VMware Workstation 12 是否支持 macOS 10.14 虚拟机，但版本 15 和 16 支持。我在 VirtualBox 上进行了测试，但它不起作用。</p>
+<p><img data-src="https://s2.loli.net/2022/07/28/N2nlz7WGiLqSekH.png" alt="macOS Mojave"></p>
+<h2 id="VMware-macOS-Unlocker"><a href="#VMware-macOS-Unlocker" class="headerlink" title="VMware macOS Unlocker"></a>VMware macOS Unlocker</h2><p>默认情况下，VMware 不提供创建 macOS 和 Mac OS X 计算机的选项。 幸运的是有一个工具可以帮助我解锁这个选项，这个工具就是 <a href="https://github.com/DrDonk/unlocker">VMware macOS Unlocker</a>。 它支持 Windows、Linux 和 MacOS。 如果你能够创建 macOS 虚拟机，请跳过此步骤。</p>
+<p>在 Windows 上，首先打开任务管理器关闭与 VMware 相关的进程，然后右键单击 <code>unlock.exe</code> 文件并选择以管理员身份运行以解锁。 对于 Linux 和 macOS，在 root 下运行 <code>unlock</code>。解锁过程完成后，运行 VMware 以创建 macOS 虚拟机。</p>
+<h2 id="创建-macOS-虚拟机"><a href="#创建-macOS-虚拟机" class="headerlink" title="创建 macOS 虚拟机"></a>创建 macOS 虚拟机</h2><p>创建 macOS 虚拟机非常简单，以下是在 VMware Workstation 上创建虚拟机的步骤：</p>
+<ol>
+<li>单击 <strong>文件</strong> ，选择 <strong>新建虚拟机…</strong></li>
+<li>选择 <strong>典型(推荐)</strong> 并单击下一步。</li>
+<li>选择 <strong>稍后安装操作系统</strong> 。 并单击下一步。</li>
+<li>在选择客户机操作系统部分选择 <strong>Apple Mac OS X</strong>，并在版本部分选择 <strong>macOS 10.14</strong>。 点击下一步。</li>
+<li>在“命名虚拟机”窗口中，命名虚拟机和虚拟机目录。 </li>
+<li>在“指定磁盘容量”窗口中选择新虚拟磁盘的大小。 这是要安装 macOS 的虚拟磁盘。 单击下一步，然后单击完成。</li>
+</ol>
+<h2 id="添加-macOS-映像"><a href="#添加-macOS-映像" class="headerlink" title="添加 macOS 映像"></a>添加 macOS 映像</h2><p>创建虚拟机后，我们有一个虚拟磁盘来安装 macOS Mojave。 现在我们只需要添加一个包含 macOS 安装程序的新虚拟磁盘。 </p>
+<ol>
+<li>下载 <a href="https://fanxx-my.sharepoint.com/:f:/g/personal/dianaj_hentaiworld_cn/Ekeow0iSQp1AjP0hAU_IQ2YB3PHl1jajXaUKwhkcbyvcZg?e=NiMUtT">OSX_10.14.0_Installer.vmdk</a> 文件。 这是 macOS Mojave 的安装映像。</li>
+<li>选择刚刚创建的虚拟机，点击 <strong>编辑虚拟机设置</strong> 。</li>
+<li>在内存部分，你可以增加该值以使虚拟机运行得更快。 我将它增加到 4096MB (4GB)。</li>
+<li>单击 <strong>添加…</strong> ，然后选择 <strong>硬盘</strong> 并单击下一步。</li>
+<li>在“选择磁盘类型”窗口中，单击下一步。</li>
+<li>在“选择磁盘”窗口中选择 <strong>使用现有虚拟磁盘</strong> ，然后单击下一步继续。</li>
+<li>在“选择现有磁盘”窗口中，单击 <strong>浏览…</strong> 选择你在步骤 1 中下载的 <code>OSX_10.14.0_Installer.vmdk</code> 文件。</li>
+<li>单击完成，然后在虚拟机设置窗口中单击确定。</li>
+</ol>
+<h2 id="安装-macOS"><a href="#安装-macOS" class="headerlink" title="安装 macOS"></a>安装 macOS</h2><p>现在你可以启动虚拟机来安装 macOS Mojave。 安装过程中可能会遇到的问题：</p>
+<ol>
+<li><pre><code>VMware Workstation unrecoverable error: (vcpu-0)
+vcpu-0:VERIFY
+
+vmcore/vmm/main/physMem_monitor.c:1279
+</code></pre>
+<p>将 <code>smc.version = &quot;0&quot;</code> 添加到<code>%ProgramData%/VMware/VMware Workstation/config.ini</code>文件来解决此问题。 </p>
+</li>
+<li><p>这个“安装 macOS Mojave”应用程序副本已损坏，不能用来安装 macOS。<br><img data-src="https://s2.loli.net/2022/07/28/yfNmGuoDWHciQZX.png"><br>在执行抹掉磁盘步骤时，在 <strong>实用工具&#x2F;终端</strong> 中输入 <code>date 010101012018</code> 更改时间，因为证书已过期，更改完成后单击 <strong>终端</strong> 选择 <strong>退出终端</strong> 即可继续安装 macOS</p>
+</li>
+</ol>
+<p>在 macOS 实用工具窗口中，你需要运行磁盘工具来创建 <code>APFS</code> 分区以安装 macOS Mojave。</p>
+<ol>
+<li>在左栏中，你将看到在上面创建的虚拟硬盘（<code>VMware Virtual　SATA Hard Drive Media</code>）。 选择它并单击 <strong>抹掉</strong> 按钮。<br><img data-src="https://s2.loli.net/2022/07/28/UFoJ5ReXh8wBpNC.png"></li>
+<li>在名称下，输入新分区的名称。</li>
+<li>macOS Mojave 需要一个 <code>APFS</code> 格式的分区才能安装。 从格式下拉列表中选择 <code>APFS</code>。<br><img data-src="https://s2.loli.net/2022/07/28/6JH1RvzybTsoFEk.png"></li>
+<li>单击 <strong>抹掉</strong> 按钮继续。</li>
+<li>拥有 <code>APFS</code> 分区后，关闭磁盘工具以开始安装 macOS。</li>
+</ol>
+<p>返回 macOS 实用工具窗口：</p>
+<ol>
+<li>选择 <strong>安装 macOS</strong> ，然后单击继续按钮。</li>
+<li>同意软件许可协议中的条款</li>
+<li>在下一个窗口中，选择你在上面创建的 <code>APFS</code> 分区。 然后单击安装。</li>
+<li>虚拟机将重新启动几次，直到允许你进行设置。 请耐心等待。</li>
+</ol>
+<p>安装后，你可以移除在添加 macOS 映像步骤中添加的虚拟硬盘。 打开编辑虚拟机设置，选择在“添加 macOS 映像”步骤中添加的虚拟硬盘并单击移除按钮。</p>
+<h2 id="安装-VMware-Tools"><a href="#安装-VMware-Tools" class="headerlink" title="安装 VMware Tools"></a>安装 VMware Tools</h2><p>在虚拟机中安装 VMware Tools 非常重要。 安装的 VMware Tools 将提高性能并支持其他功能。 在 VMware 的网站上了解有关<a href="https://kb.vmware.com/s/article/1032440">为 macOS 虚拟机安装 VMware Tools</a> 的更多信息。</p>
+<ol>
+<li>从 VMware 菜单中选择虚拟机，然后选择 <strong>安装 VMware Tools…</strong></li>
+<li>VMware Tools 图标将出现在虚拟机屏幕上。 双击 <strong>安装 VMware Tools</strong> 。</li>
+<li>如果你看到消息“系统扩展已被阻止”，请单击 <strong>打开安全性偏好设置</strong> （默认会自动打开）。</li>
+<li>你将看到消息“来自开发商“VMware, Inc.”的系统软件已被阻止载入。”。 单击允许按钮。<br><img data-src="https://s2.loli.net/2022/07/28/vtnKDUMOY3VSZdj.png"></li>
+<li>点击重新启动按钮已完成 VMware Tools 的安装。</li>
+</ol>
+<p>至此，你已完成在 VMware Workstation 上安装 macOS Mojave。 </p>
+]]></content>
+      <categories>
+        <category>VMware</category>
+        <category>macOS</category>
+      </categories>
+      <tags>
+        <tag>macOS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ubuntu 安装配置 Samba</title>
+    <url>/posts/2022/07/21/Install-and-Configure-Samba.html</url>
+    <content><![CDATA[<p>Samba 文件服务器支持通过网络在不同操作系统之间共享文件。 它允许您从笔记本电脑访问桌面文件并与 Windows 和 macOS 用户共享文件。</p>
+<p>本教程介绍了在 Ubuntu（&gt;&#x3D;Ubuntu 16.04 LTS） 上安装和配置 Samba。</p>
+<span id="more"></span>
+
+<p><img data-src="https://s2.loli.net/2022/07/21/W5fYFhqjCIEvAJb.png" alt="samba"></p>
+<h2 id="安装-Samba"><a href="#安装-Samba" class="headerlink" title="安装 Samba"></a>安装 Samba</h2><p>要安装 Samba，执行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install samba</span><br></pre></td></tr></table></figure>
+
+<p>我们可以通过执行<code>whereis samba</code>来检查安装是否成功。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Ubuntu 22.04</span></span><br><span class="line">samba: /usr/sbin/samba /usr/lib/x86_64-linux-gnu/samba /etc/samba /usr/share/samba /usr/share/man/man7/samba.7.gz /usr/share/man/man8/samba.8.gz</span><br></pre></td></tr></table></figure>
+
+<h2 id="设置-Samba"><a href="#设置-Samba" class="headerlink" title="设置 Samba"></a>设置 Samba</h2><p>现在 Samba 已安装，我们需要为其创建一个共享目录：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /home/&lt;username&gt;/sambashare/</span><br></pre></td></tr></table></figure>
+<p>上面的命令在主目录中创建了一个新文件夹 sambashare，稍后将共享它。</p>
+<p>Samba 的配置文件位于 &#x2F;etc&#x2F;samba&#x2F;smb.conf. 要将新目录添加为共享，运行以下命令编辑配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/samba/smb.conf</span><br></pre></td></tr></table></figure>
+<p> 按 <code>i</code> 键切换到编辑模式。在文件的底部，添加以下行：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line">[<span class="string">sambashare</span>]</span><br><span class="line">    <span class="string">comment</span> <span class="string">=</span> <span class="string">Samba</span> <span class="string">on</span> <span class="string">Ubuntu</span></span><br><span class="line">    <span class="string">path</span> <span class="string">=</span> <span class="string">/home/username/sambashare</span> <span class="comment"># 共享的目录</span></span><br><span class="line">    <span class="string">read</span> <span class="string">only</span> <span class="string">=</span> <span class="literal">no</span> <span class="comment"># 修改共享文件夹内容的权限</span></span><br><span class="line">    <span class="string">browsable</span> <span class="string">=</span> <span class="literal">yes</span> <span class="comment"># 文件管理器将在“网络”下列出此共享（它也可以显示为可浏览）。</span></span><br></pre></td></tr></table></figure>
+<p>然后按 <code>Esc</code> 键退出编辑模式，切换到命令模式。输入指令 <code>:wq</code> 保存并退出 vim 文本编辑器。</p>
+<p>现在已经配置了新的共享，重新启动 Samba 以使其生效：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo service smbd restart</span><br></pre></td></tr></table></figure>
+
+<p>更新防火墙规则以允许 Samba 数据传输：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo ufw allow samba</span><br></pre></td></tr></table></figure>
+
+<h2 id="设置用户帐户并连接到共享"><a href="#设置用户帐户并连接到共享" class="headerlink" title="设置用户帐户并连接到共享"></a>设置用户帐户并连接到共享</h2><p>由于 Samba 不使用系统帐户密码，需要为我们的用户帐户设置一个 Samba 密码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo smbpasswd -a username</span><br></pre></td></tr></table></figure>
+
+<p>使用的用户名必须属于系统帐户，否则不会保存。</p>
+<h3 id="连接共享"><a href="#连接共享" class="headerlink" title="连接共享"></a>连接共享</h3><p>在 Windows 上，打开文件管理器并将文件路径编辑为：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">\\ip-address\sambashare</span><br></pre></td></tr></table></figure>
+<p>在 Ubuntu 上：打开默认文件管理器并单击连接到服务器，然后输入：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">smb://ip-address/sambashare</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://s2.loli.net/2022/07/21/72QAHdpJUwi9Btm.png" alt="ubuntu-smb"></p>
+<p>系统将提示您输入凭据。 输入它们进行连接！</p>
+]]></content>
+      <categories>
+        <category>HelloWorld</category>
+        <category>Linux</category>
+        <category>Ubuntu</category>
+      </categories>
+      <tags>
+        <tag>Samba</tag>
+        <tag>Ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>将 Hexo 部署到 GitHub Pages</title>
     <url>/posts/2022/07/20/Deploy-Hexo-to-GitHub-Pages.html</url>
     <content><![CDATA[<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 <a href="http://daringfireball.net/projects/markdown/">Markdown</a>（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
@@ -211,163 +337,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Ubuntu 安装配置 Samba</title>
-    <url>/posts/2022/07/21/Install-and-Configure-Samba.html</url>
-    <content><![CDATA[<p>Samba 文件服务器支持通过网络在不同操作系统之间共享文件。 它允许您从笔记本电脑访问桌面文件并与 Windows 和 macOS 用户共享文件。</p>
-<p>本教程介绍了在 Ubuntu（&gt;&#x3D;Ubuntu 16.04 LTS） 上安装和配置 Samba。</p>
-<span id="more"></span>
-
-<p><img data-src="https://s2.loli.net/2022/07/21/W5fYFhqjCIEvAJb.png" alt="samba"></p>
-<h2 id="安装-Samba"><a href="#安装-Samba" class="headerlink" title="安装 Samba"></a>安装 Samba</h2><p>要安装 Samba，执行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install samba</span><br></pre></td></tr></table></figure>
-
-<p>我们可以通过执行<code>whereis samba</code>来检查安装是否成功。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Ubuntu 22.04</span></span><br><span class="line">samba: /usr/sbin/samba /usr/lib/x86_64-linux-gnu/samba /etc/samba /usr/share/samba /usr/share/man/man7/samba.7.gz /usr/share/man/man8/samba.8.gz</span><br></pre></td></tr></table></figure>
-
-<h2 id="设置-Samba"><a href="#设置-Samba" class="headerlink" title="设置 Samba"></a>设置 Samba</h2><p>现在 Samba 已安装，我们需要为其创建一个共享目录：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /home/&lt;username&gt;/sambashare/</span><br></pre></td></tr></table></figure>
-<p>上面的命令在主目录中创建了一个新文件夹 sambashare，稍后将共享它。</p>
-<p>Samba 的配置文件位于 &#x2F;etc&#x2F;samba&#x2F;smb.conf. 要将新目录添加为共享，运行以下命令编辑配置文件：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/samba/smb.conf</span><br></pre></td></tr></table></figure>
-<p> 按 <code>i</code> 键切换到编辑模式。在文件的底部，添加以下行：</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line">[<span class="string">sambashare</span>]</span><br><span class="line">    <span class="string">comment</span> <span class="string">=</span> <span class="string">Samba</span> <span class="string">on</span> <span class="string">Ubuntu</span></span><br><span class="line">    <span class="string">path</span> <span class="string">=</span> <span class="string">/home/username/sambashare</span> <span class="comment"># 共享的目录</span></span><br><span class="line">    <span class="string">read</span> <span class="string">only</span> <span class="string">=</span> <span class="literal">no</span> <span class="comment"># 修改共享文件夹内容的权限</span></span><br><span class="line">    <span class="string">browsable</span> <span class="string">=</span> <span class="literal">yes</span> <span class="comment"># 文件管理器将在“网络”下列出此共享（它也可以显示为可浏览）。</span></span><br></pre></td></tr></table></figure>
-<p>然后按 <code>Esc</code> 键退出编辑模式，切换到命令模式。输入指令 <code>:wq</code> 保存并退出 vim 文本编辑器。</p>
-<p>现在已经配置了新的共享，重新启动 Samba 以使其生效：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo service smbd restart</span><br></pre></td></tr></table></figure>
-
-<p>更新防火墙规则以允许 Samba 数据传输：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo ufw allow samba</span><br></pre></td></tr></table></figure>
-
-<h2 id="设置用户帐户并连接到共享"><a href="#设置用户帐户并连接到共享" class="headerlink" title="设置用户帐户并连接到共享"></a>设置用户帐户并连接到共享</h2><p>由于 Samba 不使用系统帐户密码，需要为我们的用户帐户设置一个 Samba 密码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo smbpasswd -a username</span><br></pre></td></tr></table></figure>
-
-<p>使用的用户名必须属于系统帐户，否则不会保存。</p>
-<h3 id="连接共享"><a href="#连接共享" class="headerlink" title="连接共享"></a>连接共享</h3><p>在 Windows 上，打开文件管理器并将文件路径编辑为：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">\\ip-address\sambashare</span><br></pre></td></tr></table></figure>
-<p>在 Ubuntu 上：打开默认文件管理器并单击连接到服务器，然后输入：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">smb://ip-address/sambashare</span><br></pre></td></tr></table></figure>
-<p><img data-src="https://s2.loli.net/2022/07/21/72QAHdpJUwi9Btm.png" alt="ubuntu-smb"></p>
-<p>系统将提示您输入凭据。 输入它们进行连接！</p>
-]]></content>
-      <categories>
-        <category>HelloWorld</category>
-        <category>Linux</category>
-        <category>Ubuntu</category>
-      </categories>
-      <tags>
-        <tag>Samba</tag>
-        <tag>Ubuntu</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何在 VMware Workstation 上安装 macOS Mojave</title>
-    <url>/posts/2022/07/28/How-to-install-macOS-Mojave-on-VMware-Workstation.html</url>
-    <content><![CDATA[<p>macOS 是在 Apple Mac 上运行的专有操作系统。现在，你可以使用多种技术在你的英特尔 PC (Hackintosh) 上安装 macOS。在 Windows 中，你只需单击几下即可使用 Clover 启动盘创建 macOS Mojave 可启动 USB。但并非所有硬件都受支持，你还需要参考大量文档，以便在你的计算机上安装和运行 macOS。</p>
-<p>在运行 Windows 或 Linux 的计算机上体验 macOS 的更简单方法是在 VMware Workstation 上安装 macOS。这样做的好处是在不影响电脑设置的情况下，你会熟悉安装和使用。通过使用虚拟机，你可以同时使用 macOS 和 Windows 或 Linux。使用虚拟磁盘可确保真实磁盘上的所有数据都不会受到影响。但是我注意到在 VM 上运行 macOS 非常慢，尽管我将它设置为 4GB 的 RAM。</p>
-<span id="more"></span>
-
-<p>本文将指导你如何在 VMware Workstation 上安装 macOS Mojave。我创建了一个包含 macOS 安装程序的虚拟磁盘，你只需下载它，将它附加到虚拟机，然后安装它。我不确定 VMware Workstation 12 是否支持 macOS 10.14 虚拟机，但版本 15 和 16 支持。我在 VirtualBox 上进行了测试，但它不起作用。</p>
-<p><img data-src="https://s2.loli.net/2022/07/28/N2nlz7WGiLqSekH.png" alt="macOS Mojave"></p>
-<h2 id="VMware-macOS-Unlocker"><a href="#VMware-macOS-Unlocker" class="headerlink" title="VMware macOS Unlocker"></a>VMware macOS Unlocker</h2><p>默认情况下，VMware 不提供创建 macOS 和 Mac OS X 计算机的选项。 幸运的是有一个工具可以帮助我解锁这个选项，这个工具就是 <a href="https://github.com/DrDonk/unlocker">VMware macOS Unlocker</a>。 它支持 Windows、Linux 和 MacOS。 如果你能够创建 macOS 虚拟机，请跳过此步骤。</p>
-<p>在 Windows 上，首先打开任务管理器关闭与 VMware 相关的进程，然后右键单击 <code>unlock.exe</code> 文件并选择以管理员身份运行以解锁。 对于 Linux 和 macOS，在 root 下运行 <code>unlock</code>。解锁过程完成后，运行 VMware 以创建 macOS 虚拟机。</p>
-<h2 id="创建-macOS-虚拟机"><a href="#创建-macOS-虚拟机" class="headerlink" title="创建 macOS 虚拟机"></a>创建 macOS 虚拟机</h2><p>创建 macOS 虚拟机非常简单，以下是在 VMware Workstation 上创建虚拟机的步骤：</p>
-<ol>
-<li>单击 <strong>文件</strong> ，选择 <strong>新建虚拟机…</strong></li>
-<li>选择 <strong>典型(推荐)</strong> 并单击下一步。</li>
-<li>选择 <strong>稍后安装操作系统</strong> 。 并单击下一步。</li>
-<li>在选择客户机操作系统部分选择 <strong>Apple Mac OS X</strong>，并在版本部分选择 <strong>macOS 10.14</strong>。 点击下一步。</li>
-<li>在“命名虚拟机”窗口中，命名虚拟机和虚拟机目录。 </li>
-<li>在“指定磁盘容量”窗口中选择新虚拟磁盘的大小。 这是要安装 macOS 的虚拟磁盘。 单击下一步，然后单击完成。</li>
-</ol>
-<h2 id="添加-macOS-映像"><a href="#添加-macOS-映像" class="headerlink" title="添加 macOS 映像"></a>添加 macOS 映像</h2><p>创建虚拟机后，我们有一个虚拟磁盘来安装 macOS Mojave。 现在我们只需要添加一个包含 macOS 安装程序的新虚拟磁盘。 </p>
-<ol>
-<li>下载 <a href="https://fanxx-my.sharepoint.com/:f:/g/personal/dianaj_hentaiworld_cn/Ekeow0iSQp1AjP0hAU_IQ2YB3PHl1jajXaUKwhkcbyvcZg?e=NiMUtT">OSX_10.14.0_Installer.vmdk</a> 文件。 这是 macOS Mojave 的安装映像。</li>
-<li>选择刚刚创建的虚拟机，点击 <strong>编辑虚拟机设置</strong> 。</li>
-<li>在内存部分，你可以增加该值以使虚拟机运行得更快。 我将它增加到 4096MB (4GB)。</li>
-<li>单击 <strong>添加…</strong> ，然后选择 <strong>硬盘</strong> 并单击下一步。</li>
-<li>在“选择磁盘类型”窗口中，单击下一步。</li>
-<li>在“选择磁盘”窗口中选择 <strong>使用现有虚拟磁盘</strong> ，然后单击下一步继续。</li>
-<li>在“选择现有磁盘”窗口中，单击 <strong>浏览…</strong> 选择你在步骤 1 中下载的 <code>OSX_10.14.0_Installer.vmdk</code> 文件。</li>
-<li>单击完成，然后在虚拟机设置窗口中单击确定。</li>
-</ol>
-<h2 id="安装-macOS"><a href="#安装-macOS" class="headerlink" title="安装 macOS"></a>安装 macOS</h2><p>现在你可以启动虚拟机来安装 macOS Mojave。 安装过程中可能会遇到的问题：</p>
-<ol>
-<li><pre><code>VMware Workstation unrecoverable error: (vcpu-0)
-vcpu-0:VERIFY
-
-vmcore/vmm/main/physMem_monitor.c:1279
-</code></pre>
-<p>将 <code>smc.version = &quot;0&quot;</code> 添加到<code>%ProgramData%/VMware/VMware Workstation/config.ini</code>文件来解决此问题。 </p>
-</li>
-<li><p>这个“安装 macOS Mojave”应用程序副本已损坏，不能用来安装 macOS。<br><img data-src="https://s2.loli.net/2022/07/28/yfNmGuoDWHciQZX.png"><br>在执行抹掉磁盘步骤时，在 <strong>实用工具&#x2F;终端</strong> 中输入 <code>date 010101012018</code> 更改时间，因为证书已过期，更改完成后单击 <strong>终端</strong> 选择 <strong>退出终端</strong> 即可继续安装 macOS</p>
-</li>
-</ol>
-<p>在 macOS 实用工具窗口中，你需要运行磁盘工具来创建 <code>APFS</code> 分区以安装 macOS Mojave。</p>
-<ol>
-<li>在左栏中，你将看到在上面创建的虚拟硬盘（<code>VMware Virtual　SATA Hard Drive Media</code>）。 选择它并单击 <strong>抹掉</strong> 按钮。<br><img data-src="https://s2.loli.net/2022/07/28/UFoJ5ReXh8wBpNC.png"></li>
-<li>在名称下，输入新分区的名称。</li>
-<li>macOS Mojave 需要一个 <code>APFS</code> 格式的分区才能安装。 从格式下拉列表中选择 <code>APFS</code>。<br><img data-src="https://s2.loli.net/2022/07/28/6JH1RvzybTsoFEk.png"></li>
-<li>单击 <strong>抹掉</strong> 按钮继续。</li>
-<li>拥有 <code>APFS</code> 分区后，关闭磁盘工具以开始安装 macOS。</li>
-</ol>
-<p>返回 macOS 实用工具窗口：</p>
-<ol>
-<li>选择 <strong>安装 macOS</strong> ，然后单击继续按钮。</li>
-<li>同意软件许可协议中的条款</li>
-<li>在下一个窗口中，选择你在上面创建的 <code>APFS</code> 分区。 然后单击安装。</li>
-<li>虚拟机将重新启动几次，直到允许你进行设置。 请耐心等待。</li>
-</ol>
-<p>安装后，你可以移除在添加 macOS 映像步骤中添加的虚拟硬盘。 打开编辑虚拟机设置，选择在“添加 macOS 映像”步骤中添加的虚拟硬盘并单击移除按钮。</p>
-<h2 id="安装-VMware-Tools"><a href="#安装-VMware-Tools" class="headerlink" title="安装 VMware Tools"></a>安装 VMware Tools</h2><p>在虚拟机中安装 VMware Tools 非常重要。 安装的 VMware Tools 将提高性能并支持其他功能。 在 VMware 的网站上了解有关<a href="https://kb.vmware.com/s/article/1032440">为 macOS 虚拟机安装 VMware Tools</a> 的更多信息。</p>
-<ol>
-<li>从 VMware 菜单中选择虚拟机，然后选择 <strong>安装 VMware Tools…</strong></li>
-<li>VMware Tools 图标将出现在虚拟机屏幕上。 双击 <strong>安装 VMware Tools</strong> 。</li>
-<li>如果你看到消息“系统扩展已被阻止”，请单击 <strong>打开安全性偏好设置</strong> （默认会自动打开）。</li>
-<li>你将看到消息“来自开发商“VMware, Inc.”的系统软件已被阻止载入。”。 单击允许按钮。<br><img data-src="https://s2.loli.net/2022/07/28/vtnKDUMOY3VSZdj.png"></li>
-<li>点击重新启动按钮已完成 VMware Tools 的安装。</li>
-</ol>
-<p>至此，你已完成在 VMware Workstation 上安装 macOS Mojave。 </p>
-]]></content>
-      <categories>
-        <category>VMware</category>
-        <category>macOS</category>
-      </categories>
-      <tags>
-        <tag>macOS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/posts/2022/07/20/hello-world.html</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<span id="more"></span>
-
-<p><img data-src="https://d33wubrfki0l68.cloudfront.net/5997a40576f3beca7bbbd86fe79a795e9d520d8e/87f88/themes/screenshots/landscape.png" alt="avatar"></p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-      <categories>
-        <category>HelloWorld</category>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>NexT</tag>
-        <tag>Github Pages</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>在 Windows 上安装 MySQL Community Server</title>
     <url>/posts/2022/07/27/Installing-MySQL-on-Microsoft-Windows-Using-a-noinstall-ZIP-Archive.html</url>
     <content><![CDATA[<p>MySQL 软件提供了一个非常快速、多线程、多用户和健壮的 SQL（结构化查询语言）数据库服务器。 MySQL Server 在用于关键任务、重负载生产系统以及嵌入到大规模部署的软件中。</p>
@@ -408,6 +377,37 @@ vmcore/vmm/main/physMem_monitor.c:1279
       </categories>
       <tags>
         <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/posts/2022/07/20/hello-world.html</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+
+<p><img data-src="https://d33wubrfki0l68.cloudfront.net/5997a40576f3beca7bbbd86fe79a795e9d520d8e/87f88/themes/screenshots/landscape.png" alt="avatar"></p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <categories>
+        <category>HelloWorld</category>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+        <tag>Github Pages</tag>
       </tags>
   </entry>
   <entry>
