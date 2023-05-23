@@ -34,6 +34,79 @@
       </tags>
   </entry>
   <entry>
+    <title>将 Hexo 部署到 GitHub Pages</title>
+    <url>/posts/2022/07/20/Deploy-Hexo-to-GitHub-Pages.html</url>
+    <content><![CDATA[<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 <a href="http://daringfireball.net/projects/markdown/">Markdown</a>（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<span id="more"></span>
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装 Hexo 相当简单，只需要先安装下列应用程序即可：</p>
+<ul>
+<li><a href="https://nodejs.org/en/download/releases/">Node.js</a> (Node.js 版本需不低于 10.13，建议使用 Node.js 12.0 及以上版本)</li>
+<li><a href="http://git-scm.com/">Git</a></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Hexo 版本</th>
+<th>最低兼容 Node.js 版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>6.0+</td>
+<td>12.13.0</td>
+</tr>
+<tr>
+<td>5.0+</td>
+<td>10.13.0</td>
+</tr>
+<tr>
+<td>4.1 - 4.2</td>
+<td>8.10</td>
+</tr>
+<tr>
+<td>4.0</td>
+<td>8.6</td>
+</tr>
+</tbody></table>
+<h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+
+<p>安装 Hexo 完成后，执行下列命令，Hexo 将会在指定文件夹中新建所需要的文件。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">hexo init blog</span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<p>安装完成后，输入<code>hexo server</code>以下命令以启动服务器，网站会在 <a href="http://localhost:4000/">http://localhost:4000</a> 下启动。在服务器启动期间，Hexo 会监视文件变动并自动更新，无须重启服务器。</p>
+<h3 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h3><p>新建完成后，指定文件夹的目录如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> <strong>_config.yml</strong><br>网站的 <a href="https://hexo.io/zh-cn/docs/configuration">配置</a> 信息，您可以在此配置大部分的参数。<br><strong>package.json</strong><br>应用程序的信息。<a href="https://ejs.co/">EJS</a>, <a href="http://learnboost.github.io/stylus/">Stylus</a> 和 <a href="http://daringfireball.net/projects/markdown/">Markdown</a> renderer 已默认安装，可以自由移除。<br><strong>scaffolds</strong><br><a href="https://hexo.io/zh-cn/docs/writing">模版</a> 文件夹。当您新建文章时，Hexo 会根据 scaffold 来建立文件。<br>Hexo的模板是指在新建的文章文件中默认填充的内容。例如，如果您修改scaffold&#x2F;post.md中的Front-matter内容，那么每次新建一篇文章时都会包含这个修改。<br><strong>source</strong><br>资源文件夹是存放用户资源的地方。除 _posts 文件夹之外，开头命名为 _ (下划线)的文件 &#x2F; 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。<br><strong>themes</strong><br><a href="https://hexo.io/zh-cn/docs/themes">主题</a> 文件夹。Hexo 会根据主题来生成静态页面。</p>
+</blockquote>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><ol>
+<li>新建一个 repository。如果你希望你的站点能通过域名 &lt;你的 GitHub 用户名&gt;.github.io 访问，你的 repository 应该直接命名为 &lt;你的 GitHub 用户名&gt;.github.io。</li>
+<li>前往 GitHub 新建 <a href="https://github.com/settings/tokens">Personal Access Token</a>，只勾选 repo 的权限并生成一个新的 Token。Token 生成后请复制并保存好。</li>
+<li>在 <code>_config.yml</code>（如果有已存在的请删除）添加如下配置：<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">&#x27;git&#x27;</span></span><br><span class="line"><span class="attr">repo:</span> <span class="string">https://github.com/Hentai02/hentai02.github.io.git</span></span><br><span class="line"><span class="attr">branch:</span> <span class="string">gh-pages</span></span><br><span class="line"><span class="attr">token:</span> <span class="string">Personal</span> <span class="string">Access</span> <span class="string">Token</span></span><br></pre></td></tr></table></figure></li>
+<li>安装 <a href="https://github.com/hexojs/hexo-deployer-git">hexo-deployer-git</a>。<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></li>
+<li>运行 <code>hexo clean &amp;&amp; hexo deploy </code>。</li>
+<li>查看 username.github.io 上的网页是否部署成功。</li>
+</ol>
+<h2 id="Gitalk"><a href="#Gitalk" class="headerlink" title="Gitalk"></a>Gitalk</h2><p>NexT主题Gitalk配置</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Gitalk</span></span><br><span class="line"><span class="comment"># For more information: https://gitalk.github.io</span></span><br><span class="line"><span class="attr">gitalk:</span></span><br><span class="line">  <span class="attr">client_id:</span> <span class="string">GitHub</span> <span class="string">Application</span> <span class="string">Client</span> <span class="string">ID.</span></span><br><span class="line">  <span class="attr">client_secret:</span> <span class="string">GitHub</span> <span class="string">Application</span> <span class="string">Client</span> <span class="string">Secret.</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">gitalk-comments</span></span><br><span class="line">  <span class="attr">github_id:</span> <span class="string">Hentai02</span> <span class="comment"># GitHub repository 所有者</span></span><br><span class="line">  <span class="attr">admin_user:</span> <span class="string">Hentai02</span> <span class="comment"># GitHub repository 的所有者和合作者</span></span><br><span class="line">  <span class="comment">#distraction_free_mode: true # 类似Facebook评论框的全屏遮罩效果.</span></span><br><span class="line">  <span class="attr">language:</span> <span class="string">zh-CN</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a>自定义域名</h2><ol>
+<li>自定义域名。打开 repository 点击 <code>Settings/Pages</code> 在 <code>Custom domain</code> 中填入域名并保存。</li>
+<li>添加一条主机记录（主机记录相当于域名的前缀，比如 www），记录类型 <code>CNAME</code>（将域名指向另一个域名地址，与其保持相同解析，如 hentai02.github.io）。</li>
+</ol>
+<h2 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h2><p><a href="https://theme-next.js.org/docs/">NexT Documentation</a><br><a href="https://hexo.io/docs/">Hexo Documentation</a></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+        <category>NexT</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+        <tag>Github Pages</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>如何在 VMware Workstation 上安装 macOS Mojave</title>
     <url>/posts/2022/07/28/How-to-install-macOS-Mojave-on-VMware-Workstation.html</url>
     <content><![CDATA[<p>macOS 是在 Apple Mac 上运行的专有操作系统。现在，你可以使用多种技术在你的英特尔 PC (Hackintosh) 上安装 macOS。在 Windows 中，你只需单击几下即可使用 Clover 启动盘创建 macOS Mojave 可启动 USB。但并非所有硬件都受支持，你还需要参考大量文档，以便在你的计算机上安装和运行 macOS。</p>
@@ -215,125 +288,46 @@ vmcore/vmm/main/physMem_monitor.c:1279
       </tags>
   </entry>
   <entry>
-    <title>将 Hexo 部署到 GitHub Pages</title>
-    <url>/posts/2022/07/20/Deploy-Hexo-to-GitHub-Pages.html</url>
-    <content><![CDATA[<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 <a href="http://daringfireball.net/projects/markdown/">Markdown</a>（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+    <title>在 Windows 上安装 MySQL Community Server</title>
+    <url>/posts/2022/07/27/Installing-MySQL-on-Microsoft-Windows-Using-a-noinstall-ZIP-Archive.html</url>
+    <content><![CDATA[<p>MySQL 软件提供了一个非常快速、多线程、多用户和健壮的 SQL（结构化查询语言）数据库服务器。 MySQL Server 在用于关键任务、重负载生产系统以及嵌入到大规模部署的软件中。</p>
 <span id="more"></span>
 
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装 Hexo 相当简单，只需要先安装下列应用程序即可：</p>
-<ul>
-<li><a href="https://nodejs.org/en/download/releases/">Node.js</a> (Node.js 版本需不低于 10.13，建议使用 Node.js 12.0 及以上版本)</li>
-<li><a href="http://git-scm.com/">Git</a></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>Hexo 版本</th>
-<th>最低兼容 Node.js 版本</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>6.0+</td>
-<td>12.13.0</td>
-</tr>
-<tr>
-<td>5.0+</td>
-<td>10.13.0</td>
-</tr>
-<tr>
-<td>4.1 - 4.2</td>
-<td>8.10</td>
-</tr>
-<tr>
-<td>4.0</td>
-<td>8.6</td>
-</tr>
-</tbody></table>
-<h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://s2.loli.net/2022/07/27/Q4KBXqfTAb6WcZk.png" alt="MySQL"></p>
+<h2 id="初始化数据目录"><a href="#初始化数据目录" class="headerlink" title="初始化数据目录"></a>初始化数据目录</h2><p>MySQL 5.7.7 之前的 Windows 发行版包括一个数据目录，其中包含一组数据库中的预初始化帐户<code> mysql</code>。从 5.7.7 开始，使用该软件包执行的 Windows 安装操作不包括数据目录。 </p>
+<p>从 MySQL 5.7.6 开始，<a href="https://downloads.mysql.com/archives/community/">ZIP Archive</a> 不再包含目录。 要通过创建数据目录并填充 mysql 系统数据库中的表来初始化 MySQL 安装，使用 <code>--initialize</code> 或 <code>--initialize-insecure</code> 初始化 MySQL。 </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.\bin\mysqld.exe --initialize</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">.\bin\mysqld.exe --initialize-insecure</span><br></pre></td></tr></table></figure>
 
-<p>安装 Hexo 完成后，执行下列命令，Hexo 将会在指定文件夹中新建所需要的文件。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">hexo init blog</span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-<p>安装完成后，输入<code>hexo server</code>以下命令以启动服务器，网站会在 <a href="http://localhost:4000/">http://localhost:4000</a> 下启动。在服务器启动期间，Hexo 会监视文件变动并自动更新，无须重启服务器。</p>
-<h3 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h3><p>新建完成后，指定文件夹的目录如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
+<h2 id="将-MySQL-作为-Windows-服务启动"><a href="#将-MySQL-作为-Windows-服务启动" class="headerlink" title="将 MySQL 作为 Windows 服务启动"></a>将 MySQL 作为 Windows 服务启动</h2><p>在 Windows 上，运行 MySQL 的推荐方法是将其安装为 Windows 服务，以便 MySQL 在 Windows 启动和停止时自动启动和停止。 作为服务安装的 MySQL 服务器也可以使用 NET 命令或图形服务管理工具从命令行进行控制。 通常，要将 MySQL 安装为 Windows 服务，应该以<strong>管理员权限运行</strong>。</p>
+<p>服务管理工具（Windows 管理工具&#x2F;服务）可以在 Windows 控制面板中找到。 为避免冲突，建议在从命令行执行服务器安装或删除操作时关闭 MySQL 服务。</p>
+<h3 id="安装服务"><a href="#安装服务" class="headerlink" title="安装服务"></a>安装服务</h3><p>使用以下命令将服务器安装为服务：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.\bin\mysqld.exe --install</span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">Service successfully installed.</span><br></pre></td></tr></table></figure>
+<p>–install 命令不会启动服务器。</p>
+<p><img data-src="https://s2.loli.net/2022/07/27/qXIlyQg9etihFZE.png" alt="MySQL 服务"></p>
+<h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h3><p>将 MySQL 服务器实例安装为服务后，Windows 会在 Windows 启动时自动启动该服务。 该服务也可以立即从服务实用程序启动，或者使用 <code>sc start mysqld_service_name</code> 或 <code>NET START mysqld_service_name</code> 命令。 SC 和 NET 命令不区分大小写。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sc start MySQL</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">net start MySQL</span><br></pre></td></tr></table></figure>
+
+<p>当作为服务运行时，<code>mysqld</code> 无法访问控制台窗口，因此在那里看不到任何消息。 如果 <code>mysqld</code> 没有启动，请检查错误日志以查看服务器是否在其中写入任何消息以指示问题的原因。 错误日志位于 MySQL 数据目录中（例如， C:\Program Files\MySQL\MySQL Server 5.7\data.err ）。</p>
+<p>当 MySQL 服务器已作为服务安装并且该服务正在运行时，Windows 会在 Windows 关闭时自动停止该服务。 也可以使用服务管理工具、<code>sc stop mysqld_service_name</code> 命令、<code>NET STOP mysqld_service_name</code> 命令或 <code>mysqladmin shutdown</code> 命令手动停止服务器。</p>
+<h3 id="连接到-MySQL-服务器"><a href="#连接到-MySQL-服务器" class="headerlink" title="连接到 MySQL 服务器"></a>连接到 MySQL 服务器</h3><p>要连接到服务器，通常需要在调用 <code>mysql</code> 时提供 MySQL 用户名，并且很可能需要提供密码。 如果服务器在您登录的机器以外的机器上运行，还必须指定主机名。 使用 <code>source</code> 导入 sql 脚本时若出现字符集不匹配，可以尝试指定默认字符集 <code>--default-character-set=utf8</code> 。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 默认密码为空</span></span><br><span class="line">.\bin\mysql -h localhost -u root -p --default-character-set=utf8</span><br></pre></td></tr></table></figure>
+<p>-h 和 -u 代表你的 MySQL 服务器运行的主机名和你的 MySQL 帐户的用户名。 </p>
+<h3 id="修改数据库密码"><a href="#修改数据库密码" class="headerlink" title="修改数据库密码"></a>修改数据库密码</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;127.0.0.1&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;你的密码&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;你的密码&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;你的密码&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line">FLUSH PRIVILEGES;   <span class="comment">/* 运行此命令则立即生效，不需要重启服务器 */</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="删除服务"><a href="#删除服务" class="headerlink" title="删除服务"></a>删除服务</h2><p>要删除作为服务安装的服务，如果它正在运行，首先通过执行 <code>SC STOP mysqld_service_name</code> 或 <code>NET STOP mysqld_service_name</code> 将其停止。 然后使用 <code>SC DELETE mysqld_service_name</code> 将其删除：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SC DELETE MySQL</span><br></pre></td></tr></table></figure>
+<p>或者，使用 <code>mysqld --remove</code> 选项删除服务。</p>
 <blockquote>
-<p> <strong>_config.yml</strong><br>网站的 <a href="https://hexo.io/zh-cn/docs/configuration">配置</a> 信息，您可以在此配置大部分的参数。<br><strong>package.json</strong><br>应用程序的信息。<a href="https://ejs.co/">EJS</a>, <a href="http://learnboost.github.io/stylus/">Stylus</a> 和 <a href="http://daringfireball.net/projects/markdown/">Markdown</a> renderer 已默认安装，可以自由移除。<br><strong>scaffolds</strong><br><a href="https://hexo.io/zh-cn/docs/writing">模版</a> 文件夹。当您新建文章时，Hexo 会根据 scaffold 来建立文件。<br>Hexo的模板是指在新建的文章文件中默认填充的内容。例如，如果您修改scaffold&#x2F;post.md中的Front-matter内容，那么每次新建一篇文章时都会包含这个修改。<br><strong>source</strong><br>资源文件夹是存放用户资源的地方。除 _posts 文件夹之外，开头命名为 _ (下划线)的文件 &#x2F; 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。<br><strong>themes</strong><br><a href="https://hexo.io/zh-cn/docs/themes">主题</a> 文件夹。Hexo 会根据主题来生成静态页面。</p>
+<p>演示所使用的版本（附安装启动卸载脚本）<a href="https://fanxx-my.sharepoint.com/:f:/g/personal/dianaj_hentaiworld_cn/Ekeow0iSQp1AjP0hAU_IQ2YB3PHl1jajXaUKwhkcbyvcZg?e=NiMUtT">mysql-5.7.35-winx64.7z</a></p>
 </blockquote>
-<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><ol>
-<li>新建一个 repository。如果你希望你的站点能通过域名 &lt;你的 GitHub 用户名&gt;.github.io 访问，你的 repository 应该直接命名为 &lt;你的 GitHub 用户名&gt;.github.io。</li>
-<li>前往 GitHub 新建 <a href="https://github.com/settings/tokens">Personal Access Token</a>，只勾选 repo 的权限并生成一个新的 Token。Token 生成后请复制并保存好。</li>
-<li>在 <code>_config.yml</code>（如果有已存在的请删除）添加如下配置：<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">&#x27;git&#x27;</span></span><br><span class="line"><span class="attr">repo:</span> <span class="string">https://github.com/Hentai02/hentai02.github.io.git</span></span><br><span class="line"><span class="attr">branch:</span> <span class="string">gh-pages</span></span><br><span class="line"><span class="attr">token:</span> <span class="string">Personal</span> <span class="string">Access</span> <span class="string">Token</span></span><br></pre></td></tr></table></figure></li>
-<li>安装 <a href="https://github.com/hexojs/hexo-deployer-git">hexo-deployer-git</a>。<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></li>
-<li>运行 <code>hexo clean &amp;&amp; hexo deploy </code>。</li>
-<li>查看 username.github.io 上的网页是否部署成功。</li>
-</ol>
-<h2 id="Gitalk"><a href="#Gitalk" class="headerlink" title="Gitalk"></a>Gitalk</h2><p>NexT主题Gitalk配置</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Gitalk</span></span><br><span class="line"><span class="comment"># For more information: https://gitalk.github.io</span></span><br><span class="line"><span class="attr">gitalk:</span></span><br><span class="line">  <span class="attr">client_id:</span> <span class="string">GitHub</span> <span class="string">Application</span> <span class="string">Client</span> <span class="string">ID.</span></span><br><span class="line">  <span class="attr">client_secret:</span> <span class="string">GitHub</span> <span class="string">Application</span> <span class="string">Client</span> <span class="string">Secret.</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">gitalk-comments</span></span><br><span class="line">  <span class="attr">github_id:</span> <span class="string">Hentai02</span> <span class="comment"># GitHub repository 所有者</span></span><br><span class="line">  <span class="attr">admin_user:</span> <span class="string">Hentai02</span> <span class="comment"># GitHub repository 的所有者和合作者</span></span><br><span class="line">  <span class="comment">#distraction_free_mode: true # 类似Facebook评论框的全屏遮罩效果.</span></span><br><span class="line">  <span class="attr">language:</span> <span class="string">zh-CN</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a>自定义域名</h2><ol>
-<li>自定义域名。打开 repository 点击 <code>Settings/Pages</code> 在 <code>Custom domain</code> 中填入域名并保存。</li>
-<li>添加一条主机记录（主机记录相当于域名的前缀，比如 www），记录类型 <code>CNAME</code>（将域名指向另一个域名地址，与其保持相同解析，如 hentai02.github.io）。</li>
-</ol>
-<h2 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h2><p><a href="https://theme-next.js.org/docs/">NexT Documentation</a><br><a href="https://hexo.io/docs/">Hexo Documentation</a></p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-        <category>NexT</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>NexT</tag>
-        <tag>Github Pages</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Ubuntu 安装配置 Samba</title>
-    <url>/posts/2022/07/21/Install-and-Configure-Samba.html</url>
-    <content><![CDATA[<p>Samba 文件服务器支持通过网络在不同操作系统之间共享文件。 它允许您从笔记本电脑访问桌面文件并与 Windows 和 macOS 用户共享文件。</p>
-<p>本教程介绍了在 Ubuntu（&gt;&#x3D;Ubuntu 16.04 LTS） 上安装和配置 Samba。</p>
-<span id="more"></span>
-
-<p><img data-src="https://s2.loli.net/2022/07/21/W5fYFhqjCIEvAJb.png" alt="samba"></p>
-<h2 id="安装-Samba"><a href="#安装-Samba" class="headerlink" title="安装 Samba"></a>安装 Samba</h2><p>要安装 Samba，执行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install samba</span><br></pre></td></tr></table></figure>
-
-<p>我们可以通过执行<code>whereis samba</code>来检查安装是否成功。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Ubuntu 22.04</span></span><br><span class="line">samba: /usr/sbin/samba /usr/lib/x86_64-linux-gnu/samba /etc/samba /usr/share/samba /usr/share/man/man7/samba.7.gz /usr/share/man/man8/samba.8.gz</span><br></pre></td></tr></table></figure>
-
-<h2 id="设置-Samba"><a href="#设置-Samba" class="headerlink" title="设置 Samba"></a>设置 Samba</h2><p>现在 Samba 已安装，我们需要为其创建一个共享目录：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /home/&lt;username&gt;/sambashare/</span><br></pre></td></tr></table></figure>
-<p>上面的命令在主目录中创建了一个新文件夹 sambashare，稍后将共享它。</p>
-<p>Samba 的配置文件位于 &#x2F;etc&#x2F;samba&#x2F;smb.conf. 要将新目录添加为共享，运行以下命令编辑配置文件：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/samba/smb.conf</span><br></pre></td></tr></table></figure>
-<p> 按 <code>i</code> 键切换到编辑模式。在文件的底部，添加以下行：</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line">[<span class="string">sambashare</span>]</span><br><span class="line">    <span class="string">comment</span> <span class="string">=</span> <span class="string">Samba</span> <span class="string">on</span> <span class="string">Ubuntu</span></span><br><span class="line">    <span class="string">path</span> <span class="string">=</span> <span class="string">/home/username/sambashare</span> <span class="comment"># 共享的目录</span></span><br><span class="line">    <span class="string">read</span> <span class="string">only</span> <span class="string">=</span> <span class="literal">no</span> <span class="comment"># 修改共享文件夹内容的权限</span></span><br><span class="line">    <span class="string">browsable</span> <span class="string">=</span> <span class="literal">yes</span> <span class="comment"># 文件管理器将在“网络”下列出此共享（它也可以显示为可浏览）。</span></span><br></pre></td></tr></table></figure>
-<p>然后按 <code>Esc</code> 键退出编辑模式，切换到命令模式。输入指令 <code>:wq</code> 保存并退出 vim 文本编辑器。</p>
-<p>现在已经配置了新的共享，重新启动 Samba 以使其生效：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo service smbd restart</span><br></pre></td></tr></table></figure>
-
-<p>更新防火墙规则以允许 Samba 数据传输：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo ufw allow samba</span><br></pre></td></tr></table></figure>
-
-<h2 id="设置用户帐户并连接到共享"><a href="#设置用户帐户并连接到共享" class="headerlink" title="设置用户帐户并连接到共享"></a>设置用户帐户并连接到共享</h2><p>由于 Samba 不使用系统帐户密码，需要为我们的用户帐户设置一个 Samba 密码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo smbpasswd -a username</span><br></pre></td></tr></table></figure>
-
-<p>使用的用户名必须属于系统帐户，否则不会保存。</p>
-<h3 id="连接共享"><a href="#连接共享" class="headerlink" title="连接共享"></a>连接共享</h3><p>在 Windows 上，打开文件管理器并将文件路径编辑为：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">\\ip-address\sambashare</span><br></pre></td></tr></table></figure>
-<p>在 Ubuntu 上：打开默认文件管理器并单击连接到服务器，然后输入：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">smb://ip-address/sambashare</span><br></pre></td></tr></table></figure>
-<p><img data-src="https://s2.loli.net/2022/07/21/72QAHdpJUwi9Btm.png" alt="ubuntu-smb"></p>
-<p>系统将提示您输入凭据。 输入它们进行连接！</p>
+<h2 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h2><p><a href="https://dev.mysql.com/doc/refman/5.7/en/windows-install-archive.html">Installing MySQL on Microsoft Windows Using a noinstall ZIP Archive</a><br><a href="https://downloads.mysql.com/archives/community/">MySQL Community Server (Archived Versions)</a></p>
 ]]></content>
       <categories>
         <category>HelloWorld</category>
-        <category>Linux</category>
-        <category>Ubuntu</category>
+        <category>MySQL</category>
       </categories>
       <tags>
-        <tag>Samba</tag>
-        <tag>Ubuntu</tag>
+        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -373,8 +367,7 @@ vmcore/vmm/main/physMem_monitor.c:1279
     <content><![CDATA[<p>互联网上充斥着大量资源，但是大多数用户无法分辨其完整性和安全性。就i社游戏而言大多数玩家都是选择百度，搜索到的结果要么要充钱要么就炫耀一下根本不发资源就算发了大多数也不是给你一手资源。充钱的那些甚至大多数用的同一个网站模板，而且销量还不低，我就匪夷所思这tm还有人买。信息垄断太严重了，其实说到底还是搜索引擎的锅但凡用 Bing、Google 哪能花着冤枉钱，当然你得用英文搜，不然结果还是一堆垃圾。为什么我会推荐这个整合包呢，因为这是大多数整合包的基石，很多整合包都是基于这个改的，要是良性修改也就算了，但大多数都是阉割版，阉割也就算了主要是信息垄断，有些缺德玩意会删除原作者的一些链接，引向自己的社区群，而且大多数都是不管你的问题的，我提供的这个整合包它是有官网有社区的，社区活跃更新频繁避免了大多数 bug ，有着自己的软件体系和完整的生命周期，比起那些”单机版“要好太多，可惜还是有些玩家舍近求远，要是有独有的内容也无可厚非，但是一些不痛不痒的玩意有必要单独搞整合包吗，百来个G的数据下起来很麻烦的，有这么多时间不如把游戏没翻译的东西翻译翻译放 github 上没准有好心人帮你一起翻译。</p>
 <span id="more"></span>
 
-<h2 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h2><p>系统配置是没装Mod和插件的官方配置，如果只玩主游戏大概有个120多G，加上工作室Mod大概有个270G。DX 是 Honey Select 2 的付费 DLC，其中 DX 是“Deluxe eXpansion”的缩写。</p>
-<h3 id="推荐软件"><a href="#推荐软件" class="headerlink" title="推荐软件"></a>推荐软件</h3><h4 id="Motrix"><a href="#Motrix" class="headerlink" title="Motrix"></a>Motrix</h4><p><a href="https://motrix.app/">Motrix</a> 是一款全能的下载工具，支持下载 HTTP、FTP、BT、磁力链等资源。</p>
+<h2 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h2><h3 id="推荐软件"><a href="#推荐软件" class="headerlink" title="推荐软件"></a>推荐软件</h3><h4 id="Motrix"><a href="#Motrix" class="headerlink" title="Motrix"></a>Motrix</h4><p><a href="https://motrix.app/">Motrix</a> 是一款全能的下载工具，支持下载 HTTP、FTP、BT、磁力链等资源。</p>
 <h4 id="qBitTorrent"><a href="#qBitTorrent" class="headerlink" title="qBitTorrent"></a>qBitTorrent</h4><p><a href="https://www.qbittorrent.org/download">qBitTorrent</a>，顾名思义，是一个 BitTorrent 客户端，现在被广泛使用。它具有易于使用的设计，专注于简单的可用性。</p>
 <h4 id="7zip"><a href="#7zip" class="headerlink" title="7zip"></a>7zip</h4><p><a href="https://www.7-zip.org/download.html">7zip</a> 是一种广泛使用的解压缩应用程序，可实现真正高效的数据压缩。这是用于“封存”BetterRepack 的应用程序，因此是下载游戏后最适合解压游戏的应用程序。</p>
 <h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p><a href="https://dl.betterrepack.com/public/">BetterRepack</a> 与社区，模组巧妙地结合在一起，提供最好的游戏，并由开发者充分发挥其潜力。包含的模组由社区制作者制作，精心组合并经过测试，以提供最佳的游戏体验。<br><img data-src="https://s2.loli.net/2023/05/23/1laWH8DYkzmA36q.png" alt="dl.betterrepack.com.png"></p>
@@ -439,52 +432,59 @@ vmcore/vmm/main/physMem_monitor.c:1279
 </tr>
 </tbody></table>
 <h2 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h2><p><a href="https://discord.gg/illusionsoft">IllusionSoft Discord server</a><br><a href="https://illusioncards.booru.org/index.php?page=post&s=list&tags=honey_select_2">Illusion Booru</a><br><a href="https://kenzato.uk/booru/category/HS2">Kenzato</a><br><a href="https://yuki-portal.com/uploader/honeyselect2/">yuki-portal</a><br><a href="https://db.bepis.moe/aishoujo">Bepis DB</a><br><a href="https://f95zone.to/">f95zone</a></p>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><p><a href="http://wiki.anime-sharing.com/hgames/index.php?title=Illusion">wiki.anime-sharing.com</a></p>
 ]]></content>
       <categories>
         <category>temp</category>
       </categories>
   </entry>
   <entry>
-    <title>在 Windows 上安装 MySQL Community Server</title>
-    <url>/posts/2022/07/27/Installing-MySQL-on-Microsoft-Windows-Using-a-noinstall-ZIP-Archive.html</url>
-    <content><![CDATA[<p>MySQL 软件提供了一个非常快速、多线程、多用户和健壮的 SQL（结构化查询语言）数据库服务器。 MySQL Server 在用于关键任务、重负载生产系统以及嵌入到大规模部署的软件中。</p>
+    <title>Ubuntu 安装配置 Samba</title>
+    <url>/posts/2022/07/21/Install-and-Configure-Samba.html</url>
+    <content><![CDATA[<p>Samba 文件服务器支持通过网络在不同操作系统之间共享文件。 它允许您从笔记本电脑访问桌面文件并与 Windows 和 macOS 用户共享文件。</p>
+<p>本教程介绍了在 Ubuntu（&gt;&#x3D;Ubuntu 16.04 LTS） 上安装和配置 Samba。</p>
 <span id="more"></span>
 
-<p><img data-src="https://s2.loli.net/2022/07/27/Q4KBXqfTAb6WcZk.png" alt="MySQL"></p>
-<h2 id="初始化数据目录"><a href="#初始化数据目录" class="headerlink" title="初始化数据目录"></a>初始化数据目录</h2><p>MySQL 5.7.7 之前的 Windows 发行版包括一个数据目录，其中包含一组数据库中的预初始化帐户<code> mysql</code>。从 5.7.7 开始，使用该软件包执行的 Windows 安装操作不包括数据目录。 </p>
-<p>从 MySQL 5.7.6 开始，<a href="https://downloads.mysql.com/archives/community/">ZIP Archive</a> 不再包含目录。 要通过创建数据目录并填充 mysql 系统数据库中的表来初始化 MySQL 安装，使用 <code>--initialize</code> 或 <code>--initialize-insecure</code> 初始化 MySQL。 </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.\bin\mysqld.exe --initialize</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">.\bin\mysqld.exe --initialize-insecure</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://s2.loli.net/2022/07/21/W5fYFhqjCIEvAJb.png" alt="samba"></p>
+<h2 id="安装-Samba"><a href="#安装-Samba" class="headerlink" title="安装 Samba"></a>安装 Samba</h2><p>要安装 Samba，执行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install samba</span><br></pre></td></tr></table></figure>
 
-<h2 id="将-MySQL-作为-Windows-服务启动"><a href="#将-MySQL-作为-Windows-服务启动" class="headerlink" title="将 MySQL 作为 Windows 服务启动"></a>将 MySQL 作为 Windows 服务启动</h2><p>在 Windows 上，运行 MySQL 的推荐方法是将其安装为 Windows 服务，以便 MySQL 在 Windows 启动和停止时自动启动和停止。 作为服务安装的 MySQL 服务器也可以使用 NET 命令或图形服务管理工具从命令行进行控制。 通常，要将 MySQL 安装为 Windows 服务，应该以<strong>管理员权限运行</strong>。</p>
-<p>服务管理工具（Windows 管理工具&#x2F;服务）可以在 Windows 控制面板中找到。 为避免冲突，建议在从命令行执行服务器安装或删除操作时关闭 MySQL 服务。</p>
-<h3 id="安装服务"><a href="#安装服务" class="headerlink" title="安装服务"></a>安装服务</h3><p>使用以下命令将服务器安装为服务：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.\bin\mysqld.exe --install</span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">Service successfully installed.</span><br></pre></td></tr></table></figure>
-<p>–install 命令不会启动服务器。</p>
-<p><img data-src="https://s2.loli.net/2022/07/27/qXIlyQg9etihFZE.png" alt="MySQL 服务"></p>
-<h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h3><p>将 MySQL 服务器实例安装为服务后，Windows 会在 Windows 启动时自动启动该服务。 该服务也可以立即从服务实用程序启动，或者使用 <code>sc start mysqld_service_name</code> 或 <code>NET START mysqld_service_name</code> 命令。 SC 和 NET 命令不区分大小写。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sc start MySQL</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">net start MySQL</span><br></pre></td></tr></table></figure>
+<p>我们可以通过执行<code>whereis samba</code>来检查安装是否成功。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Ubuntu 22.04</span></span><br><span class="line">samba: /usr/sbin/samba /usr/lib/x86_64-linux-gnu/samba /etc/samba /usr/share/samba /usr/share/man/man7/samba.7.gz /usr/share/man/man8/samba.8.gz</span><br></pre></td></tr></table></figure>
 
-<p>当作为服务运行时，<code>mysqld</code> 无法访问控制台窗口，因此在那里看不到任何消息。 如果 <code>mysqld</code> 没有启动，请检查错误日志以查看服务器是否在其中写入任何消息以指示问题的原因。 错误日志位于 MySQL 数据目录中（例如， C:\Program Files\MySQL\MySQL Server 5.7\data.err ）。</p>
-<p>当 MySQL 服务器已作为服务安装并且该服务正在运行时，Windows 会在 Windows 关闭时自动停止该服务。 也可以使用服务管理工具、<code>sc stop mysqld_service_name</code> 命令、<code>NET STOP mysqld_service_name</code> 命令或 <code>mysqladmin shutdown</code> 命令手动停止服务器。</p>
-<h3 id="连接到-MySQL-服务器"><a href="#连接到-MySQL-服务器" class="headerlink" title="连接到 MySQL 服务器"></a>连接到 MySQL 服务器</h3><p>要连接到服务器，通常需要在调用 <code>mysql</code> 时提供 MySQL 用户名，并且很可能需要提供密码。 如果服务器在您登录的机器以外的机器上运行，还必须指定主机名。 使用 <code>source</code> 导入 sql 脚本时若出现字符集不匹配，可以尝试指定默认字符集 <code>--default-character-set=utf8</code> 。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 默认密码为空</span></span><br><span class="line">.\bin\mysql -h localhost -u root -p --default-character-set=utf8</span><br></pre></td></tr></table></figure>
-<p>-h 和 -u 代表你的 MySQL 服务器运行的主机名和你的 MySQL 帐户的用户名。 </p>
-<h3 id="修改数据库密码"><a href="#修改数据库密码" class="headerlink" title="修改数据库密码"></a>修改数据库密码</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;127.0.0.1&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;你的密码&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;你的密码&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;你的密码&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line">FLUSH PRIVILEGES;   <span class="comment">/* 运行此命令则立即生效，不需要重启服务器 */</span></span><br></pre></td></tr></table></figure>
+<h2 id="设置-Samba"><a href="#设置-Samba" class="headerlink" title="设置 Samba"></a>设置 Samba</h2><p>现在 Samba 已安装，我们需要为其创建一个共享目录：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /home/&lt;username&gt;/sambashare/</span><br></pre></td></tr></table></figure>
+<p>上面的命令在主目录中创建了一个新文件夹 sambashare，稍后将共享它。</p>
+<p>Samba 的配置文件位于 &#x2F;etc&#x2F;samba&#x2F;smb.conf. 要将新目录添加为共享，运行以下命令编辑配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/samba/smb.conf</span><br></pre></td></tr></table></figure>
+<p> 按 <code>i</code> 键切换到编辑模式。在文件的底部，添加以下行：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line">[<span class="string">sambashare</span>]</span><br><span class="line">    <span class="string">comment</span> <span class="string">=</span> <span class="string">Samba</span> <span class="string">on</span> <span class="string">Ubuntu</span></span><br><span class="line">    <span class="string">path</span> <span class="string">=</span> <span class="string">/home/username/sambashare</span> <span class="comment"># 共享的目录</span></span><br><span class="line">    <span class="string">read</span> <span class="string">only</span> <span class="string">=</span> <span class="literal">no</span> <span class="comment"># 修改共享文件夹内容的权限</span></span><br><span class="line">    <span class="string">browsable</span> <span class="string">=</span> <span class="literal">yes</span> <span class="comment"># 文件管理器将在“网络”下列出此共享（它也可以显示为可浏览）。</span></span><br></pre></td></tr></table></figure>
+<p>然后按 <code>Esc</code> 键退出编辑模式，切换到命令模式。输入指令 <code>:wq</code> 保存并退出 vim 文本编辑器。</p>
+<p>现在已经配置了新的共享，重新启动 Samba 以使其生效：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo service smbd restart</span><br></pre></td></tr></table></figure>
 
-<h2 id="删除服务"><a href="#删除服务" class="headerlink" title="删除服务"></a>删除服务</h2><p>要删除作为服务安装的服务，如果它正在运行，首先通过执行 <code>SC STOP mysqld_service_name</code> 或 <code>NET STOP mysqld_service_name</code> 将其停止。 然后使用 <code>SC DELETE mysqld_service_name</code> 将其删除：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SC DELETE MySQL</span><br></pre></td></tr></table></figure>
-<p>或者，使用 <code>mysqld --remove</code> 选项删除服务。</p>
-<blockquote>
-<p>演示所使用的版本（附安装启动卸载脚本）<a href="https://fanxx-my.sharepoint.com/:f:/g/personal/dianaj_hentaiworld_cn/Ekeow0iSQp1AjP0hAU_IQ2YB3PHl1jajXaUKwhkcbyvcZg?e=NiMUtT">mysql-5.7.35-winx64.7z</a></p>
-</blockquote>
-<h2 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h2><p><a href="https://dev.mysql.com/doc/refman/5.7/en/windows-install-archive.html">Installing MySQL on Microsoft Windows Using a noinstall ZIP Archive</a><br><a href="https://downloads.mysql.com/archives/community/">MySQL Community Server (Archived Versions)</a></p>
+<p>更新防火墙规则以允许 Samba 数据传输：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo ufw allow samba</span><br></pre></td></tr></table></figure>
+
+<h2 id="设置用户帐户并连接到共享"><a href="#设置用户帐户并连接到共享" class="headerlink" title="设置用户帐户并连接到共享"></a>设置用户帐户并连接到共享</h2><p>由于 Samba 不使用系统帐户密码，需要为我们的用户帐户设置一个 Samba 密码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo smbpasswd -a username</span><br></pre></td></tr></table></figure>
+
+<p>使用的用户名必须属于系统帐户，否则不会保存。</p>
+<h3 id="连接共享"><a href="#连接共享" class="headerlink" title="连接共享"></a>连接共享</h3><p>在 Windows 上，打开文件管理器并将文件路径编辑为：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">\\ip-address\sambashare</span><br></pre></td></tr></table></figure>
+<p>在 Ubuntu 上：打开默认文件管理器并单击连接到服务器，然后输入：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">smb://ip-address/sambashare</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://s2.loli.net/2022/07/21/72QAHdpJUwi9Btm.png" alt="ubuntu-smb"></p>
+<p>系统将提示您输入凭据。 输入它们进行连接！</p>
 ]]></content>
       <categories>
         <category>HelloWorld</category>
-        <category>MySQL</category>
+        <category>Linux</category>
+        <category>Ubuntu</category>
       </categories>
       <tags>
-        <tag>mysql</tag>
+        <tag>Samba</tag>
+        <tag>Ubuntu</tag>
       </tags>
   </entry>
 </search>
