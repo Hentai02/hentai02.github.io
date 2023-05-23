@@ -184,7 +184,14 @@
   </url>
   
   <url>
-    <loc>https://blog.iluoli.org/tags/macOS/</loc>
+    <loc>https://blog.iluoli.org/tags/Samba/</loc>
+    <lastmod>2023-05-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.iluoli.org/tags/Ubuntu/</loc>
     <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -212,21 +219,14 @@
   </url>
   
   <url>
+    <loc>https://blog.iluoli.org/tags/macOS/</loc>
+    <lastmod>2023-05-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.iluoli.org/tags/mysql/</loc>
-    <lastmod>2023-05-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.iluoli.org/tags/Samba/</loc>
-    <lastmod>2023-05-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.iluoli.org/tags/Ubuntu/</loc>
     <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -249,13 +249,6 @@
   </url>
   
   <url>
-    <loc>https://blog.iluoli.org/categories/VMware/</loc>
-    <lastmod>2023-05-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.iluoli.org/categories/Hexo/</loc>
     <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -270,21 +263,7 @@
   </url>
   
   <url>
-    <loc>https://blog.iluoli.org/categories/Java/Spring/</loc>
-    <lastmod>2023-05-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.iluoli.org/categories/VMware/macOS/</loc>
-    <lastmod>2023-05-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.iluoli.org/categories/Hexo/NexT/</loc>
+    <loc>https://blog.iluoli.org/categories/VMware/</loc>
     <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -298,7 +277,14 @@
   </url>
   
   <url>
-    <loc>https://blog.iluoli.org/categories/HelloWorld/Linux/</loc>
+    <loc>https://blog.iluoli.org/categories/Java/Spring/</loc>
+    <lastmod>2023-05-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.iluoli.org/categories/temp/</loc>
     <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -312,7 +298,21 @@
   </url>
   
   <url>
-    <loc>https://blog.iluoli.org/categories/temp/</loc>
+    <loc>https://blog.iluoli.org/categories/HelloWorld/Linux/</loc>
+    <lastmod>2023-05-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.iluoli.org/categories/Hexo/NexT/</loc>
+    <lastmod>2023-05-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.iluoli.org/categories/VMware/macOS/</loc>
     <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
