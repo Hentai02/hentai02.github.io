@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Hentai&#39;s Blog</title>
-  <icon>https://blog.hentaiworld.cn/icon.png</icon>
+  <icon>https://blog.iluoli.org/icon.png</icon>
   <subtitle>Hello World!</subtitle>
-  <link href="https://blog.hentaiworld.cn/atom.xml" rel="self"/>
+  <link href="https://blog.iluoli.org/atom.xml" rel="self"/>
   
-  <link href="https://blog.hentaiworld.cn/"/>
-  <updated>2022-07-28T12:29:50.855Z</updated>
-  <id>https://blog.hentaiworld.cn/</id>
+  <link href="https://blog.iluoli.org/"/>
+  <updated>2023-05-23T04:12:19.572Z</updated>
+  <id>https://blog.iluoli.org/</id>
   
   <author>
     <name>Hentai</name>
@@ -17,9 +17,26 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>如何畅玩i社全家桶</title>
+    <link href="https://blog.iluoli.org/posts/2023/05/23/%E5%A6%82%E4%BD%95%E7%95%85%E7%8E%A9i%E7%A4%BE%E5%85%A8%E5%AE%B6%E6%A1%B6.html"/>
+    <id>https://blog.iluoli.org/posts/2023/05/23/%E5%A6%82%E4%BD%95%E7%95%85%E7%8E%A9i%E7%A4%BE%E5%85%A8%E5%AE%B6%E6%A1%B6.html</id>
+    <published>2023-05-23T02:42:55.000Z</published>
+    <updated>2023-05-23T04:12:19.572Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;互联网上充斥着大量资源，但是大多数用户无法分辨其完整性和安全性。就i社游戏而言大多数玩家都是选择百度，搜索到的结果要么要充钱要么就炫耀一下根本不发资源就算发了大多数也不是给你一手资源。充钱的那些甚至大多数用的同一个网站模板，而且销量还不低，我就匪夷所思这tm还有人买。信息垄断太严重了，其实说到底还是搜索引擎的锅但凡用 Bing、Google 哪能花着冤枉钱，当然你得用英文搜，不然结果还是一堆垃圾。为什么我会推荐这个整合包呢，因为这是大多数整合包的基石，很多整合包都是基于这个改的，要是良性修改也就算了，但大多数都是阉割版，阉割也就算了主要是信息垄断，有些缺德玩意会删除原作者的一些链接，引向自己的社区群，而且大多数都是不管你的问题的，我提供的这个整合包它是有官网有社区的，社区活跃更新频繁避免了大多数 bug ，有着自己的软件体系和完整的生命周期，比起那些”单机版“要好太多，可惜还是有些玩家舍近求远，要是有独有的内容也无可厚非，但是一些不痛不痒的玩意有必要单独搞整合包吗，百来个G的数据下起来很麻烦的，有这么多时间不如把游戏没翻译的东西翻译翻译放 github 上没准有好心人帮你一起翻译。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="temp" scheme="https://blog.iluoli.org/categories/temp/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>如何在 VMware Workstation 上安装 macOS Mojave</title>
-    <link href="https://blog.hentaiworld.cn/posts/2022/07/28/How-to-install-macOS-Mojave-on-VMware-Workstation.html"/>
-    <id>https://blog.hentaiworld.cn/posts/2022/07/28/How-to-install-macOS-Mojave-on-VMware-Workstation.html</id>
+    <link href="https://blog.iluoli.org/posts/2022/07/28/How-to-install-macOS-Mojave-on-VMware-Workstation.html"/>
+    <id>https://blog.iluoli.org/posts/2022/07/28/How-to-install-macOS-Mojave-on-VMware-Workstation.html</id>
     <published>2022-07-28T04:17:58.000Z</published>
     <updated>2022-07-28T12:29:50.855Z</updated>
     
@@ -29,19 +46,19 @@
     
     
     
-    <category term="VMware" scheme="https://blog.hentaiworld.cn/categories/VMware/"/>
+    <category term="VMware" scheme="https://blog.iluoli.org/categories/VMware/"/>
     
-    <category term="macOS" scheme="https://blog.hentaiworld.cn/categories/VMware/macOS/"/>
+    <category term="macOS" scheme="https://blog.iluoli.org/categories/VMware/macOS/"/>
     
     
-    <category term="macOS" scheme="https://blog.hentaiworld.cn/tags/macOS/"/>
+    <category term="macOS" scheme="https://blog.iluoli.org/tags/macOS/"/>
     
   </entry>
   
   <entry>
     <title>在 Windows 上安装 MySQL Community Server</title>
-    <link href="https://blog.hentaiworld.cn/posts/2022/07/27/Installing-MySQL-on-Microsoft-Windows-Using-a-noinstall-ZIP-Archive.html"/>
-    <id>https://blog.hentaiworld.cn/posts/2022/07/27/Installing-MySQL-on-Microsoft-Windows-Using-a-noinstall-ZIP-Archive.html</id>
+    <link href="https://blog.iluoli.org/posts/2022/07/27/Installing-MySQL-on-Microsoft-Windows-Using-a-noinstall-ZIP-Archive.html"/>
+    <id>https://blog.iluoli.org/posts/2022/07/27/Installing-MySQL-on-Microsoft-Windows-Using-a-noinstall-ZIP-Archive.html</id>
     <published>2022-07-27T03:01:10.000Z</published>
     <updated>2022-07-27T07:12:13.864Z</updated>
     
@@ -50,19 +67,19 @@
     
     
     
-    <category term="HelloWorld" scheme="https://blog.hentaiworld.cn/categories/HelloWorld/"/>
+    <category term="HelloWorld" scheme="https://blog.iluoli.org/categories/HelloWorld/"/>
     
-    <category term="MySQL" scheme="https://blog.hentaiworld.cn/categories/HelloWorld/MySQL/"/>
+    <category term="MySQL" scheme="https://blog.iluoli.org/categories/HelloWorld/MySQL/"/>
     
     
-    <category term="mysql" scheme="https://blog.hentaiworld.cn/tags/mysql/"/>
+    <category term="mysql" scheme="https://blog.iluoli.org/tags/mysql/"/>
     
   </entry>
   
   <entry>
     <title>配置 Spring MVC 开发环境</title>
-    <link href="https://blog.hentaiworld.cn/posts/2022/07/21/Configure-the-Spring-MVC-development-environment.html"/>
-    <id>https://blog.hentaiworld.cn/posts/2022/07/21/Configure-the-Spring-MVC-development-environment.html</id>
+    <link href="https://blog.iluoli.org/posts/2022/07/21/Configure-the-Spring-MVC-development-environment.html"/>
+    <id>https://blog.iluoli.org/posts/2022/07/21/Configure-the-Spring-MVC-development-environment.html</id>
     <published>2022-07-21T10:37:20.000Z</published>
     <updated>2022-07-31T04:50:42.132Z</updated>
     
@@ -71,29 +88,29 @@
     
     
     
-    <category term="Java" scheme="https://blog.hentaiworld.cn/categories/Java/"/>
+    <category term="Java" scheme="https://blog.iluoli.org/categories/Java/"/>
     
-    <category term="Spring" scheme="https://blog.hentaiworld.cn/categories/Java/Spring/"/>
+    <category term="Spring" scheme="https://blog.iluoli.org/categories/Java/Spring/"/>
     
     
-    <category term="Spring MVC" scheme="https://blog.hentaiworld.cn/tags/Spring-MVC/"/>
+    <category term="Spring MVC" scheme="https://blog.iluoli.org/tags/Spring-MVC/"/>
     
-    <category term="Thymeleaf" scheme="https://blog.hentaiworld.cn/tags/Thymeleaf/"/>
+    <category term="Thymeleaf" scheme="https://blog.iluoli.org/tags/Thymeleaf/"/>
     
-    <category term="MyBatis" scheme="https://blog.hentaiworld.cn/tags/MyBatis/"/>
+    <category term="MyBatis" scheme="https://blog.iluoli.org/tags/MyBatis/"/>
     
-    <category term="RESTful" scheme="https://blog.hentaiworld.cn/tags/RESTful/"/>
+    <category term="RESTful" scheme="https://blog.iluoli.org/tags/RESTful/"/>
     
-    <category term="SLF4J" scheme="https://blog.hentaiworld.cn/tags/SLF4J/"/>
+    <category term="SLF4J" scheme="https://blog.iluoli.org/tags/SLF4J/"/>
     
-    <category term="Log4j" scheme="https://blog.hentaiworld.cn/tags/Log4j/"/>
+    <category term="Log4j" scheme="https://blog.iluoli.org/tags/Log4j/"/>
     
   </entry>
   
   <entry>
     <title>使用 Tomcat 搭建 WebDAV</title>
-    <link href="https://blog.hentaiworld.cn/posts/2022/07/21/Building-WebDAV-with-Tomcat.html"/>
-    <id>https://blog.hentaiworld.cn/posts/2022/07/21/Building-WebDAV-with-Tomcat.html</id>
+    <link href="https://blog.iluoli.org/posts/2022/07/21/Building-WebDAV-with-Tomcat.html"/>
+    <id>https://blog.iluoli.org/posts/2022/07/21/Building-WebDAV-with-Tomcat.html</id>
     <published>2022-07-21T09:55:26.000Z</published>
     <updated>2022-07-21T10:34:49.479Z</updated>
     
@@ -102,21 +119,21 @@
     
     
     
-    <category term="HelloWorld" scheme="https://blog.hentaiworld.cn/categories/HelloWorld/"/>
+    <category term="HelloWorld" scheme="https://blog.iluoli.org/categories/HelloWorld/"/>
     
-    <category term="Tomcat" scheme="https://blog.hentaiworld.cn/categories/HelloWorld/Tomcat/"/>
+    <category term="Tomcat" scheme="https://blog.iluoli.org/categories/HelloWorld/Tomcat/"/>
     
     
-    <category term="Tomcat" scheme="https://blog.hentaiworld.cn/tags/Tomcat/"/>
+    <category term="Tomcat" scheme="https://blog.iluoli.org/tags/Tomcat/"/>
     
-    <category term="WebDAV" scheme="https://blog.hentaiworld.cn/tags/WebDAV/"/>
+    <category term="WebDAV" scheme="https://blog.iluoli.org/tags/WebDAV/"/>
     
   </entry>
   
   <entry>
     <title>Ubuntu 安装配置 Samba</title>
-    <link href="https://blog.hentaiworld.cn/posts/2022/07/21/Install-and-Configure-Samba.html"/>
-    <id>https://blog.hentaiworld.cn/posts/2022/07/21/Install-and-Configure-Samba.html</id>
+    <link href="https://blog.iluoli.org/posts/2022/07/21/Install-and-Configure-Samba.html"/>
+    <id>https://blog.iluoli.org/posts/2022/07/21/Install-and-Configure-Samba.html</id>
     <published>2022-07-21T07:18:35.000Z</published>
     <updated>2022-07-21T10:34:55.605Z</updated>
     
@@ -126,23 +143,23 @@
     
     
     
-    <category term="HelloWorld" scheme="https://blog.hentaiworld.cn/categories/HelloWorld/"/>
+    <category term="HelloWorld" scheme="https://blog.iluoli.org/categories/HelloWorld/"/>
     
-    <category term="Linux" scheme="https://blog.hentaiworld.cn/categories/HelloWorld/Linux/"/>
+    <category term="Linux" scheme="https://blog.iluoli.org/categories/HelloWorld/Linux/"/>
     
-    <category term="Ubuntu" scheme="https://blog.hentaiworld.cn/categories/HelloWorld/Linux/Ubuntu/"/>
+    <category term="Ubuntu" scheme="https://blog.iluoli.org/categories/HelloWorld/Linux/Ubuntu/"/>
     
     
-    <category term="Samba" scheme="https://blog.hentaiworld.cn/tags/Samba/"/>
+    <category term="Samba" scheme="https://blog.iluoli.org/tags/Samba/"/>
     
-    <category term="Ubuntu" scheme="https://blog.hentaiworld.cn/tags/Ubuntu/"/>
+    <category term="Ubuntu" scheme="https://blog.iluoli.org/tags/Ubuntu/"/>
     
   </entry>
   
   <entry>
     <title>将 Hexo 部署到 GitHub Pages</title>
-    <link href="https://blog.hentaiworld.cn/posts/2022/07/20/Deploy-Hexo-to-GitHub-Pages.html"/>
-    <id>https://blog.hentaiworld.cn/posts/2022/07/20/Deploy-Hexo-to-GitHub-Pages.html</id>
+    <link href="https://blog.iluoli.org/posts/2022/07/20/Deploy-Hexo-to-GitHub-Pages.html"/>
+    <id>https://blog.iluoli.org/posts/2022/07/20/Deploy-Hexo-to-GitHub-Pages.html</id>
     <published>2022-07-20T06:47:23.000Z</published>
     <updated>2022-07-27T05:51:07.439Z</updated>
     
@@ -151,23 +168,23 @@
     
     
     
-    <category term="Hexo" scheme="https://blog.hentaiworld.cn/categories/Hexo/"/>
+    <category term="Hexo" scheme="https://blog.iluoli.org/categories/Hexo/"/>
     
-    <category term="NexT" scheme="https://blog.hentaiworld.cn/categories/Hexo/NexT/"/>
+    <category term="NexT" scheme="https://blog.iluoli.org/categories/Hexo/NexT/"/>
     
     
-    <category term="Hexo" scheme="https://blog.hentaiworld.cn/tags/Hexo/"/>
+    <category term="Hexo" scheme="https://blog.iluoli.org/tags/Hexo/"/>
     
-    <category term="NexT" scheme="https://blog.hentaiworld.cn/tags/NexT/"/>
+    <category term="NexT" scheme="https://blog.iluoli.org/tags/NexT/"/>
     
-    <category term="Github Pages" scheme="https://blog.hentaiworld.cn/tags/Github-Pages/"/>
+    <category term="Github Pages" scheme="https://blog.iluoli.org/tags/Github-Pages/"/>
     
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="https://blog.hentaiworld.cn/posts/2022/07/20/hello-world.html"/>
-    <id>https://blog.hentaiworld.cn/posts/2022/07/20/hello-world.html</id>
+    <link href="https://blog.iluoli.org/posts/2022/07/20/hello-world.html"/>
+    <id>https://blog.iluoli.org/posts/2022/07/20/hello-world.html</id>
     <published>2022-07-20T02:00:00.000Z</published>
     <updated>2022-07-21T07:23:26.203Z</updated>
     
@@ -176,16 +193,16 @@
     
     
     
-    <category term="HelloWorld" scheme="https://blog.hentaiworld.cn/categories/HelloWorld/"/>
+    <category term="HelloWorld" scheme="https://blog.iluoli.org/categories/HelloWorld/"/>
     
-    <category term="Hexo" scheme="https://blog.hentaiworld.cn/categories/HelloWorld/Hexo/"/>
+    <category term="Hexo" scheme="https://blog.iluoli.org/categories/HelloWorld/Hexo/"/>
     
     
-    <category term="Hexo" scheme="https://blog.hentaiworld.cn/tags/Hexo/"/>
+    <category term="Hexo" scheme="https://blog.iluoli.org/tags/Hexo/"/>
     
-    <category term="NexT" scheme="https://blog.hentaiworld.cn/tags/NexT/"/>
+    <category term="NexT" scheme="https://blog.iluoli.org/tags/NexT/"/>
     
-    <category term="Github Pages" scheme="https://blog.hentaiworld.cn/tags/Github-Pages/"/>
+    <category term="Github Pages" scheme="https://blog.iluoli.org/tags/Github-Pages/"/>
     
   </entry>
   

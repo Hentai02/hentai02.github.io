@@ -22,32 +22,24 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"blog.iluoli.org","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Samba 文件服务器支持通过网络在不同操作系统之间共享文件。 它允许您从笔记本电脑访问桌面文件并与 Windows 和 macOS 用户共享文件。 本教程介绍了在 Ubuntu（&gt;&#x3D;Ubuntu 16.04 LTS） 上安装和配置 Samba。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Ubuntu 安装配置 Samba">
-<meta property="og:url" content="https://blog.iluoli.org/posts/2022/07/21/Install-and-Configure-Samba.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Hentai&#39;s Blog">
+<meta property="og:url" content="https://blog.iluoli.org/categories/temp/index.html">
 <meta property="og:site_name" content="Hentai&#39;s Blog">
-<meta property="og:description" content="Samba 文件服务器支持通过网络在不同操作系统之间共享文件。 它允许您从笔记本电脑访问桌面文件并与 Windows 和 macOS 用户共享文件。 本教程介绍了在 Ubuntu（&gt;&#x3D;Ubuntu 16.04 LTS） 上安装和配置 Samba。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s2.loli.net/2022/07/21/W5fYFhqjCIEvAJb.png">
-<meta property="og:image" content="https://s2.loli.net/2022/07/21/72QAHdpJUwi9Btm.png">
-<meta property="article:published_time" content="2022-07-21T07:18:35.000Z">
-<meta property="article:modified_time" content="2022-07-21T10:34:55.605Z">
 <meta property="article:author" content="Hentai">
-<meta property="article:tag" content="Samba">
-<meta property="article:tag" content="Ubuntu">
+<meta property="article:tag" content="Hentai,Blog,NexT,Hexo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s2.loli.net/2022/07/21/W5fYFhqjCIEvAJb.png">
 
 
-<link rel="canonical" href="https://blog.iluoli.org/posts/2022/07/21/Install-and-Configure-Samba.html">
+<link rel="canonical" href="https://blog.iluoli.org/categories/temp/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.iluoli.org/posts/2022/07/21/Install-and-Configure-Samba.html","path":"posts/2022/07/21/Install-and-Configure-Samba.html","title":"Ubuntu 安装配置 Samba"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"categories/temp/index.html","title":""}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Ubuntu 安装配置 Samba | Hentai's Blog</title>
+<title>分类: temp | Hentai's Blog</title>
   
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-235107950-1","only_pageview":true}</script>
   <script src="/js/third-party/analytics/google-analytics.js"></script>
@@ -140,7 +132,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -153,7 +145,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Samba"><span class="nav-number">1.</span> <span class="nav-text">安装 Samba</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE-Samba"><span class="nav-number">2.</span> <span class="nav-text">设置 Samba</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%94%A8%E6%88%B7%E5%B8%90%E6%88%B7%E5%B9%B6%E8%BF%9E%E6%8E%A5%E5%88%B0%E5%85%B1%E4%BA%AB"><span class="nav-number">3.</span> <span class="nav-text">设置用户帐户并连接到共享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E5%85%B1%E4%BA%AB"><span class="nav-number">3.1.</span> <span class="nav-text">连接共享</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -223,157 +214,51 @@
 </noscript>
 
 
-    <div class="main-inner post posts-expand">
+    <div class="main-inner category posts-collapse">
 
 
   
-
-
-<div class="post-block">
   
   
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.iluoli.org/posts/2022/07/21/Install-and-Configure-Samba.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Hentai">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hentai's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Ubuntu 安装配置 Samba | Hentai's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Ubuntu 安装配置 Samba
+  <div class="post-block">
+    <div class="post-content">
+      <div class="collection-title">
+        <h1 class="collection-header">temp
+          <small>分类</small>
         </h1>
+      </div>
 
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
       
-
-      <time title="创建时间：2022-07-21 15:18:35 / 修改时间：18:34:55" itemprop="dateCreated datePublished" datetime="2022-07-21T15:18:35+08:00">2022-07-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/HelloWorld/" itemprop="url" rel="index"><span itemprop="name">HelloWorld</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/HelloWorld/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/HelloWorld/Linux/Ubuntu/" itemprop="url" rel="index"><span itemprop="name">Ubuntu</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="busuanzi_value_page_pv"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-        <p>Samba 文件服务器支持通过网络在不同操作系统之间共享文件。 它允许您从笔记本电脑访问桌面文件并与 Windows 和 macOS 用户共享文件。</p>
-<p>本教程介绍了在 Ubuntu（&gt;&#x3D;Ubuntu 16.04 LTS） 上安装和配置 Samba。</p>
-<span id="more"></span>
-
-<p><img data-src="https://s2.loli.net/2022/07/21/W5fYFhqjCIEvAJb.png" alt="samba"></p>
-<h2 id="安装-Samba"><a href="#安装-Samba" class="headerlink" title="安装 Samba"></a>安装 Samba</h2><p>要安装 Samba，执行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install samba</span><br></pre></td></tr></table></figure>
-
-<p>我们可以通过执行<code>whereis samba</code>来检查安装是否成功。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Ubuntu 22.04</span></span><br><span class="line">samba: /usr/sbin/samba /usr/lib/x86_64-linux-gnu/samba /etc/samba /usr/share/samba /usr/share/man/man7/samba.7.gz /usr/share/man/man8/samba.8.gz</span><br></pre></td></tr></table></figure>
-
-<h2 id="设置-Samba"><a href="#设置-Samba" class="headerlink" title="设置 Samba"></a>设置 Samba</h2><p>现在 Samba 已安装，我们需要为其创建一个共享目录：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /home/&lt;username&gt;/sambashare/</span><br></pre></td></tr></table></figure>
-<p>上面的命令在主目录中创建了一个新文件夹 sambashare，稍后将共享它。</p>
-<p>Samba 的配置文件位于 &#x2F;etc&#x2F;samba&#x2F;smb.conf. 要将新目录添加为共享，运行以下命令编辑配置文件：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/samba/smb.conf</span><br></pre></td></tr></table></figure>
-<p> 按 <code>i</code> 键切换到编辑模式。在文件的底部，添加以下行：</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line">[<span class="string">sambashare</span>]</span><br><span class="line">    <span class="string">comment</span> <span class="string">=</span> <span class="string">Samba</span> <span class="string">on</span> <span class="string">Ubuntu</span></span><br><span class="line">    <span class="string">path</span> <span class="string">=</span> <span class="string">/home/username/sambashare</span> <span class="comment"># 共享的目录</span></span><br><span class="line">    <span class="string">read</span> <span class="string">only</span> <span class="string">=</span> <span class="literal">no</span> <span class="comment"># 修改共享文件夹内容的权限</span></span><br><span class="line">    <span class="string">browsable</span> <span class="string">=</span> <span class="literal">yes</span> <span class="comment"># 文件管理器将在“网络”下列出此共享（它也可以显示为可浏览）。</span></span><br></pre></td></tr></table></figure>
-<p>然后按 <code>Esc</code> 键退出编辑模式，切换到命令模式。输入指令 <code>:wq</code> 保存并退出 vim 文本编辑器。</p>
-<p>现在已经配置了新的共享，重新启动 Samba 以使其生效：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo service smbd restart</span><br></pre></td></tr></table></figure>
-
-<p>更新防火墙规则以允许 Samba 数据传输：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo ufw allow samba</span><br></pre></td></tr></table></figure>
-
-<h2 id="设置用户帐户并连接到共享"><a href="#设置用户帐户并连接到共享" class="headerlink" title="设置用户帐户并连接到共享"></a>设置用户帐户并连接到共享</h2><p>由于 Samba 不使用系统帐户密码，需要为我们的用户帐户设置一个 Samba 密码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo smbpasswd -a username</span><br></pre></td></tr></table></figure>
-
-<p>使用的用户名必须属于系统帐户，否则不会保存。</p>
-<h3 id="连接共享"><a href="#连接共享" class="headerlink" title="连接共享"></a>连接共享</h3><p>在 Windows 上，打开文件管理器并将文件路径编辑为：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">\\ip-address\sambashare</span><br></pre></td></tr></table></figure>
-<p>在 Ubuntu 上：打开默认文件管理器并单击连接到服务器，然后输入：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">smb://ip-address/sambashare</span><br></pre></td></tr></table></figure>
-<p><img data-src="https://s2.loli.net/2022/07/21/72QAHdpJUwi9Btm.png" alt="ubuntu-smb"></p>
-<p>系统将提示您输入凭据。 输入它们进行连接！</p>
-
+    <div class="collection-year">
+      <span class="collection-header">2023</span>
     </div>
 
-    
-    
-    
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2023-05-23T10:42:55+08:00"
+              content="2023-05-23">
+          05-23
+        </time>
+      </div>
 
-    <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/Samba/" rel="tag"># Samba</a>
-              <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
-          </div>
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/2023/05/23/%E5%A6%82%E4%BD%95%E7%95%85%E7%8E%A9i%E7%A4%BE%E5%85%A8%E5%AE%B6%E6%A1%B6.html" itemprop="url">
+            <span itemprop="name">如何畅玩i社全家桶</span>
+          </a>
+      </div>
 
-        
-
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/posts/2022/07/20/Deploy-Hexo-to-GitHub-Pages.html" rel="prev" title="将 Hexo 部署到 GitHub Pages">
-                  <i class="fa fa-chevron-left"></i> 将 Hexo 部署到 GitHub Pages
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/posts/2022/07/21/Building-WebDAV-with-Tomcat.html" rel="next" title="使用 Tomcat 搭建 WebDAV">
-                  使用 Tomcat 搭建 WebDAV <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
-    </footer>
+      
+    </header>
   </article>
-</div>
 
+    </div>
+  </div>
+  
+  
+  
 
-
-
-
-
-    <div class="comments gitalk-container"></div>
 </div>
   </main>
 
@@ -429,7 +314,7 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"client_id":"e4b1ef7b2d72d418ae83","client_secret":"f95cd364a7298c24f39fc28cb8f543b3f93deeed","repo":"gitalk-comments","github_id":"Hentai02","admin_user":"Hentai02","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"b80e64f066f036652e21e0ba845f5b9c"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"client_id":"e4b1ef7b2d72d418ae83","client_secret":"f95cd364a7298c24f39fc28cb8f543b3f93deeed","repo":"gitalk-comments","github_id":"Hentai02","admin_user":"Hentai02","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"04c5ff49450a09ec787bf3f8e27d1de9"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>

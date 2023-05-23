@@ -22,32 +22,31 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"blog.iluoli.org","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Samba 文件服务器支持通过网络在不同操作系统之间共享文件。 它允许您从笔记本电脑访问桌面文件并与 Windows 和 macOS 用户共享文件。 本教程介绍了在 Ubuntu（&gt;&#x3D;Ubuntu 16.04 LTS） 上安装和配置 Samba。">
+    <meta name="description" content="互联网上充斥着大量资源，但是大多数用户无法分辨其完整性和安全性。就i社游戏而言大多数玩家都是选择百度，搜索到的结果要么要充钱要么就炫耀一下根本不发资源就算发了大多数也不是给你一手资源。充钱的那些甚至大多数用的同一个网站模板，而且销量还不低，我就匪夷所思这tm还有人买。信息垄断太严重了，其实说到底还是搜索引擎的锅但凡用 Bing、Google 哪能花着冤枉钱，当然你得用英文搜，不然结果还是一堆垃圾。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ubuntu 安装配置 Samba">
-<meta property="og:url" content="https://blog.iluoli.org/posts/2022/07/21/Install-and-Configure-Samba.html">
+<meta property="og:title" content="如何畅玩i社全家桶">
+<meta property="og:url" content="https://blog.iluoli.org/posts/2023/05/23/%E5%A6%82%E4%BD%95%E7%95%85%E7%8E%A9i%E7%A4%BE%E5%85%A8%E5%AE%B6%E6%A1%B6.html">
 <meta property="og:site_name" content="Hentai&#39;s Blog">
-<meta property="og:description" content="Samba 文件服务器支持通过网络在不同操作系统之间共享文件。 它允许您从笔记本电脑访问桌面文件并与 Windows 和 macOS 用户共享文件。 本教程介绍了在 Ubuntu（&gt;&#x3D;Ubuntu 16.04 LTS） 上安装和配置 Samba。">
+<meta property="og:description" content="互联网上充斥着大量资源，但是大多数用户无法分辨其完整性和安全性。就i社游戏而言大多数玩家都是选择百度，搜索到的结果要么要充钱要么就炫耀一下根本不发资源就算发了大多数也不是给你一手资源。充钱的那些甚至大多数用的同一个网站模板，而且销量还不低，我就匪夷所思这tm还有人买。信息垄断太严重了，其实说到底还是搜索引擎的锅但凡用 Bing、Google 哪能花着冤枉钱，当然你得用英文搜，不然结果还是一堆垃圾。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s2.loli.net/2022/07/21/W5fYFhqjCIEvAJb.png">
-<meta property="og:image" content="https://s2.loli.net/2022/07/21/72QAHdpJUwi9Btm.png">
-<meta property="article:published_time" content="2022-07-21T07:18:35.000Z">
-<meta property="article:modified_time" content="2022-07-21T10:34:55.605Z">
+<meta property="og:image" content="https://s2.loli.net/2023/05/23/1laWH8DYkzmA36q.png">
+<meta property="og:image" content="https://s2.loli.net/2023/05/23/i9Je5LxfNyBrMaF.png">
+<meta property="article:published_time" content="2023-05-23T02:42:55.000Z">
+<meta property="article:modified_time" content="2023-05-23T04:12:19.572Z">
 <meta property="article:author" content="Hentai">
-<meta property="article:tag" content="Samba">
-<meta property="article:tag" content="Ubuntu">
+<meta property="article:tag" content="Hentai,Blog,NexT,Hexo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s2.loli.net/2022/07/21/W5fYFhqjCIEvAJb.png">
+<meta name="twitter:image" content="https://s2.loli.net/2023/05/23/1laWH8DYkzmA36q.png">
 
 
-<link rel="canonical" href="https://blog.iluoli.org/posts/2022/07/21/Install-and-Configure-Samba.html">
+<link rel="canonical" href="https://blog.iluoli.org/posts/2023/05/23/%E5%A6%82%E4%BD%95%E7%95%85%E7%8E%A9i%E7%A4%BE%E5%85%A8%E5%AE%B6%E6%A1%B6.html">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.iluoli.org/posts/2022/07/21/Install-and-Configure-Samba.html","path":"posts/2022/07/21/Install-and-Configure-Samba.html","title":"Ubuntu 安装配置 Samba"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.iluoli.org/posts/2023/05/23/%E5%A6%82%E4%BD%95%E7%95%85%E7%8E%A9i%E7%A4%BE%E5%85%A8%E5%AE%B6%E6%A1%B6.html","path":"posts/2023/05/23/如何畅玩i社全家桶.html","title":"如何畅玩i社全家桶"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Ubuntu 安装配置 Samba | Hentai's Blog</title>
+<title>如何畅玩i社全家桶 | Hentai's Blog</title>
   
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-235107950-1","only_pageview":true}</script>
   <script src="/js/third-party/analytics/google-analytics.js"></script>
@@ -153,7 +152,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Samba"><span class="nav-number">1.</span> <span class="nav-text">安装 Samba</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE-Samba"><span class="nav-number">2.</span> <span class="nav-text">设置 Samba</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%94%A8%E6%88%B7%E5%B8%90%E6%88%B7%E5%B9%B6%E8%BF%9E%E6%8E%A5%E5%88%B0%E5%85%B1%E4%BA%AB"><span class="nav-number">3.</span> <span class="nav-text">设置用户帐户并连接到共享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E5%85%B1%E4%BA%AB"><span class="nav-number">3.1.</span> <span class="nav-text">连接共享</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E4%B9%8B%E5%89%8D"><span class="nav-number">1.</span> <span class="nav-text">开始之前</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90%E8%BD%AF%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">推荐软件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Motrix"><span class="nav-number">1.1.1.</span> <span class="nav-text">Motrix</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#qBitTorrent"><span class="nav-number">1.1.2.</span> <span class="nav-text">qBitTorrent</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7zip"><span class="nav-number">1.1.3.</span> <span class="nav-text">7zip</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0"><span class="nav-number">4.</span> <span class="nav-text">更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E5%A4%9A"><span class="nav-number">6.</span> <span class="nav-text">更多</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -234,7 +233,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.iluoli.org/posts/2022/07/21/Install-and-Configure-Samba.html">
+    <link itemprop="mainEntityOfPage" href="https://blog.iluoli.org/posts/2023/05/23/%E5%A6%82%E4%BD%95%E7%95%85%E7%8E%A9i%E7%A4%BE%E5%85%A8%E5%AE%B6%E6%A1%B6.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -247,12 +246,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Ubuntu 安装配置 Samba | Hentai's Blog">
+      <meta itemprop="name" content="如何畅玩i社全家桶 | Hentai's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Ubuntu 安装配置 Samba
+          如何畅玩i社全家桶
         </h1>
 
         <div class="post-meta-container">
@@ -264,7 +263,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2022-07-21 15:18:35 / 修改时间：18:34:55" itemprop="dateCreated datePublished" datetime="2022-07-21T15:18:35+08:00">2022-07-21</time>
+      <time title="创建时间：2023-05-23 10:42:55 / 修改时间：12:12:19" itemprop="dateCreated datePublished" datetime="2023-05-23T10:42:55+08:00">2023-05-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -272,15 +271,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/HelloWorld/" itemprop="url" rel="index"><span itemprop="name">HelloWorld</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/HelloWorld/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/HelloWorld/Linux/Ubuntu/" itemprop="url" rel="index"><span itemprop="name">Ubuntu</span></a>
+          <a href="/categories/temp/" itemprop="url" rel="index"><span itemprop="name">temp</span></a>
         </span>
     </span>
 
@@ -302,41 +293,75 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>Samba 文件服务器支持通过网络在不同操作系统之间共享文件。 它允许您从笔记本电脑访问桌面文件并与 Windows 和 macOS 用户共享文件。</p>
-<p>本教程介绍了在 Ubuntu（&gt;&#x3D;Ubuntu 16.04 LTS） 上安装和配置 Samba。</p>
+        <p>互联网上充斥着大量资源，但是大多数用户无法分辨其完整性和安全性。就i社游戏而言大多数玩家都是选择百度，搜索到的结果要么要充钱要么就炫耀一下根本不发资源就算发了大多数也不是给你一手资源。充钱的那些甚至大多数用的同一个网站模板，而且销量还不低，我就匪夷所思这tm还有人买。信息垄断太严重了，其实说到底还是搜索引擎的锅但凡用 Bing、Google 哪能花着冤枉钱，当然你得用英文搜，不然结果还是一堆垃圾。为什么我会推荐这个整合包呢，因为这是大多数整合包的基石，很多整合包都是基于这个改的，要是良性修改也就算了，但大多数都是阉割版，阉割也就算了主要是信息垄断，有些缺德玩意会删除原作者的一些链接，引向自己的社区群，而且大多数都是不管你的问题的，我提供的这个整合包它是有官网有社区的，社区活跃更新频繁避免了大多数 bug ，有着自己的软件体系和完整的生命周期，比起那些”单机版“要好太多，可惜还是有些玩家舍近求远，要是有独有的内容也无可厚非，但是一些不痛不痒的玩意有必要单独搞整合包吗，百来个G的数据下起来很麻烦的，有这么多时间不如把游戏没翻译的东西翻译翻译放 github 上没准有好心人帮你一起翻译。</p>
 <span id="more"></span>
 
-<p><img data-src="https://s2.loli.net/2022/07/21/W5fYFhqjCIEvAJb.png" alt="samba"></p>
-<h2 id="安装-Samba"><a href="#安装-Samba" class="headerlink" title="安装 Samba"></a>安装 Samba</h2><p>要安装 Samba，执行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install samba</span><br></pre></td></tr></table></figure>
-
-<p>我们可以通过执行<code>whereis samba</code>来检查安装是否成功。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Ubuntu 22.04</span></span><br><span class="line">samba: /usr/sbin/samba /usr/lib/x86_64-linux-gnu/samba /etc/samba /usr/share/samba /usr/share/man/man7/samba.7.gz /usr/share/man/man8/samba.8.gz</span><br></pre></td></tr></table></figure>
-
-<h2 id="设置-Samba"><a href="#设置-Samba" class="headerlink" title="设置 Samba"></a>设置 Samba</h2><p>现在 Samba 已安装，我们需要为其创建一个共享目录：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /home/&lt;username&gt;/sambashare/</span><br></pre></td></tr></table></figure>
-<p>上面的命令在主目录中创建了一个新文件夹 sambashare，稍后将共享它。</p>
-<p>Samba 的配置文件位于 &#x2F;etc&#x2F;samba&#x2F;smb.conf. 要将新目录添加为共享，运行以下命令编辑配置文件：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/samba/smb.conf</span><br></pre></td></tr></table></figure>
-<p> 按 <code>i</code> 键切换到编辑模式。在文件的底部，添加以下行：</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line">[<span class="string">sambashare</span>]</span><br><span class="line">    <span class="string">comment</span> <span class="string">=</span> <span class="string">Samba</span> <span class="string">on</span> <span class="string">Ubuntu</span></span><br><span class="line">    <span class="string">path</span> <span class="string">=</span> <span class="string">/home/username/sambashare</span> <span class="comment"># 共享的目录</span></span><br><span class="line">    <span class="string">read</span> <span class="string">only</span> <span class="string">=</span> <span class="literal">no</span> <span class="comment"># 修改共享文件夹内容的权限</span></span><br><span class="line">    <span class="string">browsable</span> <span class="string">=</span> <span class="literal">yes</span> <span class="comment"># 文件管理器将在“网络”下列出此共享（它也可以显示为可浏览）。</span></span><br></pre></td></tr></table></figure>
-<p>然后按 <code>Esc</code> 键退出编辑模式，切换到命令模式。输入指令 <code>:wq</code> 保存并退出 vim 文本编辑器。</p>
-<p>现在已经配置了新的共享，重新启动 Samba 以使其生效：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo service smbd restart</span><br></pre></td></tr></table></figure>
-
-<p>更新防火墙规则以允许 Samba 数据传输：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo ufw allow samba</span><br></pre></td></tr></table></figure>
-
-<h2 id="设置用户帐户并连接到共享"><a href="#设置用户帐户并连接到共享" class="headerlink" title="设置用户帐户并连接到共享"></a>设置用户帐户并连接到共享</h2><p>由于 Samba 不使用系统帐户密码，需要为我们的用户帐户设置一个 Samba 密码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo smbpasswd -a username</span><br></pre></td></tr></table></figure>
-
-<p>使用的用户名必须属于系统帐户，否则不会保存。</p>
-<h3 id="连接共享"><a href="#连接共享" class="headerlink" title="连接共享"></a>连接共享</h3><p>在 Windows 上，打开文件管理器并将文件路径编辑为：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">\\ip-address\sambashare</span><br></pre></td></tr></table></figure>
-<p>在 Ubuntu 上：打开默认文件管理器并单击连接到服务器，然后输入：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">smb://ip-address/sambashare</span><br></pre></td></tr></table></figure>
-<p><img data-src="https://s2.loli.net/2022/07/21/72QAHdpJUwi9Btm.png" alt="ubuntu-smb"></p>
-<p>系统将提示您输入凭据。 输入它们进行连接！</p>
+<h2 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h2><p>系统配置是没装Mod和插件的官方配置，如果只玩主游戏大概有个120多G，加上工作室Mod大概有个270G。DX 是 Honey Select 2 的付费 DLC，其中 DX 是“Deluxe eXpansion”的缩写。</p>
+<h3 id="推荐软件"><a href="#推荐软件" class="headerlink" title="推荐软件"></a>推荐软件</h3><h4 id="Motrix"><a href="#Motrix" class="headerlink" title="Motrix"></a>Motrix</h4><p><a target="_blank" rel="noopener" href="https://motrix.app/">Motrix</a> 是一款全能的下载工具，支持下载 HTTP、FTP、BT、磁力链等资源。</p>
+<h4 id="qBitTorrent"><a href="#qBitTorrent" class="headerlink" title="qBitTorrent"></a>qBitTorrent</h4><p><a target="_blank" rel="noopener" href="https://www.qbittorrent.org/download">qBitTorrent</a>，顾名思义，是一个 BitTorrent 客户端，现在被广泛使用。它具有易于使用的设计，专注于简单的可用性。</p>
+<h4 id="7zip"><a href="#7zip" class="headerlink" title="7zip"></a>7zip</h4><p><a target="_blank" rel="noopener" href="https://www.7-zip.org/download.html">7zip</a> 是一种广泛使用的解压缩应用程序，可实现真正高效的数据压缩。这是用于“封存”BetterRepack 的应用程序，因此是下载游戏后最适合解压游戏的应用程序。</p>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p><a target="_blank" rel="noopener" href="https://dl.betterrepack.com/public/">BetterRepack</a> 与社区，模组巧妙地结合在一起，提供最好的游戏，并由开发者充分发挥其潜力。包含的模组由社区制作者制作，精心组合并经过测试，以提供最佳的游戏体验。<br><img data-src="https://s2.loli.net/2023/05/23/1laWH8DYkzmA36q.png" alt="dl.betterrepack.com.png"></p>
+<ol>
+<li>选择你要下载的游戏</li>
+<li>选择下载方式，推荐磁力下载。（<code>Full Pack</code>里面包含工作室Mod，下载的时候也可以选择下载主游戏还是工作室Mod）</li>
+<li>工作室Mod</li>
+<li>整合包更新程序</li>
+</ol>
+<p>由于官网要翻墙所以相关资源都放 <a target="_blank" rel="noopener" href="https://fanxx-my.sharepoint.com/:f:/g/personal/dianaj_hentaiworld_cn/Eqwv74DkEi9GsbsjZcM08gcBJRBf-GqMQy-icuvaUY1S5g?e=HJdan3">OneDrive</a> 内。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>最好安装在一个短文件夹中。推荐的文件夹结构是“<code>C:\Illusion\HoneySelect2</code>”、“<code>D:\Illusion\HoneySelect2</code>”或类似的！安装到更长的文件夹可能会导致一系列问题，包括但不限于：启动游戏时出现问题、界面不显示（白屏）、保存失败、游戏崩溃。</p>
+<p>安装不应位于受保护的 Windows 文件夹中，例如“Program Files”、“Program Files (x86)”或“Windows”。在此处安装可能会导致游戏无法保存游戏卡、场景或游戏存档。这是由于 Windows 中的反恶意软件保护，简单来说就是权限不足。</p>
+<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><p>更新包括两个部分整合包和 Mod。整合包版本以R+数字区分，整合包的更新是通过更新程序完成更新一般不会超过1G，更新日志可在整合包作者 <a target="_blank" rel="noopener" href="https://www.patreon.com/BetterRepack">ScrewThisNoise</a> 的 Patreon 上查看。</p>
+<p>Mod 是通过游戏中的<code>KKManager</code> 下载更新，这个在 <code>InitSetting.exe</code> 中点击 更新游戏 既可选择要进行更新项，如果你没有将工作室的 Mod 添加到文件夹 <code>mods</code> 中，则更新选项中将包含工作室 Mod 的相关更新项，如 <code>Sideloader Modpack - Maps</code> 和 <code>Sideloader Modpack - Studio</code>。</p>
+<p>KKM 的更新不仅仅是 <code>mods</code> 还有 <code>UserData</code> 等数据，更新时将会列出更新内容，注意仔细辨别。第三方mod尽量不要放在除 <code>MyMods</code> 以外的文件夹中以免更新时误删除。<br><img data-src="https://s2.loli.net/2023/05/23/i9Je5LxfNyBrMaF.png" alt="KKM-update.png"></p>
+<blockquote>
+<p>KKManager 包含诸多功能如安装&#x2F;禁用游戏资源、清理重复 mod 、查看人物卡依赖等<br>ps：将需要查重的 mod 放在 <code>MyMods</code> 中以免误删除。</p>
+</blockquote>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>游戏内容方面的问题自行查阅手册，其他问题在提问提供有效信息，否则没人鸟你。<br>常用文件夹可在 <code>InitSetting.exe</code>中打开，其他常见资源路径：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>路径</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.png 服装卡</td>
+<td>UserData\coordinate</td>
+</tr>
+<tr>
+<td>.zipmod 第三方mod</td>
+<td>mods\MyMods</td>
+</tr>
+<tr>
+<td>.dhs</td>
+<td>DHH_Data</td>
+</tr>
+<tr>
+<td>.dll 插件</td>
+<td>BepInEx\Plugins</td>
+</tr>
+<tr>
+<td>.txt 简体中文翻译</td>
+<td>BepInEx\Translation\zh-CN</td>
+</tr>
+<tr>
+<td>.cube Graphicsmod 全光背景（天空盒）</td>
+<td>cubemaps</td>
+</tr>
+<tr>
+<td>常用插件可在文件夹 <code>[OPTIONAL] Mods</code>中查找，<code>OptionalMods_ListDescriptions.txt</code>包含插件的简单介绍。</td>
+<td></td>
+</tr>
+<tr>
+<td>100%存档可在 <code>[OPTIONAL] BRExtras</code>中获取。</td>
+<td></td>
+</tr>
+<tr>
+<td>其他工具可在带中括号的那几个文件夹中寻找。</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h2><p><a target="_blank" rel="noopener" href="https://discord.gg/illusionsoft">IllusionSoft Discord server</a><br><a target="_blank" rel="noopener" href="https://illusioncards.booru.org/index.php?page=post&s=list&tags=honey_select_2">Illusion Booru</a><br><a target="_blank" rel="noopener" href="https://kenzato.uk/booru/category/HS2">Kenzato</a><br><a target="_blank" rel="noopener" href="https://yuki-portal.com/uploader/honeyselect2/">yuki-portal</a><br><a target="_blank" rel="noopener" href="https://db.bepis.moe/aishoujo">Bepis DB</a><br><a target="_blank" rel="noopener" href="https://f95zone.to/">f95zone</a></p>
 
     </div>
 
@@ -345,23 +370,16 @@
     
 
     <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/Samba/" rel="tag"># Samba</a>
-              <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
-          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/posts/2022/07/20/Deploy-Hexo-to-GitHub-Pages.html" rel="prev" title="将 Hexo 部署到 GitHub Pages">
-                  <i class="fa fa-chevron-left"></i> 将 Hexo 部署到 GitHub Pages
+                <a href="/posts/2022/07/28/How-to-install-macOS-Mojave-on-VMware-Workstation.html" rel="prev" title="如何在 VMware Workstation 上安装 macOS Mojave">
+                  <i class="fa fa-chevron-left"></i> 如何在 VMware Workstation 上安装 macOS Mojave
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/posts/2022/07/21/Building-WebDAV-with-Tomcat.html" rel="next" title="使用 Tomcat 搭建 WebDAV">
-                  使用 Tomcat 搭建 WebDAV <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -429,7 +447,7 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"client_id":"e4b1ef7b2d72d418ae83","client_secret":"f95cd364a7298c24f39fc28cb8f543b3f93deeed","repo":"gitalk-comments","github_id":"Hentai02","admin_user":"Hentai02","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"b80e64f066f036652e21e0ba845f5b9c"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"client_id":"e4b1ef7b2d72d418ae83","client_secret":"f95cd364a7298c24f39fc28cb8f543b3f93deeed","repo":"gitalk-comments","github_id":"Hentai02","admin_user":"Hentai02","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"fbb8fdc0ae70dad952d077ed1ce20c7d"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>

@@ -2,7 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.hentaiworld.cn/posts/2022/07/21/Configure-the-Spring-MVC-development-environment.html</loc>
+    <loc>https://blog.iluoli.org/posts/2023/05/23/%E5%A6%82%E4%BD%95%E7%95%85%E7%8E%A9i%E7%A4%BE%E5%85%A8%E5%AE%B6%E6%A1%B6.html</loc>
+    
+    <lastmod>2023-05-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.iluoli.org/posts/2022/07/21/Configure-the-Spring-MVC-development-environment.html</loc>
     
     <lastmod>2022-07-31</lastmod>
     
@@ -11,7 +20,7 @@
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/posts/2022/07/28/How-to-install-macOS-Mojave-on-VMware-Workstation.html</loc>
+    <loc>https://blog.iluoli.org/posts/2022/07/28/How-to-install-macOS-Mojave-on-VMware-Workstation.html</loc>
     
     <lastmod>2022-07-28</lastmod>
     
@@ -20,7 +29,7 @@
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/posts/2022/07/27/Installing-MySQL-on-Microsoft-Windows-Using-a-noinstall-ZIP-Archive.html</loc>
+    <loc>https://blog.iluoli.org/posts/2022/07/27/Installing-MySQL-on-Microsoft-Windows-Using-a-noinstall-ZIP-Archive.html</loc>
     
     <lastmod>2022-07-27</lastmod>
     
@@ -29,7 +38,7 @@
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/posts/2022/07/20/Deploy-Hexo-to-GitHub-Pages.html</loc>
+    <loc>https://blog.iluoli.org/posts/2022/07/20/Deploy-Hexo-to-GitHub-Pages.html</loc>
     
     <lastmod>2022-07-27</lastmod>
     
@@ -38,7 +47,7 @@
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/google99936e00c2acefa8.html</loc>
+    <loc>https://blog.iluoli.org/google99936e00c2acefa8.html</loc>
     
     <lastmod>2022-07-23</lastmod>
     
@@ -47,7 +56,7 @@
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/posts/2022/07/21/Install-and-Configure-Samba.html</loc>
+    <loc>https://blog.iluoli.org/posts/2022/07/21/Install-and-Configure-Samba.html</loc>
     
     <lastmod>2022-07-21</lastmod>
     
@@ -56,7 +65,7 @@
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/posts/2022/07/21/Building-WebDAV-with-Tomcat.html</loc>
+    <loc>https://blog.iluoli.org/posts/2022/07/21/Building-WebDAV-with-Tomcat.html</loc>
     
     <lastmod>2022-07-21</lastmod>
     
@@ -65,7 +74,7 @@
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/posts/2022/07/20/hello-world.html</loc>
+    <loc>https://blog.iluoli.org/posts/2022/07/20/hello-world.html</loc>
     
     <lastmod>2022-07-21</lastmod>
     
@@ -74,7 +83,7 @@
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/sitemap/index.html</loc>
+    <loc>https://blog.iluoli.org/sitemap/index.html</loc>
     
     <lastmod>2022-07-20</lastmod>
     
@@ -83,7 +92,7 @@
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/categories/index.html</loc>
+    <loc>https://blog.iluoli.org/categories/index.html</loc>
     
     <lastmod>2022-07-20</lastmod>
     
@@ -92,7 +101,7 @@
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/archives/index.html</loc>
+    <loc>https://blog.iluoli.org/archives/index.html</loc>
     
     <lastmod>2022-07-19</lastmod>
     
@@ -101,7 +110,7 @@
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/tags/index.html</loc>
+    <loc>https://blog.iluoli.org/tags/index.html</loc>
     
     <lastmod>2022-07-19</lastmod>
     
@@ -111,114 +120,114 @@
   
 
   <url>
-    <loc>https://blog.hentaiworld.cn/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>https://blog.hentaiworld.cn/tags/Tomcat/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/tags/Tomcat/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/tags/WebDAV/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/tags/WebDAV/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/tags/Spring-MVC/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/tags/Spring-MVC/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/tags/Thymeleaf/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/tags/Thymeleaf/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/tags/MyBatis/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/tags/MyBatis/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/tags/RESTful/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/tags/RESTful/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/tags/SLF4J/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/tags/SLF4J/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/tags/Log4j/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/tags/Log4j/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/tags/Hexo/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/tags/macOS/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/tags/NexT/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/tags/Hexo/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/tags/Github-Pages/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/tags/NexT/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/tags/macOS/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/tags/Github-Pages/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/tags/Samba/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/tags/mysql/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/tags/Ubuntu/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/tags/Samba/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/tags/mysql/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/tags/Ubuntu/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -226,85 +235,92 @@
 
   
   <url>
-    <loc>https://blog.hentaiworld.cn/categories/HelloWorld/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/categories/HelloWorld/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/categories/Java/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/categories/Java/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/categories/Hexo/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/categories/VMware/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/categories/VMware/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/categories/Hexo/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/categories/HelloWorld/Tomcat/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/categories/HelloWorld/Tomcat/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/categories/HelloWorld/Linux/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/categories/Java/Spring/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/categories/HelloWorld/MySQL/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/categories/VMware/macOS/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/categories/Java/Spring/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/categories/Hexo/NexT/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/categories/HelloWorld/Hexo/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/categories/HelloWorld/MySQL/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/categories/Hexo/NexT/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/categories/HelloWorld/Linux/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/categories/VMware/macOS/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/categories/HelloWorld/Hexo/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.hentaiworld.cn/categories/HelloWorld/Linux/Ubuntu/</loc>
-    <lastmod>2023-05-07</lastmod>
+    <loc>https://blog.iluoli.org/categories/temp/</loc>
+    <lastmod>2023-05-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.iluoli.org/categories/HelloWorld/Linux/Ubuntu/</loc>
+    <lastmod>2023-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
