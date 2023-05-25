@@ -34,6 +34,79 @@
       </tags>
   </entry>
   <entry>
+    <title>将 Hexo 部署到 GitHub Pages</title>
+    <url>/posts/2022/07/20/Deploy-Hexo-to-GitHub-Pages.html</url>
+    <content><![CDATA[<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 <a href="http://daringfireball.net/projects/markdown/">Markdown</a>（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<span id="more"></span>
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装 Hexo 相当简单，只需要先安装下列应用程序即可：</p>
+<ul>
+<li><a href="https://nodejs.org/en/download/releases/">Node.js</a> (Node.js 版本需不低于 10.13，建议使用 Node.js 12.0 及以上版本)</li>
+<li><a href="http://git-scm.com/">Git</a></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Hexo 版本</th>
+<th>最低兼容 Node.js 版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>6.0+</td>
+<td>12.13.0</td>
+</tr>
+<tr>
+<td>5.0+</td>
+<td>10.13.0</td>
+</tr>
+<tr>
+<td>4.1 - 4.2</td>
+<td>8.10</td>
+</tr>
+<tr>
+<td>4.0</td>
+<td>8.6</td>
+</tr>
+</tbody></table>
+<h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+
+<p>安装 Hexo 完成后，执行下列命令，Hexo 将会在指定文件夹中新建所需要的文件。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">hexo init blog</span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<p>安装完成后，输入<code>hexo server</code>以下命令以启动服务器，网站会在 <a href="http://localhost:4000/">http://localhost:4000</a> 下启动。在服务器启动期间，Hexo 会监视文件变动并自动更新，无须重启服务器。</p>
+<h3 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h3><p>新建完成后，指定文件夹的目录如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> <strong>_config.yml</strong><br>网站的 <a href="https://hexo.io/zh-cn/docs/configuration">配置</a> 信息，您可以在此配置大部分的参数。<br><strong>package.json</strong><br>应用程序的信息。<a href="https://ejs.co/">EJS</a>, <a href="http://learnboost.github.io/stylus/">Stylus</a> 和 <a href="http://daringfireball.net/projects/markdown/">Markdown</a> renderer 已默认安装，可以自由移除。<br><strong>scaffolds</strong><br><a href="https://hexo.io/zh-cn/docs/writing">模版</a> 文件夹。当您新建文章时，Hexo 会根据 scaffold 来建立文件。<br>Hexo的模板是指在新建的文章文件中默认填充的内容。例如，如果您修改scaffold&#x2F;post.md中的Front-matter内容，那么每次新建一篇文章时都会包含这个修改。<br><strong>source</strong><br>资源文件夹是存放用户资源的地方。除 _posts 文件夹之外，开头命名为 _ (下划线)的文件 &#x2F; 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。<br><strong>themes</strong><br><a href="https://hexo.io/zh-cn/docs/themes">主题</a> 文件夹。Hexo 会根据主题来生成静态页面。</p>
+</blockquote>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><ol>
+<li>新建一个 repository。如果你希望你的站点能通过域名 &lt;你的 GitHub 用户名&gt;.github.io 访问，你的 repository 应该直接命名为 &lt;你的 GitHub 用户名&gt;.github.io。</li>
+<li>前往 GitHub 新建 <a href="https://github.com/settings/tokens">Personal Access Token</a>，只勾选 repo 的权限并生成一个新的 Token。Token 生成后请复制并保存好。</li>
+<li>在 <code>_config.yml</code>（如果有已存在的请删除）添加如下配置：<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">&#x27;git&#x27;</span></span><br><span class="line"><span class="attr">repo:</span> <span class="string">https://github.com/Hentai02/hentai02.github.io.git</span></span><br><span class="line"><span class="attr">branch:</span> <span class="string">gh-pages</span></span><br><span class="line"><span class="attr">token:</span> <span class="string">Personal</span> <span class="string">Access</span> <span class="string">Token</span></span><br></pre></td></tr></table></figure></li>
+<li>安装 <a href="https://github.com/hexojs/hexo-deployer-git">hexo-deployer-git</a>。<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></li>
+<li>运行 <code>hexo clean &amp;&amp; hexo deploy </code>。</li>
+<li>查看 username.github.io 上的网页是否部署成功。</li>
+</ol>
+<h2 id="Gitalk"><a href="#Gitalk" class="headerlink" title="Gitalk"></a>Gitalk</h2><p>NexT主题Gitalk配置</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Gitalk</span></span><br><span class="line"><span class="comment"># For more information: https://gitalk.github.io</span></span><br><span class="line"><span class="attr">gitalk:</span></span><br><span class="line">  <span class="attr">client_id:</span> <span class="string">GitHub</span> <span class="string">Application</span> <span class="string">Client</span> <span class="string">ID.</span></span><br><span class="line">  <span class="attr">client_secret:</span> <span class="string">GitHub</span> <span class="string">Application</span> <span class="string">Client</span> <span class="string">Secret.</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">gitalk-comments</span></span><br><span class="line">  <span class="attr">github_id:</span> <span class="string">Hentai02</span> <span class="comment"># GitHub repository 所有者</span></span><br><span class="line">  <span class="attr">admin_user:</span> <span class="string">Hentai02</span> <span class="comment"># GitHub repository 的所有者和合作者</span></span><br><span class="line">  <span class="comment">#distraction_free_mode: true # 类似Facebook评论框的全屏遮罩效果.</span></span><br><span class="line">  <span class="attr">language:</span> <span class="string">zh-CN</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a>自定义域名</h2><ol>
+<li>自定义域名。打开 repository 点击 <code>Settings/Pages</code> 在 <code>Custom domain</code> 中填入域名并保存。</li>
+<li>添加一条主机记录（主机记录相当于域名的前缀，比如 www），记录类型 <code>CNAME</code>（将域名指向另一个域名地址，与其保持相同解析，如 hentai02.github.io）。</li>
+</ol>
+<h2 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h2><p><a href="https://theme-next.js.org/docs/">NexT Documentation</a><br><a href="https://hexo.io/docs/">Hexo Documentation</a></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+        <category>NexT</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+        <tag>Github Pages</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>配置 Spring MVC 开发环境</title>
     <url>/posts/2022/07/21/Configure-the-Spring-MVC-development-environment.html</url>
     <content><![CDATA[<p>Spring Web MVC 是基于 Servlet API 构建的原始 Web 框架，从一开始就包含在 Spring Framework 中。 正式名称“Spring Web MVC”来自其源模块的名称（<a href="https://github.com/spring-projects/spring-framework/tree/main/spring-webmvc">spring-webmvc</a>），但更常见的是“Spring MVC”。</p>
@@ -135,79 +208,6 @@
         <tag>RESTful</tag>
         <tag>SLF4J</tag>
         <tag>Log4j</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>将 Hexo 部署到 GitHub Pages</title>
-    <url>/posts/2022/07/20/Deploy-Hexo-to-GitHub-Pages.html</url>
-    <content><![CDATA[<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 <a href="http://daringfireball.net/projects/markdown/">Markdown</a>（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<span id="more"></span>
-
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装 Hexo 相当简单，只需要先安装下列应用程序即可：</p>
-<ul>
-<li><a href="https://nodejs.org/en/download/releases/">Node.js</a> (Node.js 版本需不低于 10.13，建议使用 Node.js 12.0 及以上版本)</li>
-<li><a href="http://git-scm.com/">Git</a></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>Hexo 版本</th>
-<th>最低兼容 Node.js 版本</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>6.0+</td>
-<td>12.13.0</td>
-</tr>
-<tr>
-<td>5.0+</td>
-<td>10.13.0</td>
-</tr>
-<tr>
-<td>4.1 - 4.2</td>
-<td>8.10</td>
-</tr>
-<tr>
-<td>4.0</td>
-<td>8.6</td>
-</tr>
-</tbody></table>
-<h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
-
-<p>安装 Hexo 完成后，执行下列命令，Hexo 将会在指定文件夹中新建所需要的文件。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">hexo init blog</span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-<p>安装完成后，输入<code>hexo server</code>以下命令以启动服务器，网站会在 <a href="http://localhost:4000/">http://localhost:4000</a> 下启动。在服务器启动期间，Hexo 会监视文件变动并自动更新，无须重启服务器。</p>
-<h3 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h3><p>新建完成后，指定文件夹的目录如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p> <strong>_config.yml</strong><br>网站的 <a href="https://hexo.io/zh-cn/docs/configuration">配置</a> 信息，您可以在此配置大部分的参数。<br><strong>package.json</strong><br>应用程序的信息。<a href="https://ejs.co/">EJS</a>, <a href="http://learnboost.github.io/stylus/">Stylus</a> 和 <a href="http://daringfireball.net/projects/markdown/">Markdown</a> renderer 已默认安装，可以自由移除。<br><strong>scaffolds</strong><br><a href="https://hexo.io/zh-cn/docs/writing">模版</a> 文件夹。当您新建文章时，Hexo 会根据 scaffold 来建立文件。<br>Hexo的模板是指在新建的文章文件中默认填充的内容。例如，如果您修改scaffold&#x2F;post.md中的Front-matter内容，那么每次新建一篇文章时都会包含这个修改。<br><strong>source</strong><br>资源文件夹是存放用户资源的地方。除 _posts 文件夹之外，开头命名为 _ (下划线)的文件 &#x2F; 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。<br><strong>themes</strong><br><a href="https://hexo.io/zh-cn/docs/themes">主题</a> 文件夹。Hexo 会根据主题来生成静态页面。</p>
-</blockquote>
-<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><ol>
-<li>新建一个 repository。如果你希望你的站点能通过域名 &lt;你的 GitHub 用户名&gt;.github.io 访问，你的 repository 应该直接命名为 &lt;你的 GitHub 用户名&gt;.github.io。</li>
-<li>前往 GitHub 新建 <a href="https://github.com/settings/tokens">Personal Access Token</a>，只勾选 repo 的权限并生成一个新的 Token。Token 生成后请复制并保存好。</li>
-<li>在 <code>_config.yml</code>（如果有已存在的请删除）添加如下配置：<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">&#x27;git&#x27;</span></span><br><span class="line"><span class="attr">repo:</span> <span class="string">https://github.com/Hentai02/hentai02.github.io.git</span></span><br><span class="line"><span class="attr">branch:</span> <span class="string">gh-pages</span></span><br><span class="line"><span class="attr">token:</span> <span class="string">Personal</span> <span class="string">Access</span> <span class="string">Token</span></span><br></pre></td></tr></table></figure></li>
-<li>安装 <a href="https://github.com/hexojs/hexo-deployer-git">hexo-deployer-git</a>。<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></li>
-<li>运行 <code>hexo clean &amp;&amp; hexo deploy </code>。</li>
-<li>查看 username.github.io 上的网页是否部署成功。</li>
-</ol>
-<h2 id="Gitalk"><a href="#Gitalk" class="headerlink" title="Gitalk"></a>Gitalk</h2><p>NexT主题Gitalk配置</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Gitalk</span></span><br><span class="line"><span class="comment"># For more information: https://gitalk.github.io</span></span><br><span class="line"><span class="attr">gitalk:</span></span><br><span class="line">  <span class="attr">client_id:</span> <span class="string">GitHub</span> <span class="string">Application</span> <span class="string">Client</span> <span class="string">ID.</span></span><br><span class="line">  <span class="attr">client_secret:</span> <span class="string">GitHub</span> <span class="string">Application</span> <span class="string">Client</span> <span class="string">Secret.</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">gitalk-comments</span></span><br><span class="line">  <span class="attr">github_id:</span> <span class="string">Hentai02</span> <span class="comment"># GitHub repository 所有者</span></span><br><span class="line">  <span class="attr">admin_user:</span> <span class="string">Hentai02</span> <span class="comment"># GitHub repository 的所有者和合作者</span></span><br><span class="line">  <span class="comment">#distraction_free_mode: true # 类似Facebook评论框的全屏遮罩效果.</span></span><br><span class="line">  <span class="attr">language:</span> <span class="string">zh-CN</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a>自定义域名</h2><ol>
-<li>自定义域名。打开 repository 点击 <code>Settings/Pages</code> 在 <code>Custom domain</code> 中填入域名并保存。</li>
-<li>添加一条主机记录（主机记录相当于域名的前缀，比如 www），记录类型 <code>CNAME</code>（将域名指向另一个域名地址，与其保持相同解析，如 hentai02.github.io）。</li>
-</ol>
-<h2 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h2><p><a href="https://theme-next.js.org/docs/">NexT Documentation</a><br><a href="https://hexo.io/docs/">Hexo Documentation</a></p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-        <category>NexT</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>NexT</tag>
-        <tag>Github Pages</tag>
       </tags>
   </entry>
   <entry>
@@ -426,17 +426,17 @@ vmcore/vmm/main/physMem_monitor.c:1279
 <blockquote>
 <h4 id="7zip"><a href="#7zip" class="headerlink" title="7zip"></a>7zip</h4></blockquote>
 <p><a href="https://www.7-zip.org/download.html">7zip</a> 是一种广泛使用的解压缩应用程序，可实现真正高效的数据压缩。这是用于“封存”BetterRepack 的应用程序，因此是下载游戏后最适合解压游戏的应用程序。</p>
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p><a href="https://dl.betterrepack.com/public/">BetterRepack</a> 与社区，模组巧妙地结合在一起，提供最好的游戏，并由开发者充分发挥其潜力。包含的模组由社区制作者制作，精心组合并经过测试，以提供最佳的游戏体验。<br><img data-src="https://s2.loli.net/2023/05/23/1laWH8DYkzmA36q.png" alt="dl.betterrepack.com.png"></p>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p><a href="https://dl.betterrepack.com/public/">BetterRepack</a> 与社区巧妙地结合在一起，提供最好的游戏，并由开发者充分发挥其潜力。包含的模组由社区制作者制作，精心组合并经过测试，以提供最佳的游戏体验。<br><img data-src="https://s2.loli.net/2023/05/23/1laWH8DYkzmA36q.png" alt="dl.betterrepack.com.png"></p>
 <ol>
 <li>选择你要下载的游戏</li>
 <li>选择下载方式，推荐磁力下载。（<code>Full Pack</code>里面包含工作室Mod，下载的时候也可以选择下载主游戏还是工作室Mod）</li>
 <li>工作室Mod</li>
 <li>整合包更新程序</li>
 </ol>
-<p>由于官网要翻墙所以相关资源都放 <a href="https://fanxx-my.sharepoint.com/:f:/g/personal/dianaj_hentaiworld_cn/Eqwv74DkEi9GsbsjZcM08gcBJRBf-GqMQy-icuvaUY1S5g?e=HJdan3">OneDrive</a> 内。</p>
+<p>由于官网要翻墙所以相关资源都放 <a href="https://fanxx-my.sharepoint.com/:f:/g/personal/dianaj_hentaiworld_cn/Eqwv74DkEi9GsbsjZcM08gcBJRBf-GqMQy-icuvaUY1S5g?e=HJdan3">OneDrive</a> 中方便下载。</p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>最好安装在一个短文件夹中。推荐的文件夹结构是“<code>C:\Illusion\HoneySelect2</code>”、“<code>D:\Illusion\HoneySelect2</code>”或类似的！安装到更长的文件夹可能会导致一系列问题，包括但不限于：启动游戏时出现问题、界面不显示（白屏）、保存失败、游戏崩溃。</p>
 <p>安装不应位于受保护的 Windows 文件夹中，例如“Program Files”、“Program Files (x86)”或“Windows”。在此处安装可能会导致游戏无法保存游戏卡、场景或游戏存档。这是由于 Windows 中的反恶意软件保护，简单来说就是权限不足。</p>
-<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><p>更新包括两个部分整合包和 Mod。整合包版本以R+数字区分，整合包的更新是通过更新程序完成更新一般不会超过1G，更新日志可在整合包作者 <a href="https://www.patreon.com/BetterRepack">ScrewThisNoise</a> 的 Patreon 上查看。</p>
+<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><p>更新包括两个部分整合包和 Mod。整合包版本以R+数字区分。更新日志可在整合包作者 <a href="https://www.patreon.com/BetterRepack">ScrewThisNoise</a> 的 Patreon 上查看，主要是修复 bug 和更新一些插件。<br>更新程序下载：<a href="https://dl.betterrepack.com/BetterRepackUpdate/">BetterRepackUpdate</a></p>
 <p>Mod 是通过游戏中的<code>KKManager</code> 下载更新，这个在 <code>InitSetting.exe</code> 中点击 更新游戏 既可选择要进行更新项，如果你没有将工作室的 Mod 添加到文件夹 <code>mods</code> 中，则更新选项中将包含工作室 Mod 的相关更新项，如 <code>Sideloader Modpack - Maps</code> 和 <code>Sideloader Modpack - Studio</code>。</p>
 <p>KKM 的更新不仅仅是 <code>mods</code> 还有 <code>UserData</code> 等数据，更新时将会列出更新内容，注意仔细辨别。第三方mod尽量不要放在除 <code>MyMods</code> 以外的文件夹中以免更新时误删除。<br><img data-src="https://s2.loli.net/2023/05/23/i9Je5LxfNyBrMaF.png" alt="KKM-update.png"></p>
 <blockquote>
@@ -487,7 +487,7 @@ vmcore/vmm/main/physMem_monitor.c:1279
 <td></td>
 </tr>
 </tbody></table>
-<h2 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h2><p><a href="https://discord.gg/illusionsoft">IllusionSoft Discord server</a><br><a href="https://illusioncards.booru.org/index.php?page=post&s=list&tags=honey_select_2">Illusion Booru</a><br><a href="https://kenzato.uk/booru/category/HS2">Kenzato</a><br><a href="https://yuki-portal.com/uploader/honeyselect2/">yuki-portal</a><br><a href="https://db.bepis.moe/aishoujo">Bepis DB</a><br><a href="https://f95zone.to/">f95zone</a></p>
+<h2 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h2><p><a href="https://discord.gg/illusionsoft">IllusionSoft Discord server</a><br><a href="https://illusioncards.booru.org/index.php?page=post&s=list&tags=honey_select_2">Illusion Booru</a><br><a href="https://kenzato.uk/booru/category/HS2">Kenzato</a><br><a href="https://yuki-portal.com/uploader/honeyselect2/">yuki-portal</a><br><a href="https://db.bepis.moe/aishoujo">Bepis DB</a><br><a href="https://f95zone.to/">f95zone</a><br><a href="https://sideload.betterrepack.com/download/">Sideload Mod</a></p>
 <h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><p><a href="http://wiki.anime-sharing.com/hgames/index.php?title=Illusion">wiki.anime-sharing.com</a></p>
 ]]></content>
       <categories>
