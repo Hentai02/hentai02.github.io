@@ -380,16 +380,34 @@ vmcore/vmm/main/physMem_monitor.c:1279
       </tags>
   </entry>
   <entry>
-    <title>tui.editor 自定义插入图片按钮行为的方式</title>
-    <url>/posts/2023/05/26/tui-editor-Way-to-customize-the-insert-image-button-behavior.html</url>
-    <content><![CDATA[<h2 id="addImageBlobHook"><a href="#addImageBlobHook" class="headerlink" title="addImageBlobHook"></a>addImageBlobHook</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> editor = <span class="keyword">new</span> toastui.<span class="title class_">Editor</span>(&#123;</span><br><span class="line">        <span class="attr">el</span>: <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#editor&#x27;</span>),</span><br><span class="line">        <span class="attr">previewStyle</span>: <span class="string">&#x27;vertical&#x27;</span>,</span><br><span class="line">        <span class="attr">height</span>: <span class="string">&#x27;500px&#x27;</span>,</span><br><span class="line">        <span class="attr">hooks</span>: &#123;</span><br><span class="line">            <span class="attr">addImageBlobHook</span>: <span class="function">(<span class="params">blob, callback</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">let</span> formData = <span class="keyword">new</span> <span class="title class_">FormData</span>();</span><br><span class="line">                <span class="comment">// file in a &#x27;multipart/form-data&#x27; request</span></span><br><span class="line">                formData.<span class="title function_">append</span>(<span class="string">&#x27;file&#x27;</span>,blob);</span><br><span class="line">                $.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">                    url : <span class="string">&#x27;/upload.do&#x27;</span>,</span><br><span class="line">                    type : <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">                    data : formData,</span><br><span class="line">                    <span class="attr">processData</span>: <span class="literal">false</span>,  <span class="comment">// tell jQuery not to process the data</span></span><br><span class="line">                    <span class="attr">contentType</span>: <span class="literal">false</span>,  <span class="comment">// tell jQuery not to set contentType</span></span><br><span class="line">                    success : <span class="keyword">function</span>(<span class="params">ret</span>) &#123;</span><br><span class="line">                        <span class="title function_">callback</span>(ret.<span class="property">data</span>.<span class="property">url</span>,<span class="string">&quot;alt text&quot;</span>)</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+    <title>Hello World</title>
+    <url>/posts/2022/07/20/hello-world.html</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+
+<p><img data-src="https://d33wubrfki0l68.cloudfront.net/5997a40576f3beca7bbbd86fe79a795e9d520d8e/87f88/themes/screenshots/landscape.png" alt="avatar"></p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
       <categories>
-        <category>Markdown</category>
+        <category>HelloWorld</category>
+        <category>Hexo</category>
       </categories>
       <tags>
-        <tag>Markdown</tag>
-        <tag>Editor</tag>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+        <tag>Github Pages</tag>
       </tags>
   </entry>
   <entry>
@@ -475,36 +493,5 @@ vmcore/vmm/main/physMem_monitor.c:1279
       <categories>
         <category>temp</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/posts/2022/07/20/hello-world.html</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<span id="more"></span>
-
-<p><img data-src="https://d33wubrfki0l68.cloudfront.net/5997a40576f3beca7bbbd86fe79a795e9d520d8e/87f88/themes/screenshots/landscape.png" alt="avatar"></p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-      <categories>
-        <category>HelloWorld</category>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>NexT</tag>
-        <tag>Github Pages</tag>
-      </tags>
   </entry>
 </search>
