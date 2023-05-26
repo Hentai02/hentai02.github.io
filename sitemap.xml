@@ -137,6 +137,27 @@
 
   
   <url>
+    <loc>https://blog.iluoli.org/tags/Ubuntu/</loc>
+    <lastmod>2023-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.iluoli.org/tags/Download/</loc>
+    <lastmod>2023-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.iluoli.org/tags/qbittorrent/</loc>
+    <lastmod>2023-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.iluoli.org/tags/Tomcat/</loc>
     <lastmod>2023-05-26</lastmod>
     <changefreq>weekly</changefreq>
@@ -228,13 +249,6 @@
   </url>
   
   <url>
-    <loc>https://blog.iluoli.org/tags/Ubuntu/</loc>
-    <lastmod>2023-05-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.iluoli.org/tags/mysql/</loc>
     <lastmod>2023-05-26</lastmod>
     <changefreq>weekly</changefreq>
@@ -242,6 +256,13 @@
   </url>
   
 
+  
+  <url>
+    <loc>https://blog.iluoli.org/categories/Ubuntu/</loc>
+    <lastmod>2023-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
   
   <url>
     <loc>https://blog.iluoli.org/categories/HelloWorld/</loc>
@@ -272,6 +293,13 @@
   </url>
   
   <url>
+    <loc>https://blog.iluoli.org/categories/HelloWorld/Linux/</loc>
+    <lastmod>2023-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.iluoli.org/categories/HelloWorld/Tomcat/</loc>
     <lastmod>2023-05-26</lastmod>
     <changefreq>weekly</changefreq>
@@ -279,7 +307,7 @@
   </url>
   
   <url>
-    <loc>https://blog.iluoli.org/categories/HelloWorld/Linux/</loc>
+    <loc>https://blog.iluoli.org/categories/HelloWorld/MySQL/</loc>
     <lastmod>2023-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -301,13 +329,6 @@
   
   <url>
     <loc>https://blog.iluoli.org/categories/temp/</loc>
-    <lastmod>2023-05-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.iluoli.org/categories/HelloWorld/MySQL/</loc>
     <lastmod>2023-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

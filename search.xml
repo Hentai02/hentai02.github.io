@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>在Ubuntu Server 22.04上搭建远程下载服务 qbittorrent-nox</title>
+    <title>在 Ubuntu Server 22.04上搭建远程下载服务 qbittorrent-nox</title>
     <url>/posts/2023/05/26/Build-a-remote-download-service-qbittorrent-nox-on-Ubuntu-Server.html</url>
     <content><![CDATA[<p><a href="https://github.com/qbittorrent/qBittorrent/wiki/Installing-qBittorrent">Installing qBittorrent</a><br><a href="https://github.com/qbittorrent/qBittorrent/wiki/">qBittorrent wiki</a></p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:qbittorrent-team/qbittorrent-stable <span class="comment">#添加软件源</span></span><br><span class="line">sudo apt update <span class="comment"># 更新本地软件数据库</span></span><br><span class="line">sudo apt install qbittorrent-nox <span class="comment"># nox 用于无头服务器环境</span></span><br><span class="line">qbittorrent-nox <span class="comment"># 运行</span></span><br></pre></td></tr></table></figure>
@@ -10,6 +10,14 @@
 
 <p><img data-src="https://s2.loli.net/2023/05/26/I7zOnRQWAjoNEtZ.png" alt="Snipaste_2023-05-26_13-01-56.png"></p>
 ]]></content>
+      <categories>
+        <category>Ubuntu</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu</tag>
+        <tag>Download</tag>
+        <tag>qbittorrent</tag>
+      </tags>
   </entry>
   <entry>
     <title>使用 Tomcat 搭建 WebDAV</title>
@@ -343,8 +351,51 @@ vmcore/vmm/main/physMem_monitor.c:1279
         <category>Ubuntu</category>
       </categories>
       <tags>
-        <tag>Samba</tag>
         <tag>Ubuntu</tag>
+        <tag>Samba</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在 Windows 上安装 MySQL Community Server</title>
+    <url>/posts/2022/07/27/Installing-MySQL-on-Microsoft-Windows-Using-a-noinstall-ZIP-Archive.html</url>
+    <content><![CDATA[<p>MySQL 软件提供了一个非常快速、多线程、多用户和健壮的 SQL（结构化查询语言）数据库服务器。 MySQL Server 在用于关键任务、重负载生产系统以及嵌入到大规模部署的软件中。</p>
+<span id="more"></span>
+
+<p><img data-src="https://s2.loli.net/2022/07/27/Q4KBXqfTAb6WcZk.png" alt="MySQL"></p>
+<h2 id="初始化数据目录"><a href="#初始化数据目录" class="headerlink" title="初始化数据目录"></a>初始化数据目录</h2><p>MySQL 5.7.7 之前的 Windows 发行版包括一个数据目录，其中包含一组数据库中的预初始化帐户<code> mysql</code>。从 5.7.7 开始，使用该软件包执行的 Windows 安装操作不包括数据目录。 </p>
+<p>从 MySQL 5.7.6 开始，<a href="https://downloads.mysql.com/archives/community/">ZIP Archive</a> 不再包含目录。 要通过创建数据目录并填充 mysql 系统数据库中的表来初始化 MySQL 安装，使用 <code>--initialize</code> 或 <code>--initialize-insecure</code> 初始化 MySQL。 </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.\bin\mysqld.exe --initialize</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">.\bin\mysqld.exe --initialize-insecure</span><br></pre></td></tr></table></figure>
+
+<h2 id="将-MySQL-作为-Windows-服务启动"><a href="#将-MySQL-作为-Windows-服务启动" class="headerlink" title="将 MySQL 作为 Windows 服务启动"></a>将 MySQL 作为 Windows 服务启动</h2><p>在 Windows 上，运行 MySQL 的推荐方法是将其安装为 Windows 服务，以便 MySQL 在 Windows 启动和停止时自动启动和停止。 作为服务安装的 MySQL 服务器也可以使用 NET 命令或图形服务管理工具从命令行进行控制。 通常，要将 MySQL 安装为 Windows 服务，应该以<strong>管理员权限运行</strong>。</p>
+<p>服务管理工具（Windows 管理工具&#x2F;服务）可以在 Windows 控制面板中找到。 为避免冲突，建议在从命令行执行服务器安装或删除操作时关闭 MySQL 服务。</p>
+<h3 id="安装服务"><a href="#安装服务" class="headerlink" title="安装服务"></a>安装服务</h3><p>使用以下命令将服务器安装为服务：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.\bin\mysqld.exe --install</span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">Service successfully installed.</span><br></pre></td></tr></table></figure>
+<p>–install 命令不会启动服务器。</p>
+<p><img data-src="https://s2.loli.net/2022/07/27/qXIlyQg9etihFZE.png" alt="MySQL 服务"></p>
+<h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h3><p>将 MySQL 服务器实例安装为服务后，Windows 会在 Windows 启动时自动启动该服务。 该服务也可以立即从服务实用程序启动，或者使用 <code>sc start mysqld_service_name</code> 或 <code>NET START mysqld_service_name</code> 命令。 SC 和 NET 命令不区分大小写。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sc start MySQL</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">net start MySQL</span><br></pre></td></tr></table></figure>
+
+<p>当作为服务运行时，<code>mysqld</code> 无法访问控制台窗口，因此在那里看不到任何消息。 如果 <code>mysqld</code> 没有启动，请检查错误日志以查看服务器是否在其中写入任何消息以指示问题的原因。 错误日志位于 MySQL 数据目录中（例如， C:\Program Files\MySQL\MySQL Server 5.7\data.err ）。</p>
+<p>当 MySQL 服务器已作为服务安装并且该服务正在运行时，Windows 会在 Windows 关闭时自动停止该服务。 也可以使用服务管理工具、<code>sc stop mysqld_service_name</code> 命令、<code>NET STOP mysqld_service_name</code> 命令或 <code>mysqladmin shutdown</code> 命令手动停止服务器。</p>
+<h3 id="连接到-MySQL-服务器"><a href="#连接到-MySQL-服务器" class="headerlink" title="连接到 MySQL 服务器"></a>连接到 MySQL 服务器</h3><p>要连接到服务器，通常需要在调用 <code>mysql</code> 时提供 MySQL 用户名，并且很可能需要提供密码。 如果服务器在您登录的机器以外的机器上运行，还必须指定主机名。 使用 <code>source</code> 导入 sql 脚本时若出现字符集不匹配，可以尝试指定默认字符集 <code>--default-character-set=utf8</code> 。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 默认密码为空</span></span><br><span class="line">.\bin\mysql -h localhost -u root -p --default-character-set=utf8</span><br></pre></td></tr></table></figure>
+<p>-h 和 -u 代表你的 MySQL 服务器运行的主机名和你的 MySQL 帐户的用户名。 </p>
+<h3 id="修改数据库密码"><a href="#修改数据库密码" class="headerlink" title="修改数据库密码"></a>修改数据库密码</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;127.0.0.1&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;你的密码&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;你的密码&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;你的密码&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line">FLUSH PRIVILEGES;   <span class="comment">/* 运行此命令则立即生效，不需要重启服务器 */</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="删除服务"><a href="#删除服务" class="headerlink" title="删除服务"></a>删除服务</h2><p>要删除作为服务安装的服务，如果它正在运行，首先通过执行 <code>SC STOP mysqld_service_name</code> 或 <code>NET STOP mysqld_service_name</code> 将其停止。 然后使用 <code>SC DELETE mysqld_service_name</code> 将其删除：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SC DELETE MySQL</span><br></pre></td></tr></table></figure>
+<p>或者，使用 <code>mysqld --remove</code> 选项删除服务。</p>
+<blockquote>
+<p>演示所使用的版本（附安装启动卸载脚本）<a href="https://fanxx-my.sharepoint.com/:f:/g/personal/dianaj_hentaiworld_cn/Ekeow0iSQp1AjP0hAU_IQ2YB3PHl1jajXaUKwhkcbyvcZg?e=NiMUtT">mysql-5.7.35-winx64.7z</a></p>
+</blockquote>
+<h2 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h2><p><a href="https://dev.mysql.com/doc/refman/5.7/en/windows-install-archive.html">Installing MySQL on Microsoft Windows Using a noinstall ZIP Archive</a><br><a href="https://downloads.mysql.com/archives/community/">MySQL Community Server (Archived Versions)</a></p>
+]]></content>
+      <categories>
+        <category>HelloWorld</category>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -461,48 +512,5 @@ vmcore/vmm/main/physMem_monitor.c:1279
       <categories>
         <category>temp</category>
       </categories>
-  </entry>
-  <entry>
-    <title>在 Windows 上安装 MySQL Community Server</title>
-    <url>/posts/2022/07/27/Installing-MySQL-on-Microsoft-Windows-Using-a-noinstall-ZIP-Archive.html</url>
-    <content><![CDATA[<p>MySQL 软件提供了一个非常快速、多线程、多用户和健壮的 SQL（结构化查询语言）数据库服务器。 MySQL Server 在用于关键任务、重负载生产系统以及嵌入到大规模部署的软件中。</p>
-<span id="more"></span>
-
-<p><img data-src="https://s2.loli.net/2022/07/27/Q4KBXqfTAb6WcZk.png" alt="MySQL"></p>
-<h2 id="初始化数据目录"><a href="#初始化数据目录" class="headerlink" title="初始化数据目录"></a>初始化数据目录</h2><p>MySQL 5.7.7 之前的 Windows 发行版包括一个数据目录，其中包含一组数据库中的预初始化帐户<code> mysql</code>。从 5.7.7 开始，使用该软件包执行的 Windows 安装操作不包括数据目录。 </p>
-<p>从 MySQL 5.7.6 开始，<a href="https://downloads.mysql.com/archives/community/">ZIP Archive</a> 不再包含目录。 要通过创建数据目录并填充 mysql 系统数据库中的表来初始化 MySQL 安装，使用 <code>--initialize</code> 或 <code>--initialize-insecure</code> 初始化 MySQL。 </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.\bin\mysqld.exe --initialize</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">.\bin\mysqld.exe --initialize-insecure</span><br></pre></td></tr></table></figure>
-
-<h2 id="将-MySQL-作为-Windows-服务启动"><a href="#将-MySQL-作为-Windows-服务启动" class="headerlink" title="将 MySQL 作为 Windows 服务启动"></a>将 MySQL 作为 Windows 服务启动</h2><p>在 Windows 上，运行 MySQL 的推荐方法是将其安装为 Windows 服务，以便 MySQL 在 Windows 启动和停止时自动启动和停止。 作为服务安装的 MySQL 服务器也可以使用 NET 命令或图形服务管理工具从命令行进行控制。 通常，要将 MySQL 安装为 Windows 服务，应该以<strong>管理员权限运行</strong>。</p>
-<p>服务管理工具（Windows 管理工具&#x2F;服务）可以在 Windows 控制面板中找到。 为避免冲突，建议在从命令行执行服务器安装或删除操作时关闭 MySQL 服务。</p>
-<h3 id="安装服务"><a href="#安装服务" class="headerlink" title="安装服务"></a>安装服务</h3><p>使用以下命令将服务器安装为服务：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.\bin\mysqld.exe --install</span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">Service successfully installed.</span><br></pre></td></tr></table></figure>
-<p>–install 命令不会启动服务器。</p>
-<p><img data-src="https://s2.loli.net/2022/07/27/qXIlyQg9etihFZE.png" alt="MySQL 服务"></p>
-<h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h3><p>将 MySQL 服务器实例安装为服务后，Windows 会在 Windows 启动时自动启动该服务。 该服务也可以立即从服务实用程序启动，或者使用 <code>sc start mysqld_service_name</code> 或 <code>NET START mysqld_service_name</code> 命令。 SC 和 NET 命令不区分大小写。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sc start MySQL</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">net start MySQL</span><br></pre></td></tr></table></figure>
-
-<p>当作为服务运行时，<code>mysqld</code> 无法访问控制台窗口，因此在那里看不到任何消息。 如果 <code>mysqld</code> 没有启动，请检查错误日志以查看服务器是否在其中写入任何消息以指示问题的原因。 错误日志位于 MySQL 数据目录中（例如， C:\Program Files\MySQL\MySQL Server 5.7\data.err ）。</p>
-<p>当 MySQL 服务器已作为服务安装并且该服务正在运行时，Windows 会在 Windows 关闭时自动停止该服务。 也可以使用服务管理工具、<code>sc stop mysqld_service_name</code> 命令、<code>NET STOP mysqld_service_name</code> 命令或 <code>mysqladmin shutdown</code> 命令手动停止服务器。</p>
-<h3 id="连接到-MySQL-服务器"><a href="#连接到-MySQL-服务器" class="headerlink" title="连接到 MySQL 服务器"></a>连接到 MySQL 服务器</h3><p>要连接到服务器，通常需要在调用 <code>mysql</code> 时提供 MySQL 用户名，并且很可能需要提供密码。 如果服务器在您登录的机器以外的机器上运行，还必须指定主机名。 使用 <code>source</code> 导入 sql 脚本时若出现字符集不匹配，可以尝试指定默认字符集 <code>--default-character-set=utf8</code> 。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 默认密码为空</span></span><br><span class="line">.\bin\mysql -h localhost -u root -p --default-character-set=utf8</span><br></pre></td></tr></table></figure>
-<p>-h 和 -u 代表你的 MySQL 服务器运行的主机名和你的 MySQL 帐户的用户名。 </p>
-<h3 id="修改数据库密码"><a href="#修改数据库密码" class="headerlink" title="修改数据库密码"></a>修改数据库密码</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;127.0.0.1&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;你的密码&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;你的密码&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;你的密码&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line">FLUSH PRIVILEGES;   <span class="comment">/* 运行此命令则立即生效，不需要重启服务器 */</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="删除服务"><a href="#删除服务" class="headerlink" title="删除服务"></a>删除服务</h2><p>要删除作为服务安装的服务，如果它正在运行，首先通过执行 <code>SC STOP mysqld_service_name</code> 或 <code>NET STOP mysqld_service_name</code> 将其停止。 然后使用 <code>SC DELETE mysqld_service_name</code> 将其删除：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SC DELETE MySQL</span><br></pre></td></tr></table></figure>
-<p>或者，使用 <code>mysqld --remove</code> 选项删除服务。</p>
-<blockquote>
-<p>演示所使用的版本（附安装启动卸载脚本）<a href="https://fanxx-my.sharepoint.com/:f:/g/personal/dianaj_hentaiworld_cn/Ekeow0iSQp1AjP0hAU_IQ2YB3PHl1jajXaUKwhkcbyvcZg?e=NiMUtT">mysql-5.7.35-winx64.7z</a></p>
-</blockquote>
-<h2 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h2><p><a href="https://dev.mysql.com/doc/refman/5.7/en/windows-install-archive.html">Installing MySQL on Microsoft Windows Using a noinstall ZIP Archive</a><br><a href="https://downloads.mysql.com/archives/community/">MySQL Community Server (Archived Versions)</a></p>
-]]></content>
-      <categories>
-        <category>HelloWorld</category>
-        <category>MySQL</category>
-      </categories>
-      <tags>
-        <tag>mysql</tag>
-      </tags>
   </entry>
 </search>

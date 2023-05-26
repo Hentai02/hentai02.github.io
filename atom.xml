@@ -6,7 +6,7 @@
   <link href="https://blog.iluoli.org/atom.xml" rel="self"/>
   
   <link href="https://blog.iluoli.org/"/>
-  <updated>2023-05-26T05:06:51.440Z</updated>
+  <updated>2023-05-26T05:11:01.941Z</updated>
   <id>https://blog.iluoli.org/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>在Ubuntu Server 22.04上搭建远程下载服务 qbittorrent-nox</title>
+    <title>在 Ubuntu Server 22.04上搭建远程下载服务 qbittorrent-nox</title>
     <link href="https://blog.iluoli.org/posts/2023/05/26/Build-a-remote-download-service-qbittorrent-nox-on-Ubuntu-Server.html"/>
     <id>https://blog.iluoli.org/posts/2023/05/26/Build-a-remote-download-service-qbittorrent-nox-on-Ubuntu-Server.html</id>
     <published>2023-05-26T04:39:37.000Z</published>
-    <updated>2023-05-26T05:06:51.440Z</updated>
+    <updated>2023-05-26T05:11:01.941Z</updated>
     
     
     <summary type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/qbittorrent/qBittorrent/wiki/Installing-qBittorrent&quot;&gt;Installing qBittorrent&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/qbittorrent/qBittorrent/wiki/&quot;&gt;qBittorrent wiki&lt;/a&gt;&lt;/p&gt;
@@ -30,6 +30,14 @@
     
     
     
+    <category term="Ubuntu" scheme="https://blog.iluoli.org/categories/Ubuntu/"/>
+    
+    
+    <category term="Ubuntu" scheme="https://blog.iluoli.org/tags/Ubuntu/"/>
+    
+    <category term="Download" scheme="https://blog.iluoli.org/tags/Download/"/>
+    
+    <category term="qbittorrent" scheme="https://blog.iluoli.org/tags/qbittorrent/"/>
     
   </entry>
   
@@ -167,9 +175,9 @@
     <category term="Ubuntu" scheme="https://blog.iluoli.org/categories/HelloWorld/Linux/Ubuntu/"/>
     
     
-    <category term="Samba" scheme="https://blog.iluoli.org/tags/Samba/"/>
-    
     <category term="Ubuntu" scheme="https://blog.iluoli.org/tags/Ubuntu/"/>
+    
+    <category term="Samba" scheme="https://blog.iluoli.org/tags/Samba/"/>
     
   </entry>
   
