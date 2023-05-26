@@ -337,86 +337,12 @@ vmcore/vmm/main/physMem_monitor.c:1279
       </tags>
   </entry>
   <entry>
-    <title>在 Windows 上安装 MySQL Community Server</title>
-    <url>/posts/2022/07/27/Installing-MySQL-on-Microsoft-Windows-Using-a-noinstall-ZIP-Archive.html</url>
-    <content><![CDATA[<p>MySQL 软件提供了一个非常快速、多线程、多用户和健壮的 SQL（结构化查询语言）数据库服务器。 MySQL Server 在用于关键任务、重负载生产系统以及嵌入到大规模部署的软件中。</p>
-<span id="more"></span>
-
-<p><img data-src="https://s2.loli.net/2022/07/27/Q4KBXqfTAb6WcZk.png" alt="MySQL"></p>
-<h2 id="初始化数据目录"><a href="#初始化数据目录" class="headerlink" title="初始化数据目录"></a>初始化数据目录</h2><p>MySQL 5.7.7 之前的 Windows 发行版包括一个数据目录，其中包含一组数据库中的预初始化帐户<code> mysql</code>。从 5.7.7 开始，使用该软件包执行的 Windows 安装操作不包括数据目录。 </p>
-<p>从 MySQL 5.7.6 开始，<a href="https://downloads.mysql.com/archives/community/">ZIP Archive</a> 不再包含目录。 要通过创建数据目录并填充 mysql 系统数据库中的表来初始化 MySQL 安装，使用 <code>--initialize</code> 或 <code>--initialize-insecure</code> 初始化 MySQL。 </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.\bin\mysqld.exe --initialize</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">.\bin\mysqld.exe --initialize-insecure</span><br></pre></td></tr></table></figure>
-
-<h2 id="将-MySQL-作为-Windows-服务启动"><a href="#将-MySQL-作为-Windows-服务启动" class="headerlink" title="将 MySQL 作为 Windows 服务启动"></a>将 MySQL 作为 Windows 服务启动</h2><p>在 Windows 上，运行 MySQL 的推荐方法是将其安装为 Windows 服务，以便 MySQL 在 Windows 启动和停止时自动启动和停止。 作为服务安装的 MySQL 服务器也可以使用 NET 命令或图形服务管理工具从命令行进行控制。 通常，要将 MySQL 安装为 Windows 服务，应该以<strong>管理员权限运行</strong>。</p>
-<p>服务管理工具（Windows 管理工具&#x2F;服务）可以在 Windows 控制面板中找到。 为避免冲突，建议在从命令行执行服务器安装或删除操作时关闭 MySQL 服务。</p>
-<h3 id="安装服务"><a href="#安装服务" class="headerlink" title="安装服务"></a>安装服务</h3><p>使用以下命令将服务器安装为服务：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.\bin\mysqld.exe --install</span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">Service successfully installed.</span><br></pre></td></tr></table></figure>
-<p>–install 命令不会启动服务器。</p>
-<p><img data-src="https://s2.loli.net/2022/07/27/qXIlyQg9etihFZE.png" alt="MySQL 服务"></p>
-<h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h3><p>将 MySQL 服务器实例安装为服务后，Windows 会在 Windows 启动时自动启动该服务。 该服务也可以立即从服务实用程序启动，或者使用 <code>sc start mysqld_service_name</code> 或 <code>NET START mysqld_service_name</code> 命令。 SC 和 NET 命令不区分大小写。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sc start MySQL</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">net start MySQL</span><br></pre></td></tr></table></figure>
-
-<p>当作为服务运行时，<code>mysqld</code> 无法访问控制台窗口，因此在那里看不到任何消息。 如果 <code>mysqld</code> 没有启动，请检查错误日志以查看服务器是否在其中写入任何消息以指示问题的原因。 错误日志位于 MySQL 数据目录中（例如， C:\Program Files\MySQL\MySQL Server 5.7\data.err ）。</p>
-<p>当 MySQL 服务器已作为服务安装并且该服务正在运行时，Windows 会在 Windows 关闭时自动停止该服务。 也可以使用服务管理工具、<code>sc stop mysqld_service_name</code> 命令、<code>NET STOP mysqld_service_name</code> 命令或 <code>mysqladmin shutdown</code> 命令手动停止服务器。</p>
-<h3 id="连接到-MySQL-服务器"><a href="#连接到-MySQL-服务器" class="headerlink" title="连接到 MySQL 服务器"></a>连接到 MySQL 服务器</h3><p>要连接到服务器，通常需要在调用 <code>mysql</code> 时提供 MySQL 用户名，并且很可能需要提供密码。 如果服务器在您登录的机器以外的机器上运行，还必须指定主机名。 使用 <code>source</code> 导入 sql 脚本时若出现字符集不匹配，可以尝试指定默认字符集 <code>--default-character-set=utf8</code> 。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 默认密码为空</span></span><br><span class="line">.\bin\mysql -h localhost -u root -p --default-character-set=utf8</span><br></pre></td></tr></table></figure>
-<p>-h 和 -u 代表你的 MySQL 服务器运行的主机名和你的 MySQL 帐户的用户名。 </p>
-<h3 id="修改数据库密码"><a href="#修改数据库密码" class="headerlink" title="修改数据库密码"></a>修改数据库密码</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;127.0.0.1&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;你的密码&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;你的密码&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;你的密码&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line">FLUSH PRIVILEGES;   <span class="comment">/* 运行此命令则立即生效，不需要重启服务器 */</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="删除服务"><a href="#删除服务" class="headerlink" title="删除服务"></a>删除服务</h2><p>要删除作为服务安装的服务，如果它正在运行，首先通过执行 <code>SC STOP mysqld_service_name</code> 或 <code>NET STOP mysqld_service_name</code> 将其停止。 然后使用 <code>SC DELETE mysqld_service_name</code> 将其删除：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SC DELETE MySQL</span><br></pre></td></tr></table></figure>
-<p>或者，使用 <code>mysqld --remove</code> 选项删除服务。</p>
-<blockquote>
-<p>演示所使用的版本（附安装启动卸载脚本）<a href="https://fanxx-my.sharepoint.com/:f:/g/personal/dianaj_hentaiworld_cn/Ekeow0iSQp1AjP0hAU_IQ2YB3PHl1jajXaUKwhkcbyvcZg?e=NiMUtT">mysql-5.7.35-winx64.7z</a></p>
-</blockquote>
-<h2 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h2><p><a href="https://dev.mysql.com/doc/refman/5.7/en/windows-install-archive.html">Installing MySQL on Microsoft Windows Using a noinstall ZIP Archive</a><br><a href="https://downloads.mysql.com/archives/community/">MySQL Community Server (Archived Versions)</a></p>
-]]></content>
-      <categories>
-        <category>HelloWorld</category>
-        <category>MySQL</category>
-      </categories>
-      <tags>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/posts/2022/07/20/hello-world.html</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<span id="more"></span>
-
-<p><img data-src="https://d33wubrfki0l68.cloudfront.net/5997a40576f3beca7bbbd86fe79a795e9d520d8e/87f88/themes/screenshots/landscape.png" alt="avatar"></p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-      <categories>
-        <category>HelloWorld</category>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>NexT</tag>
-        <tag>Github Pages</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>如何畅玩i社全家桶</title>
     <url>/posts/2023/05/23/%E5%A6%82%E4%BD%95%E7%95%85%E7%8E%A9i%E7%A4%BE%E5%85%A8%E5%AE%B6%E6%A1%B6.html</url>
     <content><![CDATA[<p>互联网上充斥着大量资源，但是大多数用户无法分辨其完整性和安全性。就i社游戏而言大多数玩家都是选择百度，搜索到的结果要么要充钱要么就炫耀一下根本不发资源就算发了大多数也不是给你一手资源。充钱的那些甚至大多数用的同一个网站模板，而且销量还不低，我就匪夷所思这tm还有人买。信息垄断太严重了，其实说到底还是搜索引擎的锅但凡用 Bing、Google 哪能花着冤枉钱，当然你得用英文搜，不然结果还是一堆垃圾。为什么我会推荐这个整合包呢，因为这是大多数整合包的基石，很多整合包都是基于这个改的，要是良性修改也就算了，但大多数都是阉割版，阉割也就算了主要是信息垄断，有些缺德玩意会删除原作者的一些链接，引向自己的社区群，而且大多数都是不管你的问题的，我提供的这个整合包它是有官网有社区的，社区活跃更新频繁避免了大多数 bug ，有着自己的软件体系和完整的生命周期，比起那些”单机版“要好太多，可惜还是有些玩家舍近求远，要是有独有的内容也无可厚非，但是一些不痛不痒的玩意有必要单独搞整合包吗，百来个G的数据下起来很麻烦的，有这么多时间不如把游戏没翻译的东西翻译翻译放 github 上没准有好心人帮你一起翻译。</p>
 <span id="more"></span>
 
-<h2 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h2><p>打开<a href="https://dl.betterrepack.com/public/">BetterRepack</a> 选择要下载的游戏复制磁力链接到下载工具，下载完成后解压到<code>D:\Illusion\HoneySelect2</code>类似的路径。打不开可到 <a href="https://fanxx-my.sharepoint.com/:f:/g/personal/dianaj_hentaiworld_cn/Eqwv74DkEi9GsbsjZcM08gcBJRBf-GqMQy-icuvaUY1S5g?e=HJdan3">OneDrive</a> 中复制下载链接。</p>
+<h2 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h2><p>打开<a href="https://dl.betterrepack.com/public/">BetterRepack</a> 选择要下载的游戏复制磁力链接到下载工具，下载完成后解压到<code>D:\Illusion\HoneySelect2</code>类似的路径，工作室 Mod <code>[OPTIONAL][AI-HS2][20221031] Sideloader Modpack Studio.7z</code> 放在 <code>mods</code>文件夹下。打不开可到 <a href="https://fanxx-my.sharepoint.com/:f:/g/personal/dianaj_hentaiworld_cn/Eqwv74DkEi9GsbsjZcM08gcBJRBf-GqMQy-icuvaUY1S5g?e=HJdan3">OneDrive</a> 中复制下载链接。</p>
 <h3 id="推荐软件"><a href="#推荐软件" class="headerlink" title="推荐软件"></a>推荐软件</h3><blockquote>
 <h4 id="Motrix"><a href="#Motrix" class="headerlink" title="Motrix"></a>Motrix</h4></blockquote>
 <p><a href="https://motrix.app/">Motrix</a> 是一款全能的下载工具，支持下载 HTTP、FTP、BT、磁力链等资源。</p>
@@ -493,5 +419,79 @@ vmcore/vmm/main/physMem_monitor.c:1279
       <categories>
         <category>temp</category>
       </categories>
+  </entry>
+  <entry>
+    <title>在 Windows 上安装 MySQL Community Server</title>
+    <url>/posts/2022/07/27/Installing-MySQL-on-Microsoft-Windows-Using-a-noinstall-ZIP-Archive.html</url>
+    <content><![CDATA[<p>MySQL 软件提供了一个非常快速、多线程、多用户和健壮的 SQL（结构化查询语言）数据库服务器。 MySQL Server 在用于关键任务、重负载生产系统以及嵌入到大规模部署的软件中。</p>
+<span id="more"></span>
+
+<p><img data-src="https://s2.loli.net/2022/07/27/Q4KBXqfTAb6WcZk.png" alt="MySQL"></p>
+<h2 id="初始化数据目录"><a href="#初始化数据目录" class="headerlink" title="初始化数据目录"></a>初始化数据目录</h2><p>MySQL 5.7.7 之前的 Windows 发行版包括一个数据目录，其中包含一组数据库中的预初始化帐户<code> mysql</code>。从 5.7.7 开始，使用该软件包执行的 Windows 安装操作不包括数据目录。 </p>
+<p>从 MySQL 5.7.6 开始，<a href="https://downloads.mysql.com/archives/community/">ZIP Archive</a> 不再包含目录。 要通过创建数据目录并填充 mysql 系统数据库中的表来初始化 MySQL 安装，使用 <code>--initialize</code> 或 <code>--initialize-insecure</code> 初始化 MySQL。 </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.\bin\mysqld.exe --initialize</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">.\bin\mysqld.exe --initialize-insecure</span><br></pre></td></tr></table></figure>
+
+<h2 id="将-MySQL-作为-Windows-服务启动"><a href="#将-MySQL-作为-Windows-服务启动" class="headerlink" title="将 MySQL 作为 Windows 服务启动"></a>将 MySQL 作为 Windows 服务启动</h2><p>在 Windows 上，运行 MySQL 的推荐方法是将其安装为 Windows 服务，以便 MySQL 在 Windows 启动和停止时自动启动和停止。 作为服务安装的 MySQL 服务器也可以使用 NET 命令或图形服务管理工具从命令行进行控制。 通常，要将 MySQL 安装为 Windows 服务，应该以<strong>管理员权限运行</strong>。</p>
+<p>服务管理工具（Windows 管理工具&#x2F;服务）可以在 Windows 控制面板中找到。 为避免冲突，建议在从命令行执行服务器安装或删除操作时关闭 MySQL 服务。</p>
+<h3 id="安装服务"><a href="#安装服务" class="headerlink" title="安装服务"></a>安装服务</h3><p>使用以下命令将服务器安装为服务：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.\bin\mysqld.exe --install</span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">Service successfully installed.</span><br></pre></td></tr></table></figure>
+<p>–install 命令不会启动服务器。</p>
+<p><img data-src="https://s2.loli.net/2022/07/27/qXIlyQg9etihFZE.png" alt="MySQL 服务"></p>
+<h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h3><p>将 MySQL 服务器实例安装为服务后，Windows 会在 Windows 启动时自动启动该服务。 该服务也可以立即从服务实用程序启动，或者使用 <code>sc start mysqld_service_name</code> 或 <code>NET START mysqld_service_name</code> 命令。 SC 和 NET 命令不区分大小写。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sc start MySQL</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">net start MySQL</span><br></pre></td></tr></table></figure>
+
+<p>当作为服务运行时，<code>mysqld</code> 无法访问控制台窗口，因此在那里看不到任何消息。 如果 <code>mysqld</code> 没有启动，请检查错误日志以查看服务器是否在其中写入任何消息以指示问题的原因。 错误日志位于 MySQL 数据目录中（例如， C:\Program Files\MySQL\MySQL Server 5.7\data.err ）。</p>
+<p>当 MySQL 服务器已作为服务安装并且该服务正在运行时，Windows 会在 Windows 关闭时自动停止该服务。 也可以使用服务管理工具、<code>sc stop mysqld_service_name</code> 命令、<code>NET STOP mysqld_service_name</code> 命令或 <code>mysqladmin shutdown</code> 命令手动停止服务器。</p>
+<h3 id="连接到-MySQL-服务器"><a href="#连接到-MySQL-服务器" class="headerlink" title="连接到 MySQL 服务器"></a>连接到 MySQL 服务器</h3><p>要连接到服务器，通常需要在调用 <code>mysql</code> 时提供 MySQL 用户名，并且很可能需要提供密码。 如果服务器在您登录的机器以外的机器上运行，还必须指定主机名。 使用 <code>source</code> 导入 sql 脚本时若出现字符集不匹配，可以尝试指定默认字符集 <code>--default-character-set=utf8</code> 。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 默认密码为空</span></span><br><span class="line">.\bin\mysql -h localhost -u root -p --default-character-set=utf8</span><br></pre></td></tr></table></figure>
+<p>-h 和 -u 代表你的 MySQL 服务器运行的主机名和你的 MySQL 帐户的用户名。 </p>
+<h3 id="修改数据库密码"><a href="#修改数据库密码" class="headerlink" title="修改数据库密码"></a>修改数据库密码</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;127.0.0.1&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;你的密码&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;你的密码&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;你的密码&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line">FLUSH PRIVILEGES;   <span class="comment">/* 运行此命令则立即生效，不需要重启服务器 */</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="删除服务"><a href="#删除服务" class="headerlink" title="删除服务"></a>删除服务</h2><p>要删除作为服务安装的服务，如果它正在运行，首先通过执行 <code>SC STOP mysqld_service_name</code> 或 <code>NET STOP mysqld_service_name</code> 将其停止。 然后使用 <code>SC DELETE mysqld_service_name</code> 将其删除：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SC DELETE MySQL</span><br></pre></td></tr></table></figure>
+<p>或者，使用 <code>mysqld --remove</code> 选项删除服务。</p>
+<blockquote>
+<p>演示所使用的版本（附安装启动卸载脚本）<a href="https://fanxx-my.sharepoint.com/:f:/g/personal/dianaj_hentaiworld_cn/Ekeow0iSQp1AjP0hAU_IQ2YB3PHl1jajXaUKwhkcbyvcZg?e=NiMUtT">mysql-5.7.35-winx64.7z</a></p>
+</blockquote>
+<h2 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h2><p><a href="https://dev.mysql.com/doc/refman/5.7/en/windows-install-archive.html">Installing MySQL on Microsoft Windows Using a noinstall ZIP Archive</a><br><a href="https://downloads.mysql.com/archives/community/">MySQL Community Server (Archived Versions)</a></p>
+]]></content>
+      <categories>
+        <category>HelloWorld</category>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/posts/2022/07/20/hello-world.html</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+
+<p><img data-src="https://d33wubrfki0l68.cloudfront.net/5997a40576f3beca7bbbd86fe79a795e9d520d8e/87f88/themes/screenshots/landscape.png" alt="avatar"></p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <categories>
+        <category>HelloWorld</category>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+        <tag>Github Pages</tag>
+      </tags>
   </entry>
 </search>
