@@ -22,24 +22,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"blog.iluoli.org","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Hentai&#39;s Blog">
-<meta property="og:url" content="https://blog.iluoli.org/categories/VMware/index.html">
+    <meta name="description" content="addImageBlobHookconst editor &#x3D; new toastui.Editor(&amp;#123;        el: document.querySelector(&amp;#x27;#editor&amp;#x27;),        previewStyle: &amp;#x27;vertical&amp;#x27;,        height: &amp;#x27;500px&amp;#x27;,        hoo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tui.editor 自定义插入图片按钮行为的方式">
+<meta property="og:url" content="https://blog.iluoli.org/posts/2023/05/26/tui-editor-Way-to-customize-the-insert-image-button-behavior.html">
 <meta property="og:site_name" content="Hentai&#39;s Blog">
+<meta property="og:description" content="addImageBlobHookconst editor &#x3D; new toastui.Editor(&amp;#123;        el: document.querySelector(&amp;#x27;#editor&amp;#x27;),        previewStyle: &amp;#x27;vertical&amp;#x27;,        height: &amp;#x27;500px&amp;#x27;,        hoo">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-05-26T03:12:43.000Z">
+<meta property="article:modified_time" content="2023-05-26T03:35:45.625Z">
 <meta property="article:author" content="Hentai">
-<meta property="article:tag" content="Hentai,Blog,NexT,Hexo">
+<meta property="article:tag" content="Markdown">
+<meta property="article:tag" content="Editor">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://blog.iluoli.org/categories/VMware/">
+<link rel="canonical" href="https://blog.iluoli.org/posts/2023/05/26/tui-editor-Way-to-customize-the-insert-image-button-behavior.html">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"categories/VMware/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.iluoli.org/posts/2023/05/26/tui-editor-Way-to-customize-the-insert-image-button-behavior.html","path":"posts/2023/05/26/tui-editor-Way-to-customize-the-insert-image-button-behavior.html","title":"tui.editor 自定义插入图片按钮行为的方式"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>分类: VMware | Hentai's Blog</title>
+<title>tui.editor 自定义插入图片按钮行为的方式 | Hentai's Blog</title>
   
 
 
@@ -137,7 +142,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -150,6 +155,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#addImageBlobHook"><span class="nav-number">1.</span> <span class="nav-text">addImageBlobHook</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -219,51 +225,112 @@
 </noscript>
 
 
-    <div class="main-inner category posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h1 class="collection-header">VMware
-          <small>分类</small>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.iluoli.org/posts/2023/05/26/tui-editor-Way-to-customize-the-insert-image-button-behavior.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hentai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hentai's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="tui.editor 自定义插入图片按钮行为的方式 | Hentai's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          tui.editor 自定义插入图片按钮行为的方式
         </h1>
-      </div>
 
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
+
+      <time title="创建时间：2023-05-26 11:12:43 / 修改时间：11:35:45" itemprop="dateCreated datePublished" datetime="2023-05-26T11:12:43+08:00">2023-05-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Markdown/" itemprop="url" rel="index"><span itemprop="name">Markdown</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="addImageBlobHook"><a href="#addImageBlobHook" class="headerlink" title="addImageBlobHook"></a>addImageBlobHook</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> editor = <span class="keyword">new</span> toastui.<span class="title class_">Editor</span>(&#123;</span><br><span class="line">        <span class="attr">el</span>: <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#editor&#x27;</span>),</span><br><span class="line">        <span class="attr">previewStyle</span>: <span class="string">&#x27;vertical&#x27;</span>,</span><br><span class="line">        <span class="attr">height</span>: <span class="string">&#x27;500px&#x27;</span>,</span><br><span class="line">        <span class="attr">hooks</span>: &#123;</span><br><span class="line">            <span class="attr">addImageBlobHook</span>: <span class="function">(<span class="params">blob, callback</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">let</span> formData = <span class="keyword">new</span> <span class="title class_">FormData</span>();</span><br><span class="line">                <span class="comment">// file in a &#x27;multipart/form-data&#x27; request</span></span><br><span class="line">                formData.<span class="title function_">append</span>(<span class="string">&#x27;file&#x27;</span>,blob);</span><br><span class="line">                $.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">                    url : <span class="string">&#x27;/upload.do&#x27;</span>,</span><br><span class="line">                    type : <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">                    data : formData,</span><br><span class="line">                    <span class="attr">processData</span>: <span class="literal">false</span>,  <span class="comment">// tell jQuery not to process the data</span></span><br><span class="line">                    <span class="attr">contentType</span>: <span class="literal">false</span>,  <span class="comment">// tell jQuery not to set contentType</span></span><br><span class="line">                    success : <span class="keyword">function</span>(<span class="params">ret</span>) &#123;</span><br><span class="line">                        <span class="title function_">callback</span>(ret.<span class="property">data</span>.<span class="property">url</span>,<span class="string">&quot;alt text&quot;</span>)</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-07-28T12:17:58+08:00"
-              content="2022-07-28">
-          07-28
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/posts/2022/07/28/How-to-install-macOS-Mojave-on-VMware-Workstation.html" itemprop="url">
-            <span itemprop="name">如何在 VMware Workstation 上安装 macOS Mojave</span>
-          </a>
-      </div>
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Markdown/" rel="tag"># Markdown</a>
+              <a href="/tags/Editor/" rel="tag"># Editor</a>
+          </div>
 
-      
-    </header>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/2023/05/23/%E5%A6%82%E4%BD%95%E7%95%85%E7%8E%A9i%E7%A4%BE%E5%85%A8%E5%AE%B6%E6%A1%B6.html" rel="prev" title="如何畅玩i社全家桶">
+                  <i class="fa fa-chevron-left"></i> 如何畅玩i社全家桶
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
+</div>
 
-    </div>
-  </div>
-  
-  
-  
 
+
+
+
+
+    <div class="comments gitalk-container"></div>
 </div>
   </main>
 
@@ -319,7 +386,7 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"client_id":"eb413dd9805567bcf07b","client_secret":"e7357513b9e321e93cd1aa98d9f0aabce3471ec7","repo":"gitalk-comments","github_id":"Hentai02","admin_user":"Hentai02","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"24fc7105ab3f0ba5649c644b02d47e91"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"client_id":"eb413dd9805567bcf07b","client_secret":"e7357513b9e321e93cd1aa98d9f0aabce3471ec7","repo":"gitalk-comments","github_id":"Hentai02","admin_user":"Hentai02","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"bd6261cce71c8a5c9df16f6443b56feb"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>
