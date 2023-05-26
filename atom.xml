@@ -6,7 +6,7 @@
   <link href="https://blog.iluoli.org/atom.xml" rel="self"/>
   
   <link href="https://blog.iluoli.org/"/>
-  <updated>2023-05-26T01:11:26.487Z</updated>
+  <updated>2023-05-26T05:03:23.988Z</updated>
   <id>https://blog.iluoli.org/</id>
   
   <author>
@@ -15,6 +15,23 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>在Ubuntu Server 22.04上搭建远程下载服务 qbittorrent-nox</title>
+    <link href="https://blog.iluoli.org/posts/2023/05/26/Build-a-remote-download-service-qbittorrent-nox-on-Ubuntu-Server.html"/>
+    <id>https://blog.iluoli.org/posts/2023/05/26/Build-a-remote-download-service-qbittorrent-nox-on-Ubuntu-Server.html</id>
+    <published>2023-05-26T04:39:37.000Z</published>
+    <updated>2023-05-26T05:03:23.988Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/qbittorrent/qBittorrent/wiki/Installing-qBittorrent&quot;&gt;Installing qBittorrent&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/qbittorrent/qBittorrent/wiki/&quot;&gt;qBittorrent wiki&lt;/a&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;sudo add-apt-repository ppa:qbittorrent-team/qbittorrent-stable #添加软件源&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sudo apt update # 更新本地软件数据库&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sudo apt install qbittorrent-nox # nox 用于无头服务器环境&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;qbittorrent-nox # 运行&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img data-src=&quot;https://s2.loli.net/2023/05/26/dPnQrfTo3iuCDvL.png&quot; alt=&quot;Snipaste_2023-05-26_12-57-24.png&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>如何畅玩i社全家桶</title>
