@@ -1,58 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>在 Ubuntu Server 22.04上搭建远程下载服务 qbittorrent-nox</title>
-    <url>/posts/2023/05/26/Build-a-remote-download-service-qbittorrent-nox-on-Ubuntu-Server.html</url>
-    <content><![CDATA[<p><a href="https://github.com/qbittorrent/qBittorrent/wiki/Installing-qBittorrent">Installing qBittorrent</a><br><a href="https://github.com/qbittorrent/qBittorrent/wiki/">qBittorrent wiki</a></p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:qbittorrent-team/qbittorrent-stable <span class="comment">#添加软件源</span></span><br><span class="line">sudo apt update <span class="comment"># 更新本地软件数据库</span></span><br><span class="line">sudo apt install qbittorrent-nox <span class="comment"># nox 用于无头服务器环境</span></span><br><span class="line">qbittorrent-nox <span class="comment"># 运行</span></span><br></pre></td></tr></table></figure>
-<p><img data-src="https://s2.loli.net/2023/05/26/dPnQrfTo3iuCDvL.png" alt="Snipaste_2023-05-26_12-57-24.png"></p>
-<span id="more"></span>
-
-<p><img data-src="https://s2.loli.net/2023/05/26/I7zOnRQWAjoNEtZ.png" alt="Snipaste_2023-05-26_13-01-56.png"></p>
-]]></content>
-      <categories>
-        <category>Ubuntu</category>
-      </categories>
-      <tags>
-        <tag>Ubuntu</tag>
-        <tag>Download</tag>
-        <tag>qbittorrent</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用 Tomcat 搭建 WebDAV</title>
-    <url>/posts/2022/07/21/Building-WebDAV-with-Tomcat.html</url>
-    <content><![CDATA[<p>Servlet 添加了对 <a href="https://datatracker.ietf.org/doc/html/rfc4918">WebDAV</a> <a href="https://datatracker.ietf.org/doc/html/rfc4918#section-18">level 2</a> 的支持。所有基本的 HTTP 请求都由 <a href="https://tomcat.apache.org/tomcat-9.0-doc/api/org/apache/catalina/servlets/DefaultServlet.html">DefaultServlet</a> 处理。 <a href="https://tomcat.apache.org/tomcat-9.0-doc/api/org/apache/catalina/servlets/WebdavServlet.html">WebDAVServlet</a> 不能用作 DefaultServlet（即映射到“&#x2F;”），因为它在此配置中不起作用。</p>
-<span id="more"></span>
-
-<p><img data-src="https://s2.loli.net/2022/07/21/BTy6OHSXdEtGeQx.png" alt="WebDAV"></p>
-<p>将子路径（例如 &#x2F;webdav&#x2F;* 映射到此 servlet 在该子路径下重新挂载整个 Web 应用程序的效果，WebDAV 可以访问所有资源。WEB-INF 和 META-INF 目录在此受保护。</p>
-<p>要为 webapp 启用 WebDAV，将以下内容添加到 web.xml：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">└── WEB-INF</span><br><span class="line">    └── web.xml</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>webdav<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.apache.catalina.servlets.WebdavServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>debug<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>0<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>listings<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>webdav<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>启用读写访问：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>readonly<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>通过不同的 URL 使内容可编辑，使用以下映射：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>webdav<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/webdavedit/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>默认情况下，无法通过 WebDAV 访问 &#x2F;WEB-INF 和 META-INF。 要启用对这些 URL 的访问，添加：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>allowSpecialPaths<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>通过上面的映射配置，普通用户可以像以前一样访问 webapp。 具有必要访问权限的用户将能够使用 <a href="http://localhost:8080/webdav/webdavedit/content">http://localhost:8080/webdav/webdavedit/content</a> 编辑通过 <a href="http://localhost:8080/webdav/content">http://localhost:8080/webdav/content</a> 提供的文件。</p>
-]]></content>
-      <categories>
-        <category>HelloWorld</category>
-        <category>Tomcat</category>
-      </categories>
-      <tags>
-        <tag>Tomcat</tag>
-        <tag>WebDAV</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>配置 Spring MVC 开发环境</title>
     <url>/posts/2022/07/21/Configure-the-Spring-MVC-development-environment.html</url>
     <content><![CDATA[<p>Spring Web MVC 是基于 Servlet API 构建的原始 Web 框架，从一开始就包含在 Spring Framework 中。 正式名称“Spring Web MVC”来自其源模块的名称（<a href="https://github.com/spring-projects/spring-framework/tree/main/spring-webmvc">spring-webmvc</a>），但更常见的是“Spring MVC”。</p>
@@ -157,80 +105,55 @@
       </tags>
   </entry>
   <entry>
-    <title>如何在 VMware Workstation 上安装 macOS Mojave</title>
-    <url>/posts/2022/07/28/How-to-install-macOS-Mojave-on-VMware-Workstation.html</url>
-    <content><![CDATA[<p>macOS 是在 Apple Mac 上运行的专有操作系统。现在，你可以使用多种技术在你的英特尔 PC (Hackintosh) 上安装 macOS。在 Windows 中，你只需单击几下即可使用 Clover 启动盘创建 macOS Mojave 可启动 USB。但并非所有硬件都受支持，你还需要参考大量文档，以便在你的计算机上安装和运行 macOS。</p>
-<p>在运行 Windows 或 Linux 的计算机上体验 macOS 的更简单方法是在 VMware Workstation 上安装 macOS。这样做的好处是在不影响电脑设置的情况下，你会熟悉安装和使用。通过使用虚拟机，你可以同时使用 macOS 和 Windows 或 Linux。使用虚拟磁盘可确保真实磁盘上的所有数据都不会受到影响。但是我注意到在 VM 上运行 macOS 非常慢，尽管我将它设置为 4GB 的 RAM。</p>
+    <title>在 Ubuntu Server 22.04上搭建远程下载服务 qbittorrent-nox</title>
+    <url>/posts/2023/05/26/Build-a-remote-download-service-qbittorrent-nox-on-Ubuntu-Server.html</url>
+    <content><![CDATA[<p><a href="https://github.com/qbittorrent/qBittorrent/wiki/Installing-qBittorrent">Installing qBittorrent</a><br><a href="https://github.com/qbittorrent/qBittorrent/wiki/">qBittorrent wiki</a></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:qbittorrent-team/qbittorrent-stable <span class="comment">#添加软件源</span></span><br><span class="line">sudo apt update <span class="comment"># 更新本地软件数据库</span></span><br><span class="line">sudo apt install qbittorrent-nox <span class="comment"># nox 用于无头服务器环境</span></span><br><span class="line">qbittorrent-nox <span class="comment"># 运行</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://s2.loli.net/2023/05/26/dPnQrfTo3iuCDvL.png" alt="Snipaste_2023-05-26_12-57-24.png"></p>
 <span id="more"></span>
 
-<p>本文将指导你如何在 VMware Workstation 上安装 macOS Mojave。我创建了一个包含 macOS 安装程序的虚拟磁盘，你只需下载它，将它附加到虚拟机，然后安装它。我不确定 VMware Workstation 12 是否支持 macOS 10.14 虚拟机，但版本 15 和 16 支持。我在 VirtualBox 上进行了测试，但它不起作用。</p>
-<p><img data-src="https://s2.loli.net/2022/07/28/N2nlz7WGiLqSekH.png" alt="macOS Mojave"></p>
-<h2 id="VMware-macOS-Unlocker"><a href="#VMware-macOS-Unlocker" class="headerlink" title="VMware macOS Unlocker"></a>VMware macOS Unlocker</h2><p>默认情况下，VMware 不提供创建 macOS 和 Mac OS X 计算机的选项。 幸运的是有一个工具可以帮助我解锁这个选项，这个工具就是 <a href="https://github.com/DrDonk/unlocker">VMware macOS Unlocker</a>。 它支持 Windows、Linux 和 MacOS。 如果你能够创建 macOS 虚拟机，请跳过此步骤。</p>
-<p>在 Windows 上，首先打开任务管理器关闭与 VMware 相关的进程，然后右键单击 <code>unlock.exe</code> 文件并选择以管理员身份运行以解锁。 对于 Linux 和 macOS，在 root 下运行 <code>unlock</code>。解锁过程完成后，运行 VMware 以创建 macOS 虚拟机。</p>
-<h2 id="创建-macOS-虚拟机"><a href="#创建-macOS-虚拟机" class="headerlink" title="创建 macOS 虚拟机"></a>创建 macOS 虚拟机</h2><p>创建 macOS 虚拟机非常简单，以下是在 VMware Workstation 上创建虚拟机的步骤：</p>
-<ol>
-<li>单击 <strong>文件</strong> ，选择 <strong>新建虚拟机…</strong></li>
-<li>选择 <strong>典型(推荐)</strong> 并单击下一步。</li>
-<li>选择 <strong>稍后安装操作系统</strong> 。 并单击下一步。</li>
-<li>在选择客户机操作系统部分选择 <strong>Apple Mac OS X</strong>，并在版本部分选择 <strong>macOS 10.14</strong>。 点击下一步。</li>
-<li>在“命名虚拟机”窗口中，命名虚拟机和虚拟机目录。 </li>
-<li>在“指定磁盘容量”窗口中选择新虚拟磁盘的大小。 这是要安装 macOS 的虚拟磁盘。 单击下一步，然后单击完成。</li>
-</ol>
-<h2 id="添加-macOS-映像"><a href="#添加-macOS-映像" class="headerlink" title="添加 macOS 映像"></a>添加 macOS 映像</h2><p>创建虚拟机后，我们有一个虚拟磁盘来安装 macOS Mojave。 现在我们只需要添加一个包含 macOS 安装程序的新虚拟磁盘。 </p>
-<ol>
-<li>下载 <a href="https://fanxx-my.sharepoint.com/:f:/g/personal/dianaj_hentaiworld_cn/Ekeow0iSQp1AjP0hAU_IQ2YB3PHl1jajXaUKwhkcbyvcZg?e=NiMUtT">OSX_10.14.0_Installer.vmdk</a> 文件。 这是 macOS Mojave 的安装映像。</li>
-<li>选择刚刚创建的虚拟机，点击 <strong>编辑虚拟机设置</strong> 。</li>
-<li>在内存部分，你可以增加该值以使虚拟机运行得更快。 我将它增加到 4096MB (4GB)。</li>
-<li>单击 <strong>添加…</strong> ，然后选择 <strong>硬盘</strong> 并单击下一步。</li>
-<li>在“选择磁盘类型”窗口中，单击下一步。</li>
-<li>在“选择磁盘”窗口中选择 <strong>使用现有虚拟磁盘</strong> ，然后单击下一步继续。</li>
-<li>在“选择现有磁盘”窗口中，单击 <strong>浏览…</strong> 选择你在步骤 1 中下载的 <code>OSX_10.14.0_Installer.vmdk</code> 文件。</li>
-<li>单击完成，然后在虚拟机设置窗口中单击确定。</li>
-</ol>
-<h2 id="安装-macOS"><a href="#安装-macOS" class="headerlink" title="安装 macOS"></a>安装 macOS</h2><p>现在你可以启动虚拟机来安装 macOS Mojave。 安装过程中可能会遇到的问题：</p>
-<ol>
-<li><pre><code>VMware Workstation unrecoverable error: (vcpu-0)
-vcpu-0:VERIFY
-
-vmcore/vmm/main/physMem_monitor.c:1279
-</code></pre>
-<p>将 <code>smc.version = &quot;0&quot;</code> 添加到<code>%ProgramData%/VMware/VMware Workstation/config.ini</code>文件来解决此问题。 </p>
-</li>
-<li><p>这个“安装 macOS Mojave”应用程序副本已损坏，不能用来安装 macOS。<br><img data-src="https://s2.loli.net/2022/07/28/yfNmGuoDWHciQZX.png"><br>在执行抹掉磁盘步骤时，在 <strong>实用工具&#x2F;终端</strong> 中输入 <code>date 010101012018</code> 更改时间，因为证书已过期，更改完成后单击 <strong>终端</strong> 选择 <strong>退出终端</strong> 即可继续安装 macOS</p>
-</li>
-</ol>
-<p>在 macOS 实用工具窗口中，你需要运行磁盘工具来创建 <code>APFS</code> 分区以安装 macOS Mojave。</p>
-<ol>
-<li>在左栏中，你将看到在上面创建的虚拟硬盘（<code>VMware Virtual　SATA Hard Drive Media</code>）。 选择它并单击 <strong>抹掉</strong> 按钮。<br><img data-src="https://s2.loli.net/2022/07/28/UFoJ5ReXh8wBpNC.png"></li>
-<li>在名称下，输入新分区的名称。</li>
-<li>macOS Mojave 需要一个 <code>APFS</code> 格式的分区才能安装。 从格式下拉列表中选择 <code>APFS</code>。<br><img data-src="https://s2.loli.net/2022/07/28/6JH1RvzybTsoFEk.png"></li>
-<li>单击 <strong>抹掉</strong> 按钮继续。</li>
-<li>拥有 <code>APFS</code> 分区后，关闭磁盘工具以开始安装 macOS。</li>
-</ol>
-<p>返回 macOS 实用工具窗口：</p>
-<ol>
-<li>选择 <strong>安装 macOS</strong> ，然后单击继续按钮。</li>
-<li>同意软件许可协议中的条款</li>
-<li>在下一个窗口中，选择你在上面创建的 <code>APFS</code> 分区。 然后单击安装。</li>
-<li>虚拟机将重新启动几次，直到允许你进行设置。 请耐心等待。</li>
-</ol>
-<p>安装后，你可以移除在添加 macOS 映像步骤中添加的虚拟硬盘。 打开编辑虚拟机设置，选择在“添加 macOS 映像”步骤中添加的虚拟硬盘并单击移除按钮。</p>
-<h2 id="安装-VMware-Tools"><a href="#安装-VMware-Tools" class="headerlink" title="安装 VMware Tools"></a>安装 VMware Tools</h2><p>在虚拟机中安装 VMware Tools 非常重要。 安装的 VMware Tools 将提高性能并支持其他功能。 在 VMware 的网站上了解有关<a href="https://kb.vmware.com/s/article/1032440">为 macOS 虚拟机安装 VMware Tools</a> 的更多信息。</p>
-<ol>
-<li>从 VMware 菜单中选择虚拟机，然后选择 <strong>安装 VMware Tools…</strong></li>
-<li>VMware Tools 图标将出现在虚拟机屏幕上。 双击 <strong>安装 VMware Tools</strong> 。</li>
-<li>如果你看到消息“系统扩展已被阻止”，请单击 <strong>打开安全性偏好设置</strong> （默认会自动打开）。</li>
-<li>你将看到消息“来自开发商“VMware, Inc.”的系统软件已被阻止载入。”。 单击允许按钮。<br><img data-src="https://s2.loli.net/2022/07/28/vtnKDUMOY3VSZdj.png"></li>
-<li>点击重新启动按钮已完成 VMware Tools 的安装。</li>
-</ol>
-<p>至此，你已完成在 VMware Workstation 上安装 macOS Mojave。 </p>
+<p><img data-src="https://s2.loli.net/2023/05/26/I7zOnRQWAjoNEtZ.png" alt="Snipaste_2023-05-26_13-01-56.png"></p>
 ]]></content>
       <categories>
-        <category>VMware</category>
-        <category>macOS</category>
+        <category>Ubuntu</category>
       </categories>
       <tags>
-        <tag>macOS</tag>
+        <tag>Ubuntu</tag>
+        <tag>Download</tag>
+        <tag>qbittorrent</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 Tomcat 搭建 WebDAV</title>
+    <url>/posts/2022/07/21/Building-WebDAV-with-Tomcat.html</url>
+    <content><![CDATA[<p>Servlet 添加了对 <a href="https://datatracker.ietf.org/doc/html/rfc4918">WebDAV</a> <a href="https://datatracker.ietf.org/doc/html/rfc4918#section-18">level 2</a> 的支持。所有基本的 HTTP 请求都由 <a href="https://tomcat.apache.org/tomcat-9.0-doc/api/org/apache/catalina/servlets/DefaultServlet.html">DefaultServlet</a> 处理。 <a href="https://tomcat.apache.org/tomcat-9.0-doc/api/org/apache/catalina/servlets/WebdavServlet.html">WebDAVServlet</a> 不能用作 DefaultServlet（即映射到“&#x2F;”），因为它在此配置中不起作用。</p>
+<span id="more"></span>
+
+<p><img data-src="https://s2.loli.net/2022/07/21/BTy6OHSXdEtGeQx.png" alt="WebDAV"></p>
+<p>将子路径（例如 &#x2F;webdav&#x2F;* 映射到此 servlet 在该子路径下重新挂载整个 Web 应用程序的效果，WebDAV 可以访问所有资源。WEB-INF 和 META-INF 目录在此受保护。</p>
+<p>要为 webapp 启用 WebDAV，将以下内容添加到 web.xml：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">└── WEB-INF</span><br><span class="line">    └── web.xml</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>webdav<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.apache.catalina.servlets.WebdavServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>debug<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>0<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>listings<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>webdav<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>启用读写访问：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>readonly<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>通过不同的 URL 使内容可编辑，使用以下映射：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>webdav<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/webdavedit/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>默认情况下，无法通过 WebDAV 访问 &#x2F;WEB-INF 和 META-INF。 要启用对这些 URL 的访问，添加：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>allowSpecialPaths<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>通过上面的映射配置，普通用户可以像以前一样访问 webapp。 具有必要访问权限的用户将能够使用 <a href="http://localhost:8080/webdav/webdavedit/content">http://localhost:8080/webdav/webdavedit/content</a> 编辑通过 <a href="http://localhost:8080/webdav/content">http://localhost:8080/webdav/content</a> 提供的文件。</p>
+]]></content>
+      <categories>
+        <category>HelloWorld</category>
+        <category>Tomcat</category>
+      </categories>
+      <tags>
+        <tag>Tomcat</tag>
+        <tag>WebDAV</tag>
       </tags>
   </entry>
   <entry>
@@ -384,6 +307,83 @@ vmcore/vmm/main/physMem_monitor.c:1279
         <tag>Hexo</tag>
         <tag>NexT</tag>
         <tag>Github Pages</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何在 VMware Workstation 上安装 macOS Mojave</title>
+    <url>/posts/2022/07/28/How-to-install-macOS-Mojave-on-VMware-Workstation.html</url>
+    <content><![CDATA[<p>macOS 是在 Apple Mac 上运行的专有操作系统。现在，你可以使用多种技术在你的英特尔 PC (Hackintosh) 上安装 macOS。在 Windows 中，你只需单击几下即可使用 Clover 启动盘创建 macOS Mojave 可启动 USB。但并非所有硬件都受支持，你还需要参考大量文档，以便在你的计算机上安装和运行 macOS。</p>
+<p>在运行 Windows 或 Linux 的计算机上体验 macOS 的更简单方法是在 VMware Workstation 上安装 macOS。这样做的好处是在不影响电脑设置的情况下，你会熟悉安装和使用。通过使用虚拟机，你可以同时使用 macOS 和 Windows 或 Linux。使用虚拟磁盘可确保真实磁盘上的所有数据都不会受到影响。但是我注意到在 VM 上运行 macOS 非常慢，尽管我将它设置为 4GB 的 RAM。</p>
+<span id="more"></span>
+
+<p>本文将指导你如何在 VMware Workstation 上安装 macOS Mojave。我创建了一个包含 macOS 安装程序的虚拟磁盘，你只需下载它，将它附加到虚拟机，然后安装它。我不确定 VMware Workstation 12 是否支持 macOS 10.14 虚拟机，但版本 15 和 16 支持。我在 VirtualBox 上进行了测试，但它不起作用。</p>
+<p><img data-src="https://s2.loli.net/2022/07/28/N2nlz7WGiLqSekH.png" alt="macOS Mojave"></p>
+<h2 id="VMware-macOS-Unlocker"><a href="#VMware-macOS-Unlocker" class="headerlink" title="VMware macOS Unlocker"></a>VMware macOS Unlocker</h2><p>默认情况下，VMware 不提供创建 macOS 和 Mac OS X 计算机的选项。 幸运的是有一个工具可以帮助我解锁这个选项，这个工具就是 <a href="https://github.com/DrDonk/unlocker">VMware macOS Unlocker</a>。 它支持 Windows、Linux 和 MacOS。 如果你能够创建 macOS 虚拟机，请跳过此步骤。</p>
+<p>在 Windows 上，首先打开任务管理器关闭与 VMware 相关的进程，然后右键单击 <code>unlock.exe</code> 文件并选择以管理员身份运行以解锁。 对于 Linux 和 macOS，在 root 下运行 <code>unlock</code>。解锁过程完成后，运行 VMware 以创建 macOS 虚拟机。</p>
+<h2 id="创建-macOS-虚拟机"><a href="#创建-macOS-虚拟机" class="headerlink" title="创建 macOS 虚拟机"></a>创建 macOS 虚拟机</h2><p>创建 macOS 虚拟机非常简单，以下是在 VMware Workstation 上创建虚拟机的步骤：</p>
+<ol>
+<li>单击 <strong>文件</strong> ，选择 <strong>新建虚拟机…</strong></li>
+<li>选择 <strong>典型(推荐)</strong> 并单击下一步。</li>
+<li>选择 <strong>稍后安装操作系统</strong> 。 并单击下一步。</li>
+<li>在选择客户机操作系统部分选择 <strong>Apple Mac OS X</strong>，并在版本部分选择 <strong>macOS 10.14</strong>。 点击下一步。</li>
+<li>在“命名虚拟机”窗口中，命名虚拟机和虚拟机目录。 </li>
+<li>在“指定磁盘容量”窗口中选择新虚拟磁盘的大小。 这是要安装 macOS 的虚拟磁盘。 单击下一步，然后单击完成。</li>
+</ol>
+<h2 id="添加-macOS-映像"><a href="#添加-macOS-映像" class="headerlink" title="添加 macOS 映像"></a>添加 macOS 映像</h2><p>创建虚拟机后，我们有一个虚拟磁盘来安装 macOS Mojave。 现在我们只需要添加一个包含 macOS 安装程序的新虚拟磁盘。 </p>
+<ol>
+<li>下载 <a href="https://fanxx-my.sharepoint.com/:f:/g/personal/dianaj_hentaiworld_cn/Ekeow0iSQp1AjP0hAU_IQ2YB3PHl1jajXaUKwhkcbyvcZg?e=NiMUtT">OSX_10.14.0_Installer.vmdk</a> 文件。 这是 macOS Mojave 的安装映像。</li>
+<li>选择刚刚创建的虚拟机，点击 <strong>编辑虚拟机设置</strong> 。</li>
+<li>在内存部分，你可以增加该值以使虚拟机运行得更快。 我将它增加到 4096MB (4GB)。</li>
+<li>单击 <strong>添加…</strong> ，然后选择 <strong>硬盘</strong> 并单击下一步。</li>
+<li>在“选择磁盘类型”窗口中，单击下一步。</li>
+<li>在“选择磁盘”窗口中选择 <strong>使用现有虚拟磁盘</strong> ，然后单击下一步继续。</li>
+<li>在“选择现有磁盘”窗口中，单击 <strong>浏览…</strong> 选择你在步骤 1 中下载的 <code>OSX_10.14.0_Installer.vmdk</code> 文件。</li>
+<li>单击完成，然后在虚拟机设置窗口中单击确定。</li>
+</ol>
+<h2 id="安装-macOS"><a href="#安装-macOS" class="headerlink" title="安装 macOS"></a>安装 macOS</h2><p>现在你可以启动虚拟机来安装 macOS Mojave。 安装过程中可能会遇到的问题：</p>
+<ol>
+<li><pre><code>VMware Workstation unrecoverable error: (vcpu-0)
+vcpu-0:VERIFY
+
+vmcore/vmm/main/physMem_monitor.c:1279
+</code></pre>
+<p>将 <code>smc.version = &quot;0&quot;</code> 添加到<code>%ProgramData%/VMware/VMware Workstation/config.ini</code>文件来解决此问题。 </p>
+</li>
+<li><p>这个“安装 macOS Mojave”应用程序副本已损坏，不能用来安装 macOS。<br><img data-src="https://s2.loli.net/2022/07/28/yfNmGuoDWHciQZX.png"><br>在执行抹掉磁盘步骤时，在 <strong>实用工具&#x2F;终端</strong> 中输入 <code>date 010101012018</code> 更改时间，因为证书已过期，更改完成后单击 <strong>终端</strong> 选择 <strong>退出终端</strong> 即可继续安装 macOS</p>
+</li>
+</ol>
+<p>在 macOS 实用工具窗口中，你需要运行磁盘工具来创建 <code>APFS</code> 分区以安装 macOS Mojave。</p>
+<ol>
+<li>在左栏中，你将看到在上面创建的虚拟硬盘（<code>VMware Virtual　SATA Hard Drive Media</code>）。 选择它并单击 <strong>抹掉</strong> 按钮。<br><img data-src="https://s2.loli.net/2022/07/28/UFoJ5ReXh8wBpNC.png"></li>
+<li>在名称下，输入新分区的名称。</li>
+<li>macOS Mojave 需要一个 <code>APFS</code> 格式的分区才能安装。 从格式下拉列表中选择 <code>APFS</code>。<br><img data-src="https://s2.loli.net/2022/07/28/6JH1RvzybTsoFEk.png"></li>
+<li>单击 <strong>抹掉</strong> 按钮继续。</li>
+<li>拥有 <code>APFS</code> 分区后，关闭磁盘工具以开始安装 macOS。</li>
+</ol>
+<p>返回 macOS 实用工具窗口：</p>
+<ol>
+<li>选择 <strong>安装 macOS</strong> ，然后单击继续按钮。</li>
+<li>同意软件许可协议中的条款</li>
+<li>在下一个窗口中，选择你在上面创建的 <code>APFS</code> 分区。 然后单击安装。</li>
+<li>虚拟机将重新启动几次，直到允许你进行设置。 请耐心等待。</li>
+</ol>
+<p>安装后，你可以移除在添加 macOS 映像步骤中添加的虚拟硬盘。 打开编辑虚拟机设置，选择在“添加 macOS 映像”步骤中添加的虚拟硬盘并单击移除按钮。</p>
+<h2 id="安装-VMware-Tools"><a href="#安装-VMware-Tools" class="headerlink" title="安装 VMware Tools"></a>安装 VMware Tools</h2><p>在虚拟机中安装 VMware Tools 非常重要。 安装的 VMware Tools 将提高性能并支持其他功能。 在 VMware 的网站上了解有关<a href="https://kb.vmware.com/s/article/1032440">为 macOS 虚拟机安装 VMware Tools</a> 的更多信息。</p>
+<ol>
+<li>从 VMware 菜单中选择虚拟机，然后选择 <strong>安装 VMware Tools…</strong></li>
+<li>VMware Tools 图标将出现在虚拟机屏幕上。 双击 <strong>安装 VMware Tools</strong> 。</li>
+<li>如果你看到消息“系统扩展已被阻止”，请单击 <strong>打开安全性偏好设置</strong> （默认会自动打开）。</li>
+<li>你将看到消息“来自开发商“VMware, Inc.”的系统软件已被阻止载入。”。 单击允许按钮。<br><img data-src="https://s2.loli.net/2022/07/28/vtnKDUMOY3VSZdj.png"></li>
+<li>点击重新启动按钮已完成 VMware Tools 的安装。</li>
+</ol>
+<p>至此，你已完成在 VMware Workstation 上安装 macOS Mojave。 </p>
+]]></content>
+      <categories>
+        <category>VMware</category>
+        <category>macOS</category>
+      </categories>
+      <tags>
+        <tag>macOS</tag>
       </tags>
   </entry>
   <entry>
